@@ -27,9 +27,9 @@ export default function FeaturedArticles({ myArticles, myCategory }) {
                                         {featuredArticle.title}
                                     </div>
                                 </a>
-                                {featuredArticle.categories.edges.filter((e) => e.node.slug !== myCategory).map((cat, index) => (
+                                {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                     <span key={cat.node.id} className={styles.featuredArticleCategories}>
-                                        <a href={`../categories/${cat.node.slug}`}>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.slug !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                        <a href={`../categories/${cat.node.slug}`}>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>
