@@ -2,10 +2,16 @@ import Image from 'next/image'
 import styles from './featured-articles.module.css'
 
 export default function FeaturedArticles({ myArticles, myCategory }) {
-	const featuredArticle = myArticles[0].node
+    let featuredArticle
+    myArticles.length > 0 ? featuredArticle = myArticles[0].node : null
 
     return (
-        <>
+        <>  
+            {!featuredArticle ?
+                <div>
+                    There appears to be nothing here...
+                </div>
+                :
             <div className="container">
                 <div className="row">
                     <div className="col-2">
@@ -142,6 +148,7 @@ export default function FeaturedArticles({ myArticles, myCategory }) {
                 </div>
                  */}
             </div>
+        }
         </>
     )
 }
