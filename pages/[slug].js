@@ -12,7 +12,7 @@ export default function Post({ post, posts, preview }) {
 
   return (
       <>
-        <div dangerouslySetInnerHTML={{__html: post.content}}></div>
+        <div dangerouslySetInnerHTML={{__html: post?.content}}></div>
       </>
   )
 }
