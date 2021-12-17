@@ -12,9 +12,6 @@ export default function Post({ post, posts, preview }) {
 
   return (
       <>
-        <div>
-          {post.title}
-        </div>
         <div dangerouslySetInnerHTML={{__html: post.content}}></div>
       </>
   )
