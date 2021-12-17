@@ -1,0 +1,118 @@
+.featuredArticleWrapper {
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+.featuredArticleCopy {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: calc(100% - 40px);
+    padding: 20px;
+}
+.featuredArticleTitle {
+    color: #fff;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    margin-bottom: 5px;
+}
+.featuredArticleCategories {
+    color: var(--highlight-color);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-transform: uppercase;
+}
+.featuredArticleCategories a {
+    color: var(--highlight-color);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-transform: uppercase;
+}
+.subfeatured-article-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.subfeatured-article {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 15px;
+    margin-bottom: 25px;
+}
+.subfeatured-article-image {
+    height: 100px;
+    width: 100px;
+    flex-shrink: 0;
+}
+.subfeatured-article-title {
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    margin-bottom: 10px;
+}
+.subfeatured-article-categories {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.subfeatured-article-categories a {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.top-article-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.top-article-title {
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    margin-bottom: 5px;
+}
+.top-article-categories {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.top-article-categories a {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.article {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 15px;
+}
+.article-image {
+    width: 300px;
+    margin-bottom: 15px;
+}
+.article-title {
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    margin-bottom: 10px;
+}
+.article-categories {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.article-categories a {
+    color: var(--highlight-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}

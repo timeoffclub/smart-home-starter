@@ -2,8 +2,10 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getAllCategories, getPostsByCategory } from '../../lib/api'
+import FeaturedArticles from '../../components/featured-articles'
 
-export default function Categories({ posts }) {
+export default function Categories({ posts, category }) {
+	console.log(category)
 	const router = useRouter()
 
 	if (!router.isFallback && !posts?.edges) {
@@ -14,13 +16,7 @@ export default function Categories({ posts }) {
 		{router.isFallback ? (
 			<div>Loading…</div>
 		  ) : (
-			posts.edges.map((post) => (
-				<div key={post.node.id}>
-					<a href={`../${post.node.slug}`}>
-						{post.node.title}
-					</a>
-				</div>
-			))
+			<FeaturedArticles myArticles={posts.edges} myCategory={category} />
 		  )}
 		</>
 	)
@@ -31,7 +27,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 	return {
 		props: {
 			preview,
-			posts: data?.posts
+			posts: data?.posts,
+			category: params.slug
 		},
 	}
   }
