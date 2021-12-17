@@ -25,14 +25,14 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                     </div>                                  }
                                 <div className={styles.articleCopy}>
                                     <div className={styles.articleTitle}>
-                                        <a to={`../${el.node.slug}`}>
+                                        <a href={`../${el.node.slug}`}>
                                             {el.node.title}
                                         </a>
                                     </div>
                                     <div className={styles.articleCoCategories}>
                                         {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                             <span key={cat.node.id}>
-                                                <a to={`../${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                <a href={`../${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                             </span>
                                         ))}
                                     </div>
