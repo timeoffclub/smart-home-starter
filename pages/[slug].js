@@ -4,7 +4,6 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '../lib/api'
 
 export default function Post({ post, posts, preview }) {
   const router = useRouter()
-  const morePosts = posts?.edges
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -12,7 +11,11 @@ export default function Post({ post, posts, preview }) {
 
   return (
       <>
-        <div dangerouslySetInnerHTML={{__html: post?.content}}></div>
+      {router.isFallback ? (
+        <div>Loading…</div>
+      ) : (
+        <div dangerouslySetInnerHTML={{__html: post.content}}></div>
+      )}
       </>
   )
 }
