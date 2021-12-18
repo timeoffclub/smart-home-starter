@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import { getAllCategories, getPostsByCategory, getCategoryNameFromSlug, getMenuFromSlug } from '../../lib/api'
+import { getAllCategories, getPostsByCategory, getMorePostsByCategory, getCategoryNameFromSlug, getMenuFromSlug } from '../../lib/api'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleGrid from '../../components/article-grid'
 import ArticleFilterBar from '../../components/article-filter-bar'
 import { useState } from 'react'
 import styles from './category.module.css'
 
-export default function Categories({ posts, category, filterMenu }) {
+export default function Categories({ posts, category, categorySlug, filterMenu }) {
     const categories = []
 	const [filteredArticles, setFilteredArticles] = useState(false)
 	posts?.edges.forEach(el => {
@@ -29,6 +29,10 @@ export default function Categories({ posts, category, filterMenu }) {
 			})
 			setFilteredArticles(arr)
 		}
+	}
+	async function loadMoreArticles() {
+		const moreArticles = await getMorePostsByCategory(categorySlug, 24, posts.pageInfo.endCursor)
+		setFilteredArticles(...posts.edges, ...moreArticles.edges)
 	}
 	const router = useRouter()
 	if (!router.isFallback && !posts?.edges) {
@@ -55,14 +59,24 @@ export default function Categories({ posts, category, filterMenu }) {
 				</div>
 				<FeaturedCategory myArticles={posts.edges} myCategory={category} />
 				<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu.menuItems.nodes : filterTabs} myCategory={category} onFilter={filter} />
-				<ArticleGrid myArticles={filteredArticles || posts.edges} myCategory={category} />
+				<ArticleGrid onLoadMore={loadMoreArticles} myArticles={filteredArticles || posts.edges} myCategory={category} pageInfo={posts.pageInfo}/>
+
+                {posts.pageInfo.hasNextPage ?
+                    <div onClick={loadMoreArticles}>
+                        Load More
+                    </div>
+                    :
+                    <div>
+                        No More
+                    </div>
+                }
 			</>
-		  )
+		)
 	)
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-	const data = await getPostsByCategory(params.slug, preview, previewData)
+	const data = await getPostsByCategory(params.slug, 12)
 	const category = await getCategoryNameFromSlug(params.slug)
 	const menu = await getMenuFromSlug(params.slug)
 	return {
@@ -70,10 +84,11 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 			preview,
 			posts: data?.posts,
 			category: category,
+			categorySlug: params.slug,
 			filterMenu: menu
 		},
 	}
-  }
+}
 
 export async function getStaticPaths() {
 	const allCategories = await getAllCategories()

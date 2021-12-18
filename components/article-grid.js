@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import styles from './article-grid.module.css'
 
-export default function ArticleGrid ({ myArticles, myCategory }) {
+export default function ArticleGrid ({ myArticles, myCategory, pageInfo, onLoadMore }) {
+
     return (
         <>
             <div className="container">
