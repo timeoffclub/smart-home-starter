@@ -20,7 +20,7 @@ export default function ArticleGrid ({ myArticles, myCategory, pageInfo, onLoadM
                                             height={160}
                                             placeholder="blur"
                                             // Work-around for no out-of-box dataUrl
-                                            // blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                            blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />
                                     </div>
                                 }
