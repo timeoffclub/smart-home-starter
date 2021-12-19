@@ -70,7 +70,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu }
 		  }
 		`
 		const variables = {slug:categorySlug, batchSize:24, endCursor: endCursor || posts?.pageInfo.endCursor}
-		const res = await fetch(WORDPRESS_API_URL, {
+		const res = await fetch(API_URL, {
 			method: 'POST',
 			headers,
 			body: JSON.stringify({
