@@ -35,6 +35,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu }
 		}
 	}
 	async function loadMoreArticles() {
+		console.log(API_URL)
 		const headers = { 'Content-Type': 'application/json' }
 		const query = 
 		`query ($slug: String!, $batchSize: Int, $endCursor: String) {
