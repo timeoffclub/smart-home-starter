@@ -9,6 +9,7 @@ import { useState } from 'react'
 import styles from './category.module.css'
 
 export default function Categories({ posts, category, categorySlug, filterMenu }) {
+	console.log(API_URL)
     const categories = []
 	const [filteredArticles, setFilteredArticles] = useState(false)
 	const [endCursor, setEndCursor] = useState(null)
