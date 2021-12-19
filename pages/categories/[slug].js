@@ -10,6 +10,8 @@ import styles from './category.module.css'
 export default function Categories({ posts, category, categorySlug, filterMenu }) {
     const categories = []
 	const [filteredArticles, setFilteredArticles] = useState(false)
+	const [endCursor, setEndCursor] = useState(null)
+	const [hasNextPage, setHasNextPage] = useState(true)
 	posts?.edges.forEach(el => {
 		el.node.categories.edges.forEach(e => {
 			!categories.includes(e.node.name) && categories.push(e.node.name)
@@ -31,8 +33,60 @@ export default function Categories({ posts, category, categorySlug, filterMenu }
 		}
 	}
 	async function loadMoreArticles() {
-		const moreArticles = await getMorePostsByCategory(categorySlug, 24, posts.pageInfo.endCursor)
-		setFilteredArticles(...posts.edges, ...moreArticles.edges)
+		const headers = { 'Content-Type': 'application/json' }
+		const query = 
+		`query ($slug: String!, $batchSize: Int, $endCursor: String) {
+			morePosts: posts(first: $batchSize, after: $endCursor, where: {categoryName: $slug}) {
+			  pageInfo {
+				hasNextPage
+				endCursor
+			  }
+			  edges {
+				cursor
+				node {
+				  id
+				  categories {
+					edges {
+					  node {
+						name
+						slug
+						id
+					  }
+					}
+				  }
+				  date
+				  featuredImage {
+					node {
+					  sourceUrl(size: MEDIUM)
+					  altText
+					}
+				  }
+				  slug
+				  title
+				}
+			  }
+			}
+		  }
+		`
+		const variables = {slug:categorySlug, batchSize:24, endCursor: endCursor || posts?.pageInfo.endCursor}
+		const res = await fetch('http://localhost:10083/graphql', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				query,
+				variables
+			}
+			),
+		  })
+		  const json = await res.json()
+		  if (json.errors) {
+			console.error(json.errors)
+			throw new Error('Failed to fetch API')
+		  }
+		  console.log(json?.data)
+		  setEndCursor(json?.data.morePosts.pageInfo.endCursor)
+		  setHasNextPage(json?.data.morePosts.pageInfo.hasNextPage)
+		  setFilteredArticles(filteredArticles ? filteredArticles.concat(json?.data.morePosts.edges) : posts?.edges.concat(json?.data.morePosts.edges))
 	}
 	const router = useRouter()
 	if (!router.isFallback && !posts?.edges) {
@@ -61,7 +115,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu }
 				<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu.menuItems.nodes : filterTabs} myCategory={category} onFilter={filter} />
 				<ArticleGrid onLoadMore={loadMoreArticles} myArticles={filteredArticles || posts.edges} myCategory={category} pageInfo={posts.pageInfo}/>
 
-                {posts.pageInfo.hasNextPage ?
+                {hasNextPage ?
                     <div onClick={loadMoreArticles}>
                         Load More
                     </div>
