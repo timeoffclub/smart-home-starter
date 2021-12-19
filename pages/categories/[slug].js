@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+const API_URL = process.env.WORDPRESS_API_URL
 import ErrorPage from 'next/error'
 import { getAllCategories, getPostsByCategory, getMorePostsByCategory, getCategoryNameFromSlug, getMenuFromSlug } from '../../lib/api'
 import FeaturedCategory from '../../components/featured-category'
@@ -69,7 +70,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu }
 		  }
 		`
 		const variables = {slug:categorySlug, batchSize:24, endCursor: endCursor || posts?.pageInfo.endCursor}
-		const res = await fetch('http://localhost:10083/graphql', {
+		const res = await fetch(WORDPRESS_API_URL, {
 			method: 'POST',
 			headers,
 			body: JSON.stringify({
