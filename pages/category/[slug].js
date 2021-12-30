@@ -84,7 +84,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 				/>
 				<meta
 				property="og:image"
-				content={featuredArticle.featuredImage.node.sourceUrl}
+				content={featuredArticle.featuredImage ? featuredArticle.featuredImage.node.sourceUrl : null}
 				/>
 			</Head>
 			<Header menu={navigationMenus}/>
