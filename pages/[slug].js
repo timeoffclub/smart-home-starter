@@ -10,7 +10,6 @@ import Moment from 'react-moment'
 import 'moment-timezone'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
-    console.log(post.featuredImage.node.altText)
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
@@ -116,12 +115,10 @@ async function getRelatedPosts(tags) {
         arr.push(tag.node.slug)
     })
 
-    console.log(arr)
 
     let data = []
     let i = 0
     do {
-        console.log(arr[i])
         let res = await getPostsWithTag(arr[i])
         !data.some((el) => res.posts.nodes.some((node) => node.slug === el.slug)) && data.push(...res.posts.nodes)
         i++
