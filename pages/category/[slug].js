@@ -82,10 +82,6 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 				property="og:description"
 				content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 				/>
-				<meta
-				property="og:image"
-				content={featuredArticle.featuredImage ? featuredArticle.featuredImage.node.sourceUrl : null}
-				/>
 			</Head>
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 md:px-0 grid grid-cols-4 gap-5 my-12'>
