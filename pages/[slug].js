@@ -10,6 +10,7 @@ import Moment from 'react-moment'
 import 'moment-timezone'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
+    console.log(post.featuredImage.node.altText)
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
