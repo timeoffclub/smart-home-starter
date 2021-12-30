@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Head from 'next/head'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Newsletter from '../components/newsletter'
@@ -9,8 +10,30 @@ import Moment from 'react-moment'
 import 'moment-timezone'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
+    const formatExcerpt = (str) => {
+        return str.replace(/(<([^>]+)>)/gi, '')
+    }
     return (
         <>
+            <Head>
+                <title>
+                    {post.title}
+                </title>
+                <meta
+                    name="description"
+                    content={formatExcerpt(post.excerpt)}
+                    key="desc"
+                />
+				<meta property="og:title" content={post.title} />
+				<meta
+				property="og:description"
+				content={formatExcerpt(post.excerpt)}
+				/>
+				<meta
+				property="og:image"
+				content={post.featuredImage.node.sourceUrl}
+				/>
+            </Head>
             <Header menu={navigationMenus}/>
             <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
                 <div className='col-span-3 lg:col-span-2'>
@@ -108,6 +131,13 @@ async function getRelatedPosts(tags) {
             
 export async function getStaticProps({ params, preview = false, previewData }) {
     const data = await getPostAndMorePosts(params.slug, preview, previewData)
+
+    if (!data.post) {
+        return {
+            notFound: true,
+        }
+    }
+    
     const related = await getRelatedPosts(data?.post?.tags?.edges)
     
     let navigationSlugs = [
@@ -123,12 +153,6 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 		navigationMenus.push(...res?.menus?.nodes)
 		i++
 	} while (i < navigationSlugs.length)
-
-    if (!data.posts) {
-        return {
-            notFound: true,
-        }
-    }
     
     return {
         props: {

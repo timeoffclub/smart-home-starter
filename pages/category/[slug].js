@@ -1,5 +1,6 @@
 import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug } from '../../lib/api'
 import Header from '../../components/header'
+import Head from 'next/head'
 import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleGrid from '../../components/article-grid'
@@ -7,6 +8,8 @@ import ArticleFilterBar from '../../components/article-filter-bar'
 import { useState } from 'react'
 
 export default function Categories({ posts, category, categorySlug, filterMenu, navigationMenus }) {
+	let featuredArticle
+    posts.edges.length > 0 ? featuredArticle = posts.edges[0].node : null
     const categories = []
 
 	const [articles, setArticles] = useState(false)
@@ -26,7 +29,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 
 	const filter = (cat) => {
 		let arr = []
-		if (cat === "All") {
+		if (cat === 'All') {
 			!articles ?
 				setFilteredArticles(posts?.edges)
 			:
@@ -65,6 +68,25 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 
 	return (
 		<>  
+			<Head>
+				<title>
+					{category.edges[0].node.name} Articles
+				</title>
+				<meta
+					name='description'
+					content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+					key='desc'
+				/>
+				<meta property="og:title" content={`${category.edges[0].node.name} Articles`} />
+				<meta
+				property="og:description"
+				content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+				/>
+				<meta
+				property="og:image"
+				content={featuredArticle.featuredImage.node.sourceUrl}
+				/>
+			</Head>
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 md:px-0 grid grid-cols-4 gap-5 my-12'>
 				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap lg:flex-nowrap'>
@@ -81,7 +103,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 			<ArticleGrid myArticles={filteredArticles || articles || posts.edges} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
 			<div className='flex justify-center mb-12'>
 				{hasNextPage ?
-					<div className='text-xl cursor-pointer' as="div" onClick={() => loadMoreArticles()}>
+					<div className='text-xl cursor-pointer' as='div' onClick={() => loadMoreArticles()}>
 						{loadingMoreArticles ? 
 							<div>
 								Loading more articles...
