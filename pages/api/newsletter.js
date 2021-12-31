@@ -2,24 +2,19 @@ import axios from 'axios'
 
 function getRequestParams(email) {
     // Get envars
-    const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY
-    const LIST_ID = process.env.NEXT_PUBLIC_MAILCHIMP_LIST_ID
-    // Just getting the datacenter from the end of the api key
-    const DATACENTER = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY.split("-")[1]
+    const API_KEY = process.env.NEXT_PUBLIC_SENDINBLUE_API_KEY
 
-    const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`
+    const url = `https://api.sendinblue.com/v3/contacts`
 
-    // Additional params. More at https://mailchimp.com/developer/reference/lists/list-members
     const data = JSON.stringify({
-        email_address: email,
-        status: "subscribed"
+        email: email,
+        updateEnabled: false
     })
     
-    // API key needs to be encoded in base64
-    const base64ApiKey = Buffer.from(`anystring:${API_KEY}`).toString("base64")
     const headers = {
         "Content-type": "application/json",
-        Authorization: `Basic ${base64ApiKey}`
+        "Accept": "application/json",
+        "api-key": API_KEY
     }
 
     return {
