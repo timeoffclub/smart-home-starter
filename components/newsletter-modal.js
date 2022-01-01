@@ -62,7 +62,7 @@ export default function NewsletterModal({ onClose }) {
                                             <FontAwesomeIcon className='text-white' icon={faBadgeCheck}/>
                                         </div>
                                         <div className='text-sky-600 text-bold text-center text-4xl mb-6'>
-                                            You've been added to our list. See ya soon!
+                                            You&apos;ve been added to our list. See ya soon!
                                         </div>
                                     </div>
                                 }
