@@ -35,7 +35,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         ))}
                     </div>
                 </div>
-                <div className='sm:grid grid-cols-2 sm:col-span-2 gap-x-5'>
+                <div className='sm:grid grid-cols-2 sm:col-span-2 gap-x-5 mx-6 lg:mx-0'>
                     <div className='col-span-2 text-sky-600 font-semibold text-2xl tracking-wider mb-5'>
                         Top Articles
                     </div>
@@ -57,7 +57,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     ))}
                 </div>
             </div>
-            <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
+            <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 mx-6 lg:mx-0'>
                 {myArticles.slice(7,11).map((el) => (
                     <div key={el.node.id} className='inline-flex flex-wrap w-full mb-5'>
                         {el.node.featuredImage &&

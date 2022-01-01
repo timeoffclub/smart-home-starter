@@ -41,7 +41,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 ))}
                             </div>
                         </div>
-                        <div className='flex px-5 xl:px-0 flex-col justify-between col-span-2'>
+                        <div className='flex px-5 lg:px-0 flex-col justify-between col-span-2'>
                             {myArticles.slice(1,4).map((el, index) => (
                                 <div key={el.node.id} className='flex items-center mb-3 lg:mb-0'>
                                     {el.node.featuredImage &&
@@ -73,7 +73,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             ))}
                         </div>
                     </div>
-                    <div className='sm:grid px-5 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
+                    <div className='sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
                             <div key={el.node.id} className='flex flex-col justify-center h-26 sm:h-20 text-xl basis-80 font-medium mb-2'>
                                 <div className='mb-2 '>
@@ -94,7 +94,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             AD
                         </div>
                     </div>
-                    <div className='lg:grid px-5 xl:px-0 lg:grid-cols-4 gap-5 mt-5'>
+                    <div className='lg:grid px-5 lg:px-0 lg:grid-cols-4 gap-5 mt-5'>
                         <div className='flex flex-col col-span-2'>
                             {myArticles.slice(14,16).map((el, index) => (
                                 <div key={el.node.id} className='inline-flex items-center mb-5'>
