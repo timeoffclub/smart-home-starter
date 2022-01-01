@@ -8,13 +8,13 @@ export default function ContactUs({ navigationMenus }) {
     return (
         <>
             <Header menu={navigationMenus} />
-            <div className='container px-6 md:px-0 my-12 w-full'>
+            <div className='container px-6 xl:px-0 my-12 w-full'>
                 <div className='w-fit'>
-                    <h1 className='text-4xl mb-4 font-bold text-sky-600'>
+                    <h1 className='text-4xl mb-4 font-semibold text-sky-600'>
                         Contact Us
                     </h1>
                     <p className='text-lg mb-4'>
-                        Have a question? You can send us a message using the form below.
+                        Have a question? Use the form below to send us a message.
                     </p>
                 </div>
                 <div className='w-fit'>

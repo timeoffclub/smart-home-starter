@@ -29,14 +29,14 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             </div>
                         </a>
                         {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
-                            <span key={cat.node.id} className='text-sky-600 text-md font-bold uppercase tracking-wider'>
-                                <a href={`../category/${cat.node.slug}`} className='text-sky-600 font-bold hover:text-blue-500'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                            <span key={cat.node.id} className='text-sky-600 text-md font-semibold uppercase tracking-wider'>
+                                <a href={`../category/${cat.node.slug}`} className='text-sky-600 font-semibold hover:text-blue-500'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                             </span>
                         ))}
                     </div>
                 </div>
                 <div className='sm:grid grid-cols-2 sm:col-span-2 gap-x-5'>
-                    <div className='col-span-2 text-sky-600 font-bold text-2xl tracking-wider mb-5'>
+                    <div className='col-span-2 text-sky-600 font-semibold text-2xl tracking-wider mb-5'>
                         Top Articles
                     </div>
                     {myArticles.slice(1,7).map((el) => (
@@ -49,7 +49,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
                                 {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                     <span key={cat.node.id}>
-                                        <a className='text-sky-600 font-bold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>
@@ -80,7 +80,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             <div className='text-base text-sky-600'>
                                 {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                     <span key={cat.node.id}>
-                                        <a className='text-sky-600 font-bold uppercase' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-sky-600 font-semibold uppercase' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>

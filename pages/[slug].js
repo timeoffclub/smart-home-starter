@@ -40,7 +40,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     <div className='text-base text-gray-500 font-extralight'>
                         The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
                     </div>
-                    <div className='text-4xl font-bold tracking-wider mt-12 mb-5'>
+                    <div className='text-4xl font-semibold tracking-wider mt-12 mb-5'>
                         {post.title}
                     </div>
                     <div className='flex justify-between items-baseline mb-2'>
@@ -72,7 +72,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     <div className='w-full bg-gray-300 h-[700px] mb-14'>
                         AD
                     </div>
-                    <div className='text-3xl font-bold mb-5'>
+                    <div className='text-3xl font-semibold mb-5'>
                         Related Articles
                     </div>
                     {related.map((el) => (
@@ -93,7 +93,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         </div>
                     ))}
                     <div className='border-y-2 border-y-gray-500 py-12 my-14'>
-                        <div className='text-4xl text-sky-600 font-bold mb-5 tracking-wider'>
+                        <div className='text-4xl text-sky-600 font-semibold mb-5 tracking-wider'>
                             Sign up for our newsletter
                         </div>
                         <Newsletter mode={'light'}/>

@@ -33,23 +33,23 @@ export default function Header({ menu, slug }) {
         <div className='relative'>
             {/* Upper nav on large viewports only */}
             <div className='hidden lg:block h-12 text-white bg-neutral-900'>
-                <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 md:px-0'>
-                    <div className='hidden lg:flex items-center justify-end'>
-                        <div className='text-base font-bold text-white tracking-wide mt-2.5'>
+                <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 xl:px-0'>
+                    <div className='hidden md:flex items-center justify-end'>
+                        <div className='text-base font-semibold text-white tracking-wide mt-2.5'>
                             <a href={'/contact-us'}>
                                 Contact Us
                             </a>
                         </div>
-                        <div onClick={() => {setModalOpen(true), setMegaMenuDisabled(true)}} className='text-base cursor-pointer font-bold text-white tracking-wide ml-4 mt-2.5'>
+                        <div onClick={() => {setModalOpen(true), setMegaMenuDisabled(true)}} className='text-base cursor-pointer font-semibold text-white tracking-wide ml-4 mt-2.5'>
                             Subscribe
                         </div>
-                        <div className='text-3xl font-bold text-white ml-4 mt-2.5'>
+                        <div className='text-3xl font-semibold text-white ml-4 mt-2.5'>
                             <FontAwesomeIcon icon={faFacebookSquare}/>
                         </div>
-                        <div className='text-3xl font-bold text-white ml-2 mt-2.5'>
+                        <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
                             <FontAwesomeIcon icon={faInstagramSquare}/>
                         </div>
-                        <div className='text-3xl font-bold text-white ml-2 mt-2.5'>
+                        <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
                             <FontAwesomeIcon icon={faTwitterSquare}/>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ export default function Header({ menu, slug }) {
             </div>
             {/* Main nav all viewports */}
             <div className='h-20 bg-black'>
-                <div className='container px-6 md:px-0'>
+                <div className='container px-6 xl:px-0'>
                     <div className='flex justify-between'>
                         <div className='w-40 cursor-pointer'>
                             LOGO
@@ -78,7 +78,7 @@ export default function Header({ menu, slug }) {
                         <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
-                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-bold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-bold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
+                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
                                     onMouseEnter={() => {setMegaMenu(el.menuItems.nodes), setActiveLabel(el.name)}}
                                     key={el.id}
                                 >
@@ -91,14 +91,14 @@ export default function Header({ menu, slug }) {
                                 <div 
                                     onMouseEnter={() => {setMegaMenu(false), setActiveLabel(null)}}
                                     onClick={() => setSearchInput(false)}
-                                    className={searchInput ? 'inline text-xl font-bold cursor-pointer text-white' : 'hidden text-xl font-bold cursor-pointer text-white'}
+                                    className={searchInput ? 'inline text-xl font-semibold cursor-pointer text-white' : 'hidden text-xl font-semibold cursor-pointer text-white'}
                                 >
                                     <FontAwesomeIcon icon={faWindowClose}/>
                                 </div>
                                 <div 
                                     onMouseEnter={() => {setMegaMenu(false), setActiveLabel(null)}}
                                     onClick={() => setSearchInput(true)}
-                                    className={searchInput ? 'hidden text-xl font-bold cursor-pointer text-white' : 'inline text-xl font-bold cursor-pointer text-white'}
+                                    className={searchInput ? 'hidden text-xl font-semibold cursor-pointer text-white' : 'inline text-xl font-semibold cursor-pointer text-white'}
                                 >
                                     <FontAwesomeIcon icon={faSearch}/>
                                 </div>
@@ -136,11 +136,11 @@ export default function Header({ menu, slug }) {
                     mobileNav ? 
                         // If slug is /search bump this menu up higher with top attribute
                         slug === 'search' ? 
-                            'absolute z-50 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12' 
+                            'absolute lg:hidden z-50 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12' 
                         :
-                            'absolute z-50 top-44  left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12'
+                            'absolute lg:hidden z-50 top-44 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12'
                     :
-                        'absolute w-screen z-50 h-0 bg-black transition-all ease-in-out duration-400'
+                        'absolute lg:hidden w-screen z-50 h-0 bg-black transition-all ease-in-out duration-400'
                     }
                 >
                 {menu.map((el) => (
@@ -166,7 +166,7 @@ export default function Header({ menu, slug }) {
                     <div className='container grid grid-cols-4'>
                         {megaMenu.map((el) => (
                             <div onClick={() => {setMegaMenu(null)}} className='justify-self-center cursor-pointer h-10' key={el.id}>
-                                <a href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-bold transition ease-in-out duration-700'>
+                                <a href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700'>
                                     {el.label}
                                 </a>
                             </div>
@@ -175,8 +175,7 @@ export default function Header({ menu, slug }) {
                 </div>
             }
             {/* Newsletter modal - shows on Subscribe link click */}
-           {/* Newsletter modal - shows on Subscribe link click */}
-           {modalOpen &&
+            {modalOpen &&
                 <NewsletterModal
                     onClose={() => {setModalOpen(false), setMegaMenuDisabled(false)}}
                 />
