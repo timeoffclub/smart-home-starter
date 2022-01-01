@@ -5,6 +5,7 @@ export default function ArticleFilterBar ({ myMenu, myCategory, onFilter }) {
     const [moreTabs, setMoreTabs] = useState(false)
 
     const toggleMoreTabs = () => {
+        console.log(moreTabs)
         setMoreTabs(!moreTabs)
     }
     const [activeTab, setActiveTab] = useState('All')
