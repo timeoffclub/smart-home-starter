@@ -5,7 +5,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
     return (
         <>
             <form className={mode === 'dark' ? 'flex w-full justify-center' : 'hidden'} onSubmit={handleSearchFormSubmit}>
-                <div className='w-80 relative'>
+                <div className='w-full lg:w-80 relative'>
                     <span className="h-full text-xl absolute inset-y-0 left-2 flex items-center pl-2">
                         <FontAwesomeIcon icon={faSearch} className='fill-current text-sky-600'/>
                     </span>
@@ -20,7 +20,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
                     type='submit'
                     value='Search'
                     onClick={handleSearchFormSubmit}
-                    className='hidden lg:inline cursor-pointer text-white text-xl bg-neutral-900 border-0 px-5 focus:outline-none'
+                    className='hidden lg:inline cursor-pointer text-white text-xl bg-neutral-900 border-0 px-5 focus:outline-none appearance-none'
                 />
             </form>
             <form className={mode === 'light' ? 'flex w-full justify-center' : 'hidden'} onSubmit={handleSearchFormSubmit}>
@@ -39,7 +39,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
                     type='submit'
                     value='Search'
                     onClick={handleSearchFormSubmit}
-                    className='cursor-pointer text-white bg-sky-600 text-xl border-0 px-5 ml-1 focus:outline-none'
+                    className='cursor-pointer text-white bg-sky-600 text-xl border-0 px-5 ml-1 focus:outline-none appearance-none'
                 />
             </form>
         </>

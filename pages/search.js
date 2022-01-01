@@ -99,7 +99,7 @@ export default function Search({ data, navigationMenus, slug }) {
             :
                 <>
                     <div className='container mb-12'>
-                        <div className={showResultInfo ? 'container text-xl my-5 mx-6 md:mx-0' : 'hidden'}>
+                        <div className={showResultInfo ? 'text-xl my-5 mx-6 xl:mx-0' : 'hidden'}>
                             Your search returned {totalPostResultCount} articles.
                         </div>
                         <div className={searchError ? 'container text-xl my-5' : 'hidden'}>
