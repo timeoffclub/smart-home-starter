@@ -73,7 +73,7 @@ export default function NewsletterModal({ onClose }) {
                                 )}
                             <input
                                 type='email'
-                                className='bg-white w-full pl-2 h-10'
+                                className='bg-white w-full pl-2 h-10 appearance-none'
                                 placeholder='Enter your email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

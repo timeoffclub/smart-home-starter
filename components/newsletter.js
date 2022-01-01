@@ -26,7 +26,7 @@ export default function Newsletter({ mode }) {
             <div className='flex flex-wrap justify-end'>
                 <input
                     type='email'
-                    className={mode === 'light' ? `bg-gray-200 w-full pl-2 h-10` : `bg-white w-full pl-2 h-10`}
+                    className={mode === 'light' ? `bg-gray-200 w-full pl-2 h-10 appearance-none` : `bg-white w-full pl-2 h-10 appearance-none`}
                     placeholder='Enter your email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
