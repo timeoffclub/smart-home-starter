@@ -1,6 +1,9 @@
 import '../styles/globals.scss'
 import "@fontsource/source-sans-pro"
 import "@fontsource/source-sans-pro/300.css"
+import "@fontsource/source-sans-pro/400.css"
+import "@fontsource/source-sans-pro/600.css"
+import "@fontsource/source-sans-pro/700.css"
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'

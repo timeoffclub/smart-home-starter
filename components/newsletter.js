@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { MdOutlineVerified } from 'react-icons/md'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBadgeCheck } from '@fortawesome/pro-regular-svg-icons'
 
 export default function Newsletter({ mode }) {
     const [email, setEmail] = useState('')
@@ -24,6 +25,7 @@ export default function Newsletter({ mode }) {
         <div className='w-full'>
             <div className='flex flex-wrap justify-end'>
                 <input
+                    type='email'
                     className={mode === 'light' ? `bg-gray-200 w-full pl-2 h-10` : `bg-white w-full pl-2 h-10`}
                     placeholder='Enter your email'
                     value={email}
@@ -31,7 +33,7 @@ export default function Newsletter({ mode }) {
                 />
                 {state === 'SUCCESS' && (
                     <div className={mode === 'light' ? 'inline-flex text-black items-center w-1/2 text-2xl mt-2' : 'inline-flex text-white items-center w-1/2 text-2xl mt-2'}>
-                        <MdOutlineVerified/><span className='ml-1'> Subscribed</span>
+                        <FontAwesomeIcon icon={faBadgeCheck}/><span className='ml-1'> Subscribed</span>
                     </div>
                 )}
                 <div

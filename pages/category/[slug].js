@@ -86,7 +86,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 md:px-0 grid grid-cols-4 gap-5 my-12'>
 				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap lg:flex-nowrap'>
-					<div className='flex-shrink-0 text-sky-600 text-6xl font-semibold lg:border-r-2 border-r-black py-3 pr-3'>
+					<div className='flex-shrink-0 text-sky-600 text-6xl font-bold lg:border-r-2 border-r-black py-3 pr-3'>
 						{category.edges[0].node.name}
 					</div>
 					<div className='text-lg md:text-base font-medium tracking-wider lg:pl-5'>

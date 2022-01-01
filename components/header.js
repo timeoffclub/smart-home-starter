@@ -7,14 +7,18 @@ import { faWindowClose } from '@fortawesome/pro-light-svg-icons'
 import { faFacebookSquare, faInstagramSquare, faTwitterSquare } from '../node_modules/@fortawesome/free-brands-svg-icons'
 import Accordion from './accordian'
 import { kebabCase } from '../lib/utils'
+import NewsletterModal from './newsletter-modal'
 
 export default function Header({ menu, slug }) {
 
+    const [modalOpen, setModalOpen] = useState(false)
     const [megaMenu, setMegaMenu] = useState(null)
+    const [megaMenuDisabled, setMegaMenuDisabled] = useState(false)
     const [activeLabel, setActiveLabel] = useState(null)
     const [mobileNav, setMobileNav] = useState(null)
     const [searchInput, setSearchInput] = useState(null)
     const [ searchQuery, setSearchQuery ] = useState( '' )
+    
     const handleSearchFormSubmit = ( event ) => {
         event.preventDefault();
         Router.push( `/search?s=${searchQuery}` )
@@ -26,24 +30,26 @@ export default function Header({ menu, slug }) {
     }
 
     return (
-        <div>
+        <div className='relative'>
             {/* Upper nav on large viewports only */}
             <div className='hidden lg:block h-12 text-white bg-neutral-900'>
-                <div className='container px-6 md:px-0'>
+                <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 md:px-0'>
                     <div className='hidden lg:flex items-center justify-end'>
-                        <div className='text-base font-semibold text-white tracking-wide mt-2.5'>
-                            Contact Us
+                        <div className='text-base font-bold text-white tracking-wide mt-2.5'>
+                            <a href={'/contact-us'}>
+                                Contact Us
+                            </a>
                         </div>
-                        <div className='text-base font-semibold text-white tracking-wide ml-4 mt-2.5'>
+                        <div onClick={() => {setModalOpen(true), setMegaMenuDisabled(true)}} className='text-base cursor-pointer font-bold text-white tracking-wide ml-4 mt-2.5'>
                             Subscribe
                         </div>
-                        <div className='text-3xl font-semibold text-white ml-4 mt-2.5'>
+                        <div className='text-3xl font-bold text-white ml-4 mt-2.5'>
                             <FontAwesomeIcon icon={faFacebookSquare}/>
                         </div>
-                        <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
+                        <div className='text-3xl font-bold text-white ml-2 mt-2.5'>
                             <FontAwesomeIcon icon={faInstagramSquare}/>
                         </div>
-                        <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
+                        <div className='text-3xl font-bold text-white ml-2 mt-2.5'>
                             <FontAwesomeIcon icon={faTwitterSquare}/>
                         </div>
                     </div>
@@ -69,10 +75,10 @@ export default function Header({ menu, slug }) {
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
-                        <div className='hidden lg:flex items-center h-[79px]'>
+                        <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
-                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
+                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-bold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-bold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
                                     onMouseEnter={() => {setMegaMenu(el.menuItems.nodes), setActiveLabel(el.name)}}
                                     key={el.id}
                                 >
@@ -85,14 +91,14 @@ export default function Header({ menu, slug }) {
                                 <div 
                                     onMouseEnter={() => {setMegaMenu(false), setActiveLabel(null)}}
                                     onClick={() => setSearchInput(false)}
-                                    className={searchInput ? 'inline text-xl font-semibold cursor-pointer text-white' : 'hidden text-xl font-semibold cursor-pointer text-white'}
+                                    className={searchInput ? 'inline text-xl font-bold cursor-pointer text-white' : 'hidden text-xl font-bold cursor-pointer text-white'}
                                 >
                                     <FontAwesomeIcon icon={faWindowClose}/>
                                 </div>
                                 <div 
                                     onMouseEnter={() => {setMegaMenu(false), setActiveLabel(null)}}
                                     onClick={() => setSearchInput(true)}
-                                    className={searchInput ? 'hidden text-xl font-semibold cursor-pointer text-white' : 'inline text-xl font-semibold cursor-pointer text-white'}
+                                    className={searchInput ? 'hidden text-xl font-bold cursor-pointer text-white' : 'inline text-xl font-bold cursor-pointer text-white'}
                                 >
                                     <FontAwesomeIcon icon={faSearch}/>
                                 </div>
@@ -142,20 +148,38 @@ export default function Header({ menu, slug }) {
                         <Accordion primary={el.name} secondary={el.menuItems.nodes} onToggleNav={toggleMobileNav}/>
                     </div>
                 ))}
+                <div
+                    onClick={() => {setMobileNav(false), setModalOpen(true)}} 
+                    className={mobileNav ? 'text-sky-600 px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}
+                >
+                    Subscribe
+                </div>
+                <div  className={mobileNav ? 'text-sky-600 px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}>
+                    <a href={'/contact-us'}>
+                        Contact Us
+                    </a>
+                </div>
             </div>
             {/* Megamenu - large viewports */}
-            {megaMenu &&
+            {(megaMenu && !megaMenuDisabled) &&
                 <div className='absolute hidden w-full lg:block bg-black z-40 py-5' onMouseLeave={() => {setMegaMenu(null), setActiveLabel(null)}}>
                     <div className='container grid grid-cols-4'>
                         {megaMenu.map((el) => (
                             <div onClick={() => {setMegaMenu(null)}} className='justify-self-center cursor-pointer h-10' key={el.id}>
-                                <a href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700'>
+                                <a href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-bold transition ease-in-out duration-700'>
                                     {el.label}
                                 </a>
                             </div>
                         ))}
                     </div>
                 </div>
+            }
+            {/* Newsletter modal - shows on Subscribe link click */}
+           {/* Newsletter modal - shows on Subscribe link click */}
+           {modalOpen &&
+                <NewsletterModal
+                    onClose={() => {setModalOpen(false), setMegaMenuDisabled(false)}}
+                />
             }
         </div>
     )
