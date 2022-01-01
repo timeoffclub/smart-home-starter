@@ -166,9 +166,7 @@ export default function Header({ menu, slug }) {
                     <div className='container grid grid-cols-4'>
                         {megaMenu.map((el) => (
                             <div onClick={() => {setMegaMenu(null)}} className='justify-self-center cursor-pointer h-10' key={el.id}>
-                                <a href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700'>
-                                    {el.label}
-                                </a>
+                                {el.label}
                             </div>
                         ))}
                     </div>
