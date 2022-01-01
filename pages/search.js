@@ -108,7 +108,6 @@ export default function Search({ data, navigationMenus, slug }) {
                         <div className='grid grid-cols-1 px-5 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                             {queryResultPosts?.edges?.map((el) => (
                                 <div key={el.node.id}>
-                                {el.node.id}
                                     <div className='h-80'>
                                         {el.node.featuredImage &&
                                             <div className='relative h-44 mb-3'>
