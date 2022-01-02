@@ -15,17 +15,19 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                 :
                                 <div className='h-80'>
                                     {el.node.featuredImage &&
-                                        <div className='relative h-44 mb-3'>
-                                            <Image 
-                                                src={el.node.featuredImage.node.sourceUrl}
-                                                alt={el.node.featuredImage.node.altText}
-                                                objectFit='cover'
-                                                layout='fill'
-                                                placeholder='blur'
-                                                // Work-around for no out-of-box dataUrl
-                                                blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
-                                            />
-                                        </div>
+                                        <a href={`../${el.node.slug}`}>
+                                            <div className='relative h-44 mb-3'>
+                                                <Image 
+                                                    src={el.node.featuredImage.node.sourceUrl}
+                                                    alt={el.node.featuredImage.node.altText}
+                                                    objectFit='cover'
+                                                    layout='fill'
+                                                    placeholder='blur'
+                                                    // Work-around for no out-of-box dataUrl
+                                                    blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                                />
+                                            </div>
+                                        </a>
                                     }
                                     <div>
                                         <div className='text-lg mb-3'>

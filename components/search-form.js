@@ -12,8 +12,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
                     <input 
                         value={searchQuery}
                         onChange={( event ) => setSearchQuery( event.target.value )}
-                        className='w-full h-10 text-sky-600 px-2 bg-neutral-900 border-2 border-gray-600 rounded focus:outline-none pl-11 appearance-none'
-                        placeholder='Search...'
+                        className='w-full h-10 text-sky-600 px-2 bg-neutral-900 border-2 border-gray-600 focus:outline-none pl-11 appearance-none'
                     />
                 </div>
                 <input
@@ -32,7 +31,6 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
                         value={searchQuery}
                         onChange={( event ) => setSearchQuery( event.target.value )}
                         className='w-full h-10 text-sky-600 px-2 bg-gray-200 border-0 focus:outline-none pl-11 appearance-none'
-                        placeholder='Search...'
                     />
                 </div>
                 <input

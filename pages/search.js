@@ -17,29 +17,29 @@ export default function Search({ data, navigationMenus, slug }) {
     const [ showResultInfo, setShowResultInfo ] = useState( false )
 	const [loading, setLoading] = useState(false)
 
-
-    async function getAllSearchResults(first, after, query) {
-        let data = {
-            posts: {
-                edges: []
-            }
-        }
-        let res = null
-        let hasNextPage = true
-        do {
-            res = await getSearchResults(first, after || null, query)
-            after = res.posts.pageInfo.endCursor
-            hasNextPage = res.posts.pageInfo.hasNextPage
-            data.posts.edges.push(...res.posts.edges)
-        } while (hasNextPage)
-        return data
-    }
+    // There's really no reason to return every match, but we will keep this here for now.
+    // async function getAllSearchResults(first, after, query) {
+    //     let data = {
+    //         posts: {
+    //             edges: []
+    //         }
+    //     }
+    //     let res = null
+    //     let hasNextPage = true
+    //     do {
+    //         res = await getSearchResults(first, after || null, query)
+    //         after = res.posts.pageInfo.endCursor
+    //         hasNextPage = res.posts.pageInfo.hasNextPage
+    //         data.posts.edges.push(...res.posts.edges)
+    //     } while (hasNextPage)
+    //     return data
+    // }
 
     async function fetchPosts(first, after, query) {
         setLoading(true)
         data = null
         try {
-            data = await getAllSearchResults(first, after, query)
+            data = await getSearchResults(first, after, query)
             setQueryResultPosts( data?.posts ?? {} )
             setShowResultInfo( true )
         } catch (e) {
@@ -63,18 +63,23 @@ export default function Search({ data, navigationMenus, slug }) {
         
         setSearchError( '' )
         
-        fetchPosts(36, null, searchQuery)
+        fetchPosts(80, null, searchQuery)
     }
 
     useEffect( () => {
         /**
-        * If the query params is set, set the searchQuery in the in
-        * 1. Set the search input value to that query.
-        * 2. Call fetchPosts to get the results as per the query string from query params.
+        * This is technically not safe because fetchPosts() should be defined inside
+        * of useEffect() in order for useEffect() to see all of the variables it uses.
+        * This is why Vercel gives us a warning on build. But since fetchPost() calls
+        * getAllSearchResults(), which calls getSearchResults() from GraphQL, we would
+        * have to move all of that inside of useEffect(), introducing all kinds of clutter.
+        * It's enough apparently to list searchQueryString in the dependency array, 
+        * because ultimately that's the prop that stores the data anyway. See here:
+        * https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies
         */
         if ( searchQueryString ) {
             setSearchQuery( searchQueryString )
-            fetchPosts(36, null, searchQueryString)
+            fetchPosts(80, null, searchQueryString)
         }
         
     }, [ searchQueryString ] )
@@ -103,7 +108,7 @@ export default function Search({ data, navigationMenus, slug }) {
                             Your search returned {totalPostResultCount} articles.
                         </div>
                         <div className={searchError ? 'container text-xl my-5' : 'hidden'}>
-                            {searchError}
+                            Error: {searchError}
                         </div>
                         <div className='grid grid-cols-1 px-5 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                             {queryResultPosts?.edges?.map((el) => (
@@ -131,7 +136,15 @@ export default function Search({ data, navigationMenus, slug }) {
                                             <div className='text-sky-600'>
                                                 {el.node.categories.edges.map((cat, index) => (
                                                     <span key={cat.node.id}>
-                                                        <a className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.length - 1) ? <span>| </span> : <span></span>}
+                                                        <a
+                                                            className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider'
+                                                            href={`../category/${cat.node.slug}`}>{cat.node.name}
+                                                        </a> 
+                                                        {index < (el.node.categories.edges.length - 1) ? 
+                                                            <span>| </span> 
+                                                        : 
+                                                            <span></span>
+                                                        }
                                                     </span>
                                                 ))}
                                             </div>

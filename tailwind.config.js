@@ -5,7 +5,8 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            'sans': ['source-sans-pro']
+            'sans': ['Source Sans Pro'],
+            'display': ['Passion One']
         },
         container: {
             center: true,

@@ -8,7 +8,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/alfa-slab-one": "^4.5.0",
+    "@fontsource/bungee": "^4.5.0",
     "@fontsource/open-sans": "^4.5.2",
+    "@fontsource/passion-one": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
     "@fontsource/roboto-mono": "^4.5.0",
     "@fontsource/source-sans-pro": "^4.5.1",

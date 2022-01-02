@@ -35,7 +35,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     </div>
                                 </a>
                                 {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
-                                    <span key={cat.node.id} className='text-sky-600 text-xl font-semibold uppercase tracking-wider'>
+                                    <span key={cat.node.id} className='text-sky-600 text-lg font-semibold uppercase tracking-wider'>
                                         <a href={`../category/${cat.node.slug}`} className='text-sky-600 font-semibold hover:text-blue-500'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
@@ -56,7 +56,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div className='ml-2'>
-                                        <div className='text-2xl font-medium mb-2'>
+                                        <div className='text-xl font-medium mb-2'>
                                             <a href={`../${el.node.slug}`}>
                                                 {el.node.title}
                                             </a>
@@ -73,9 +73,9 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             ))}
                         </div>
                     </div>
-                    <div className='sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
+                    <div className='sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
-                            <div key={el.node.id} className='flex flex-col justify-center h-26 sm:h-20 text-xl basis-80 font-medium mb-2'>
+                            <div key={el.node.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
                                 <div className='mb-2 '>
                                     <a href={`../${el.node.slug}`}>
                                         {el.node.title}
@@ -110,7 +110,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div className='ml-2'>
-                                        <div className='text-2xl font-medium mb-2'>
+                                        <div className='text-xl font-medium mb-2'>
                                             <a href={`../${el.node.slug}`}>
                                                 {el.node.title}
                                             </a>
@@ -128,7 +128,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         </div>
                         <div className='lg:hidden grid grid-cols-2 gap-5'>
                             {myArticles.slice(18,20).map((el) => (
-                                <div key={el.node.id} className='col-span-2  sm:col-span-1 inline-flex flex-wrap sm:w-72 md:w-96 mb-5'>
+                                <div key={el.node.id} className='col-span-2  sm:col-span-1 inline-flex flex-wrap sm:w-72 md:w-full mb-5'>
                                     {el.node.featuredImage &&
                                         <a href={`../${el.node.slug}`} className='relative w-full h-48 mb-3'>
                                             <Image 
@@ -141,7 +141,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div className='border-l-4 border-l-sky-600/0'>
-                                        <div className='text-xl mb-3'>
+                                        <div className='text-lg mb-3'>
                                             <a href={`../${el.node.slug}`}>
                                                 {el.node.title}
                                             </a>
@@ -171,7 +171,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     </a>
                                 }
                                 <div className='border-l-4 border-l-sky-600/0'>
-                                    <div className='text-xl mb-3'>
+                                    <div className='text-lg mb-3'>
                                         <a href={`../${el.node.slug}`}>
                                             {el.node.title}
                                         </a>

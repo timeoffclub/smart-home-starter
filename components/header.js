@@ -110,7 +110,7 @@ export default function Header({ menu, slug }) {
             {/* Main search input - appears when searchInput === true */}
             <div
                 
-                className={searchInput ? 'flex z-50 absolute top-30 right-12 bg-neutral-900 h-20 p-5 items-center' : 'hidden'}
+                className={searchInput ? 'hidden lg:flex z-50 absolute top-30 right-12 bg-neutral-900 h-20 p-5 items-center' : 'hidden'}
             >
                 <SearchForm
                     searchQuery={ searchQuery }

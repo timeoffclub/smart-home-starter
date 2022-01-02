@@ -5,6 +5,8 @@ import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleGrid from '../../components/article-grid'
 import ArticleFilterBar from '../../components/article-filter-bar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
 import { useState } from 'react'
 
 export default function Categories({ posts, category, categorySlug, filterMenu, navigationMenus }) {
@@ -86,7 +88,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 xl:px-0 grid grid-cols-4 gap-5 my-12'>
 				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap lg:flex-nowrap'>
-					<div className='flex-shrink-0 text-sky-600 text-6xl font-semibold lg:border-r-2 border-r-black py-3 pr-3'>
+					<div className='font-display text-sky-600 text-7xl lg:border-r-2 border-r-black py-3 pr-3 tracking-wide'>
 						{category.edges[0].node.name}
 					</div>
 					<div className='text-lg md:text-base font-medium tracking-wider lg:pl-5'>
@@ -94,28 +96,41 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 					</div>
 				</div>
 			</div>
-			<FeaturedCategory myArticles={posts.edges} myCategory={category.edges[0].node.name} />
-			<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-			<ArticleGrid myArticles={filteredArticles || articles || posts.edges} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
-			<div className='flex justify-center mb-12'>
-				{hasNextPage ?
-					<div className='text-xl cursor-pointer' as='div' onClick={() => loadMoreArticles()}>
-						{loadingMoreArticles ? 
-							<div>
-								Loading more articles...
-							</div>
-						:
-							<div>
-								Load More
-							</div>
-						}
+			{!featuredArticle ?
+				<div className='container text-center my-40'>
+					<div className='text-6xl mb-6'>
+						<FontAwesomeIcon icon={faGrimace}/>
 					</div>
-				:
-					<div className='text-xl cursor-pointer'>
-						No more articles in this category.
+					<div className='text-xl'>
+						It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
 					</div>
-				}
-			</div>
+				</div>
+			:
+			<>
+				<FeaturedCategory myArticles={posts.edges} myCategory={category.edges[0].node.name} />
+				<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
+				<ArticleGrid myArticles={filteredArticles || articles || posts.edges} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
+				<div className='flex justify-center mb-12'>
+					{hasNextPage ?
+						<div className='text-xl cursor-pointer' as='div' onClick={() => loadMoreArticles()}>
+							{loadingMoreArticles ? 
+								<div>
+									Loading more articles...
+								</div>
+							:
+								<div>
+									Load More
+								</div>
+							}
+						</div>
+					:
+						<div className='text-xl cursor-pointer'>
+							No more articles in this category.
+						</div>
+					}
+				</div>
+			</>
+			}
 			<Footer myMenu={navigationMenus} />
 		</>
 	)

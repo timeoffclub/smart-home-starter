@@ -1,5 +1,7 @@
 import '../styles/globals.scss'
 import "@fontsource/source-sans-pro"
+import "@fontsource/alfa-slab-one"
+import "@fontsource/passion-one"
 import "@fontsource/source-sans-pro/300.css"
 import "@fontsource/source-sans-pro/400.css"
 import "@fontsource/source-sans-pro/600.css"
