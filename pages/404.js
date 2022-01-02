@@ -8,8 +8,7 @@ export default function Custom404() {
                     </div>
                     <div className='pl-8 text-center'>
                         <div>
-                            Hey, there, time traveler. This page doesn&apos;t exist... yet. Click <a href='/' className='text-sky-600'>here</a> to go home,
-                            or just hit the back button.
+                            Hey, there, time traveler. This page doesn&apos;t exist... yet.
                         </div>
                     </div>
                 </div>
