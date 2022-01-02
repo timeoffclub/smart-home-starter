@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Script from 'next/script'
 import Head from 'next/head'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -16,7 +15,6 @@ export default function Post({ post, related, posts, preview, navigationMenus })
     }
     return (
         <>
-            <Script src="https://connect.facebook.net/en_US/sdk.js" strategy="lazyOnload" />
             <Head>
                 <title>
                     {post.title}
@@ -71,7 +69,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
                 </div>
                 <div className='hidden lg:inline col-span-1'>
-                    <div className='w-full bg-gray-300 h-[700px] mb-14'>
+                    <div className='sidebar-ad w-full bg-gray-300 h-[700px] mb-14'>
                         AD
                     </div>
                     <div className='text-3xl font-semibold mb-5'>
@@ -100,7 +98,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         </div>
                         <Newsletter mode={'light'}/>
                     </div>
-                    <div className='w-full bg-gray-300 h-[700px] top-10 sticky'>
+                    <div className='sidebar-ad-sticky w-full bg-gray-300 h-[700px] top-10 sticky'>
                         AD
                     </div>
                 </div>
