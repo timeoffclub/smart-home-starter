@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Script from 'next/script'
 import Head from 'next/head'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -15,6 +16,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
     }
     return (
         <>
+            <Script src="https://connect.facebook.net/en_US/sdk.js" strategy="lazyOnload" />
             <Head>
                 <title>
                     {post.title}
@@ -26,12 +28,12 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                 />
 				<meta property="og:title" content={post.title} />
 				<meta
-				property="og:description"
-				content={formatExcerpt(post.excerpt)}
+                    property="og:description"
+                    content={formatExcerpt(post.excerpt)}
 				/>
 				<meta
-				property="og:image"
-				content={post.featuredImage.node.sourceUrl}
+                    property="og:image"
+                    content={post.featuredImage.node.sourceUrl}
 				/>
             </Head>
             <Header menu={navigationMenus}/>
