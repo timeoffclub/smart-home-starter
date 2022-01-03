@@ -22,7 +22,7 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
             </Head>
             <Header menu={navigationMenus}/>
             <div className='container mt-14'>
-                <HomeFeatured myArticles={top.edges} myCategory={'Featured'}/>
+                <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
             </div>
             <NewsLetterPageCTA/>
             <div className='container px-5 sm:px-0'>
@@ -36,13 +36,13 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                         {hardware.categoryName.edges[0].node.name}
                     </a>
                 </div>
-                <FeaturedCategory myArticles={hardware.posts.edges} myCategory={'TVs'}/>
+                <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
                 <div className='mx-4 xl:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
                     <a href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
                         {brands.categoryName.edges[0].node.name}
                     </a>
                 </div>
-                <FeaturedCategory myArticles={brands.posts.edges} myCategory={'Ring'} />
+                <FeaturedCategory myArticles={brands.posts.nodes} myCategory={'Ring'} />
             </div>
 			<Footer myMenu={navigationMenus} />
         </>

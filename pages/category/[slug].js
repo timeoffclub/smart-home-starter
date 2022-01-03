@@ -10,7 +10,6 @@ import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
 import { useState } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
-	console.log(posts)
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
