@@ -36,9 +36,9 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                             </a>
                                         </div>
                                         <div className='text-sky-600'>
-                                            {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                            {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                    <a className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>

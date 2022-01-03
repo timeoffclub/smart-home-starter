@@ -10,6 +10,7 @@ import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
 import { useState } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
+	console.log(category)
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
@@ -98,7 +99,7 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 						{category.edges[0].node.name}
 					</div>
 					<div className='text-lg md:text-base font-medium tracking-wider lg:pl-5'>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam ut porttitor
+						{category.edges[0].node.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam ut porttitor'}
 					</div>
 				</div>
 			</div>
