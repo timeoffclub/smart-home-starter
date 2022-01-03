@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function FeaturedCategory ({ myArticles, myCategory }) {
     let featuredArticle
-    myArticles.length > 0 ? featuredArticle = myArticles[0].node : null
+    myArticles.length > 0 ? featuredArticle = myArticles[0] : null
 
     return (
         <>  
@@ -43,28 +43,28 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         </div>
                         <div className='flex px-5 lg:px-0 flex-col justify-between col-span-2'>
                             {myArticles.slice(1,4).map((el, index) => (
-                                <div key={el.node.id} className='flex items-center mb-3 lg:mb-0'>
-                                    {el.node.featuredImage &&
-                                        <a href={`../${el.node.slug}`} className='relative shrink-0 w-24 h-24'>
+                                <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
+                                    {el.featuredImage &&
+                                        <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
                                             <Image
-                                                src={el.node.featuredImage.node.sourceUrl}
-                                                alt={el.node.featuredImage.node.altText}
+                                                src={el.featuredImage.node.sourceUrl}
+                                                alt={el.featuredImage.node.altText}
                                                 layout='fill'
                                                 objectFit='cover'
-                                                blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                                blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
                                         </a>
                                     }
                                     <div className='ml-2'>
                                         <div className='text-xl font-medium mb-2'>
-                                            <a href={`../${el.node.slug}`}>
-                                                {el.node.title}
+                                            <a href={`../${el.slug}`}>
+                                                {el.title}
                                             </a>
                                         </div>
                                         <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
-                                            {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                            {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                    <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>
@@ -75,16 +75,16 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                     </div>
                     <div className='sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
-                            <div key={el.node.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
+                            <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
                                 <div className='mb-2 '>
-                                    <a href={`../${el.node.slug}`}>
-                                        {el.node.title}
+                                    <a href={`../${el.slug}`}>
+                                        {el.title}
                                     </a>
                                 </div>
                                 <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
-                                    {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                    {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                         <span key={cat.node.id}>
-                                            <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                            <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                         </span>
                                     ))}
                                 </div>
@@ -97,28 +97,28 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                     <div className='lg:grid px-5 lg:px-0 lg:grid-cols-4 gap-5 mt-5'>
                         <div className='flex flex-col col-span-2'>
                             {myArticles.slice(14,16).map((el, index) => (
-                                <div key={el.node.id} className='inline-flex items-center mb-5'>
-                                    {el.node.featuredImage &&
-                                        <a href={`../${el.node.slug}`} className='relative w-24 h-24 shrink-0'>
+                                <div key={el.id} className='inline-flex items-center mb-5'>
+                                    {el.featuredImage &&
+                                        <a href={`../${el.slug}`} className='relative w-24 h-24 shrink-0'>
                                             <Image
-                                                src={el.node.featuredImage.node.sourceUrl}
-                                                alt={el.node.featuredImage.node.altText}
+                                                src={el.featuredImage.node.sourceUrl}
+                                                alt={el.featuredImage.node.altText}
                                                 layout='fill'
                                                 objectFit='cover'
-                                                blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                                blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
                                         </a>
                                     }
                                     <div className='ml-2'>
                                         <div className='text-xl font-medium mb-2'>
-                                            <a href={`../${el.node.slug}`}>
-                                                {el.node.title}
+                                            <a href={`../${el.slug}`}>
+                                                {el.title}
                                             </a>
                                         </div>
                                         <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
-                                            {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                            {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                    <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>
@@ -128,28 +128,28 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         </div>
                         <div className='lg:hidden grid grid-cols-2 gap-5'>
                             {myArticles.slice(18,20).map((el) => (
-                                <div key={el.node.id} className='col-span-2  sm:col-span-1 inline-flex flex-wrap sm:w-72 md:w-full mb-5'>
-                                    {el.node.featuredImage &&
-                                        <a href={`../${el.node.slug}`} className='relative w-full h-48 mb-3'>
+                                <div key={el.id} className='col-span-2  sm:col-span-1 inline-flex flex-wrap sm:w-72 md:w-full mb-5'>
+                                    {el.featuredImage &&
+                                        <a href={`../${el.slug}`} className='relative w-full h-48 mb-3'>
                                             <Image 
-                                                src={el.node.featuredImage.node.sourceUrl}
-                                                alt={el.node.featuredImage.node.altText}
+                                                src={el.featuredImage.node.sourceUrl}
+                                                alt={el.featuredImage.node.altText}
                                                 objectFit='cover'
                                                 layout='fill'
-                                                blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                                blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
                                         </a>
                                     }
                                     <div className='border-l-4 border-l-sky-600/0'>
                                         <div className='text-lg mb-3'>
-                                            <a href={`../${el.node.slug}`}>
-                                                {el.node.title}
+                                            <a href={`../${el.slug}`}>
+                                                {el.title}
                                             </a>
                                         </div>
                                         <div className='text-base text-sky-600'>
-                                            {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                            {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-sky-600 font-semibold' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                    <a className='text-sky-600 font-semibold' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>
@@ -158,28 +158,28 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             ))}
                         </div>
                         {myArticles.slice(17,19).map((el) => (
-                            <div key={el.node.id} className='hidden lg:inline-flex flex-wrap sm:w-72 lg:w-full mb-5'>
-                                {el.node.featuredImage &&
-                                    <a href={`../${el.node.slug}`} className='relative w-full h-56 mb-3 '>
+                            <div key={el.id} className='hidden lg:inline-flex flex-wrap sm:w-72 lg:w-full mb-5'>
+                                {el.featuredImage &&
+                                    <a href={`../${el.slug}`} className='relative w-full h-56 mb-3 '>
                                         <Image 
-                                            src={el.node.featuredImage.node.sourceUrl}
-                                            alt={el.node.featuredImage.node.altText}
+                                            src={el.featuredImage.node.sourceUrl}
+                                            alt={el.featuredImage.node.altText}
                                             objectFit='cover'
                                             layout='fill'
-                                            blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                            blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />
                                     </a>
                                 }
                                 <div className='border-l-4 border-l-sky-600/0'>
                                     <div className='text-lg mb-3'>
-                                        <a href={`../${el.node.slug}`}>
-                                            {el.node.title}
+                                        <a href={`../${el.slug}`}>
+                                            {el.title}
                                         </a>
                                     </div>
                                     <div className='text-base text-sky-600'>
-                                        {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                        {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                             <span key={cat.node.id}>
-                                                <a className='text-sky-600 font-semibold uppercase' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                <a className='text-sky-600 font-semibold uppercase' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                             </span>
                                         ))}
                                     </div>

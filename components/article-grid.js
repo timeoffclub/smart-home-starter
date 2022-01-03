@@ -7,38 +7,38 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
             <div className='container px-5 xl:px-0 mb-12'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                     {myArticles.map((el, index) => (
-                        <div key={el.node.id}>
+                        <div key={el.id}>
                             {(index !== 0 && index % 7 === 0) ?
                                 <div className='bg-gray-200 h-72' key={index}>
                                     AD
                                 </div>
                                 :
                                 <div className='h-80'>
-                                    {el.node.featuredImage &&
-                                        <a href={`../${el.node.slug}`}>
+                                    {el.featuredImage &&
+                                        <a href={`../${el.slug}`}>
                                             <div className='relative h-44 mb-3'>
                                                 <Image 
-                                                    src={el.node.featuredImage.node.sourceUrl}
-                                                    alt={el.node.featuredImage.node.altText}
+                                                    src={el.featuredImage.node.sourceUrl}
+                                                    alt={el.featuredImage.node.altText}
                                                     objectFit='cover'
                                                     layout='fill'
                                                     placeholder='blur'
                                                     // Work-around for no out-of-box dataUrl
-                                                    blurDataURL={`/_next/image?url=${el.node.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                                    blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                                 />
                                             </div>
                                         </a>
                                     }
                                     <div>
                                         <div className='text-lg mb-3'>
-                                            <a href={`../${el.node.slug}`}>
-                                                {el.node.title}
+                                            <a href={`../${el.slug}`}>
+                                                {el.title}
                                             </a>
                                         </div>
                                         <div className='text-sky-600'>
-                                            {el.node.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
+                                            {el.categories.edges.filter((e) => e.node.name !== myCategory).map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.node.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
+                                                    <a className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory).length - 1) ? <span>| </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>

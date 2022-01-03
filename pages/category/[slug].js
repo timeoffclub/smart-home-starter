@@ -1,4 +1,4 @@
-import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug } from '../../lib/api'
+import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug, getFeaturedIdsWithSlug, getPostById } from '../../lib/api'
 import Header from '../../components/header'
 import Head from 'next/head'
 import Footer from '../../components/footer'
@@ -9,9 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
 import { useState } from 'react'
 
-export default function Categories({ posts, category, categorySlug, filterMenu, navigationMenus }) {
+export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
+	console.log(posts)
+
+	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
+	featured.length < 20 ?
+	featured = featured.concat(posts.nodes.filter((node) => node.categories.edges.every((el) => el.node.name !== 'Featured')).slice(0, (20 - featured.length)))
+	: featured
+
 	let featuredArticle
-    posts.edges.length > 0 ? featuredArticle = posts.edges[0].node : null
+    featured.length > 0 ? featuredArticle = featured[0] : posts[0]
     const categories = []
 
 	const [articles, setArticles] = useState(false)
@@ -20,8 +27,8 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 	const [hasNextPage, setHasNextPage] = useState(true)
 	const [loadingMoreArticles, setLoadingMoreArticles] = useState(false)
 
-	posts?.edges.forEach(el => {
-		el.node.categories.edges.forEach(e => {
+	posts?.nodes.forEach(el => {
+		el.categories.edges.forEach(e => {
 			!categories.includes(e.node.name) && categories.push(e.node.name)
 		})
 	})
@@ -33,12 +40,12 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 		let arr = []
 		if (cat === 'All') {
 			!articles ?
-				setFilteredArticles(posts?.edges)
+				setFilteredArticles(posts?.nodes)
 			:
 				setFilteredArticles(null)
 		} else {
 			!articles ?
-				posts?.edges.forEach(el => {
+				posts?.nodes.forEach(el => {
 					el.node.categories.edges.forEach(e => {
 						e.node.name === cat && arr.push(el)
 					})
@@ -60,7 +67,7 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 			data = await getPostsByCategory(categorySlug, 40, endCursor || posts?.pageInfo.endCursor)
 			setEndCursor(data?.posts.pageInfo.endCursor)
 			setHasNextPage(data?.posts.pageInfo.hasNextPage)
-			setArticles(articles ? articles.concat(data?.posts.edges) : posts?.edges.concat(data?.posts.edges))
+			setArticles(articles ? articles.concat(data?.posts.nodes) : posts?.nodes.concat(data?.posts.nodes))
 		} catch (e) {
 			console.error(e)
 		} finally {
@@ -107,9 +114,9 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 				</div>
 			:
 			<>
-				<FeaturedCategory myArticles={posts.edges} myCategory={category.edges[0].node.name} />
+				<FeaturedCategory myArticles={featured} myCategory={category.edges[0].node.name} />
 				<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-				<ArticleGrid myArticles={filteredArticles || articles || posts.edges} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
+				<ArticleGrid myArticles={filteredArticles || articles || posts.nodes} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
 				<div className='flex justify-center mb-12'>
 					{hasNextPage ?
 						<div className='text-xl cursor-pointer' as='div' onClick={() => loadMoreArticles()}>
@@ -136,8 +143,35 @@ export default function Categories({ posts, category, categorySlug, filterMenu, 
 	)
 }
 
+async function getAllFeaturedIdsWithSlug(slug) {
+	let data = []
+    let endCursor = null
+    let hasNextPage = true
+    do {
+        let res = await getFeaturedIdsWithSlug(100, endCursor || null, slug)
+        endCursor = await res?.posts?.pageInfo.endCursor
+        hasNextPage = await res?.posts?.pageInfo.hasNextPage
+        data.push(...res.posts.nodes)
+    } while (hasNextPage)
+
+	return data
+}
+
+async function getMyFeaturedArticles(featuredIds) {
+	let data = []
+	for (const el of featuredIds) {
+		let res = await getPostById(el.id)
+		data.push(res.post)
+	}
+	return data
+}
+
 export async function getStaticProps({ params, preview = false}) {
 	const data = await getPropsForCategory(params.slug, 24)
+	const featuredIds = await getAllFeaturedIdsWithSlug(params.slug)
+	const myFeaturedIds = featuredIds.filter((el) => el.categories.nodes.length !== 0)
+	const myFeaturedArticles = await getMyFeaturedArticles(myFeaturedIds)
+
 	let navigationSlugs = [
 		'brands',
 		'faq',
@@ -163,6 +197,7 @@ export async function getStaticProps({ params, preview = false}) {
 		props: {
 			preview,
 			posts: data?.posts,
+			featured: myFeaturedArticles,
 			category: data?.categoryName,
 			categorySlug: params.slug,
 			// A little data massaging to match shape of filterTabs and catch categories without specified menus
