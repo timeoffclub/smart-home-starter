@@ -1,4 +1,5 @@
 import { getPostsWithSlug, getCategories } from "../../lib/api"
+import Moment from "react-moment"
 
 const EXTERNAL_DATA_URL = 'https://shs-vercel.app'
 
@@ -23,6 +24,7 @@ function generateSiteMap(posts, categories) {
          return `
        <url>
            <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}`}</loc>
+           <lastmod>${el.node.date}</lastmod>
        </url>
      `
        })
