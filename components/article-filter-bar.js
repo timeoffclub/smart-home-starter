@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function ArticleFilterBar ({ myMenu, myCategory, onFilter }) {
+
     const tabsPaginate = 7;
     const [moreTabs, setMoreTabs] = useState(false)
 
     const toggleMoreTabs = () => {
         setMoreTabs(!moreTabs)
     }
+
     const [activeTab, setActiveTab] = useState('All')
+
     return (
         <>
             <div className='container mb-5 px-6 xl:px-0 lg:pb-2 lg:border-b-2 lg:border-b-black lg:border-dashed'>

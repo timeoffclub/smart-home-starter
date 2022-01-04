@@ -73,7 +73,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             ))}
                         </div>
                     </div>
-                    <div className='sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
+                    <div className='hidden sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
                             <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
                                 <div className='mb-2 '>
@@ -93,6 +93,37 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         <div  key='ad' className='bg-gray-200 h-72 lg:h-auto sm:row-start-6 sm:row-span-1 sm:col-span-2 lg:col-span-1 lg:row-start-1 lg:row-span-3 lg:col-start-4 mt-10 md:mt-0'>
                             AD
                         </div>
+                    </div>
+                    <div className='md:hidden flex px-5 lg:px-0 flex-col justify-between col-span-2'>
+                        {myArticles.slice(5,14).map((el, index) => (
+                            <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
+                                {el.featuredImage &&
+                                    <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
+                                        <Image
+                                            src={el.featuredImage.node.sourceUrl}
+                                            alt={el.featuredImage.node.altText}
+                                            layout='fill'
+                                            objectFit='cover'
+                                            blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                        />
+                                    </a>
+                                }
+                                <div className='ml-2'>
+                                    <div className='text-xl font-medium mb-2'>
+                                        <a href={`../${el.slug}`}>
+                                            {el.title}
+                                        </a>
+                                    </div>
+                                    <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
+                                        {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
+                                            <span key={cat.node.id}>
+                                                <a className='text-sky-600 font-semibold hover:text-blue-500' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className='lg:grid px-5 lg:px-0 lg:grid-cols-4 gap-5 mt-5'>
                         <div className='flex flex-col col-span-2'>

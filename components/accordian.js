@@ -18,14 +18,14 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                     isShowing ? 
                         'flex text-white tracking-wider justify-between items-end  h-20' 
                     : 
-                        'flex text-white tracking-wider justify-between items-end border-b-2 border-b-gray-400 h-20'}
+                        'flex text-white tracking-wider justify-between items-end border-b border-b-white h-20'}
             >
                 <div className='text-white pb-3'>
                         <div className='flex items-center'>
                             <div  className={isShowing ? 'text-sky-600 text-xl mr-3' : 'hidden'}>
                                 <FontAwesomeIcon icon={faArrowRight}/>
                             </div>
-                            <div className='text-3xl '>
+                            <div className='text-2xl '>
                                 {primary}
                             </div>
                         </div>
@@ -39,7 +39,7 @@ export default function Accordion({primary, secondary, onToggleNav}) {
             </div>
             <div className='ml-8'>
                     {secondary.map((el) => (
-                        <div className={isShowing ? 'h-fit text-white text-2xl py-3 transition-all ease-in-out duration-400' : 'h-0 transition-all ease-in-out duration-400'} key={el.id}>
+                        <div className={isShowing ? 'h-fit text-white text-xl py-2 transition-all ease-in-out duration-400' : 'h-0 transition-all ease-in-out duration-400'} key={el.id}>
                             <a href={`../category/${kebabCase(el.label)}`} onClick={onToggleNav}>
                                 {el.label}
                             </a>

@@ -7,10 +7,9 @@ import ArticleGrid from '../../components/article-grid'
 import ArticleFilterBar from '../../components/article-filter-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
-	console.log(category)
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
@@ -21,11 +20,15 @@ export default function Categories({ posts, featured, category, categorySlug, fi
     featured.length > 0 ? featuredArticle = featured[0] : posts[0]
     const categories = []
 
-	const [articles, setArticles] = useState(false)
-	const [filteredArticles, setFilteredArticles] = useState(false)
+	const [filteredPosts, setFilteredPosts] = useState(false)
+	const [filterTab, setFilterTab] = useState('All')
 	const [endCursor, setEndCursor] = useState(null)
-	const [hasNextPage, setHasNextPage] = useState(true)
-	const [loadingMoreArticles, setLoadingMoreArticles] = useState(false)
+	const [hasNextPage, setHasNextPage] = useState(null)
+	const [loadingMorePosts, setLoadingMorePosts] = useState(false)
+
+	useEffect( () => {
+        setHasNextPage(posts.pageInfo.hasNextPage)
+    }, [] )
 
 	posts?.nodes.forEach(el => {
 		el.categories.edges.forEach(e => {
@@ -37,41 +40,26 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 	categories.forEach(el => filterTabs.push({label: el}))
 
 	const filter = (cat) => {
-		let arr = []
+		setFilterTab(cat)
 		if (cat === 'All') {
-			!articles ?
-				setFilteredArticles(posts?.nodes)
-			:
-				setFilteredArticles(null)
+			setFilteredPosts(posts.nodes)
 		} else {
-			!articles ?
-				posts?.nodes.forEach(el => {
-					el.node.categories.edges.forEach(e => {
-						e.node.name === cat && arr.push(el)
-					})
-				})
-			:
-				articles?.forEach(el => {
-					el.node.categories.edges.forEach(e => {
-						e.node.name === cat && arr.push(el)
-					})
-				})
-			setFilteredArticles(arr)
+			setFilteredPosts(posts.nodes.filter((article) => article.categories.edges.some((el) => el.node.name === cat)))
 		}
 	}
 
-	async function loadMoreArticles() {
-		setLoadingMoreArticles(true)
+	async function fetchMorePosts() {
+		setLoadingMorePosts(true)
 		let data = null
 		try {
-			data = await getPostsByCategory(categorySlug, 40, endCursor || posts?.pageInfo.endCursor)
-			setEndCursor(data?.posts.pageInfo.endCursor)
-			setHasNextPage(data?.posts.pageInfo.hasNextPage)
-			setArticles(articles ? articles.concat(data?.posts.nodes) : posts?.nodes.concat(data?.posts.nodes))
+			data = await getPostsByCategory(categorySlug, 40, endCursor || posts.pageInfo.endCursor)
+			setEndCursor(data.posts.pageInfo.endCursor)
+			setHasNextPage(data.posts.pageInfo.hasNextPage)
+			posts.nodes = posts.nodes.concat(data.posts.nodes)
 		} catch (e) {
 			console.error(e)
 		} finally {
-			setLoadingMoreArticles(false)
+			setLoadingMorePosts(false)
 		}
 	}
 
@@ -113,30 +101,39 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 					</div>
 				</div>
 			:
-			<>
-				<FeaturedCategory myArticles={featured} myCategory={category.edges[0].node.name} />
-				<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-				<ArticleGrid myArticles={filteredArticles || articles || posts.nodes} myCategory={category.edges[0].node.name} pageInfo={posts.pageInfo}/>
-				<div className='flex justify-center mb-12'>
-					{hasNextPage ?
-						<div className='text-xl cursor-pointer' as='div' onClick={() => loadMoreArticles()}>
-							{loadingMoreArticles ? 
-								<div>
-									Loading more articles...
-								</div>
-							:
-								<div>
-									Load More
-								</div>
-							}
-						</div>
-					:
-						<div className='text-xl cursor-pointer'>
-							No more articles in this category.
-						</div>
-					}
-				</div>
-			</>
+				<>
+					<FeaturedCategory 
+						myArticles={featured} 
+						myCategory={category.edges[0].node.name}
+					/>
+					<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
+					<ArticleGrid
+						myArticles={filteredPosts || posts.nodes}
+						myCategory={category.edges[0].node.name}
+					/>
+
+					{filterTab === 'All' &&
+					<div className='flex justify-center mb-12'>
+						{hasNextPage ?
+							<div className='text-xl cursor-pointer' as='div' onClick={() => fetchMorePosts()}>
+								{loadingMorePosts ? 
+									<div>
+										Loading more articles...
+									</div>
+								:
+									<div>
+										Load More
+									</div>
+								}
+							</div>
+						:
+							<div className='text-xl'>
+								No more articles in this category.
+							</div>
+						}
+					</div>
+				}
+				</>
 			}
 			<Footer myMenu={navigationMenus} />
 		</>
