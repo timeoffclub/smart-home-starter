@@ -29,10 +29,12 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     property="og:description"
                     content={formatExcerpt(post.excerpt)}
 				/>
-				<meta
-                    property="og:image"
-                    content={post.featuredImage.node.sourceUrl}
-				/>
+                {post.featuredImage &&
+                    <meta
+                        property="og:image"
+                        content={post.featuredImage.node.sourceUrl}
+                    />
+                }
             </Head>
             <Header menu={navigationMenus}/>
             <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
