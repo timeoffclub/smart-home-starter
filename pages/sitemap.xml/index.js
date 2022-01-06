@@ -1,5 +1,4 @@
 import { getPostsWithSlug, getCategories } from "../../lib/api"
-import Moment from "react-moment"
 
 const EXTERNAL_DATA_URL = 'https://shs-vercel.app'
 

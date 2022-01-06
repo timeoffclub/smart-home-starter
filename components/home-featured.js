@@ -41,7 +41,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     </div>
                     {myArticles.slice(1,7).map((el) => (
                         <div key={el.id} className='flex flex-col justify-start h-24 text-lg basis-80 font-medium mb-2'>
-                            <div className='mb-2'>
+                            <div className='mb-2  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                 <a href={`../${el.slug}`}>
                                     {el.title}
                                 </a>
@@ -72,7 +72,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             </a>
                         }
                         <div>
-                            <div className='text-lg mb-3'>
+                            <div className='text-lg mb-3  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                 <a href={`../${el.slug}`}>
                                     {el.title}
                                 </a>
