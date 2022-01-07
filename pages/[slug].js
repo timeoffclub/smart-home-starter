@@ -38,6 +38,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                 }
             </Head>
             <Script
+                id='load-ads'
                 strategy="lazyOnload"
                 dangerouslySetInnerHTML={{
                 __html: `
