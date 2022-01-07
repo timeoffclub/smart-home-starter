@@ -25,19 +25,19 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                 <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
             </div>
             <NewsLetterPageCTA/>
-            <div className='container px-5 sm:px-0'>
+            <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
                 <div className='bg-gray-300 w-full h-32 mt-14'>
                     AD
                 </div>
             </div>
             <div className='container mt-14'>
-                <div className='mx-4 xl:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
+                <div className='mx-4 sm:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
                     <a href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
                         {hardware.categoryName.edges[0].node.name}
                     </a>
                 </div>
                 <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
-                <div className='mx-4 xl:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
+                <div className='mx-4 sm:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
                     <a href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
                         {brands.categoryName.edges[0].node.name}
                     </a>

@@ -33,7 +33,7 @@ export default function Header({ menu, slug }) {
         <div className='relative'>
             {/* Upper nav on large viewports only */}
             <div className='hidden lg:block h-12 text-white bg-neutral-900'>
-                <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 xl:px-0'>
+                <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='hidden md:flex items-center justify-end'>
                         <div className='text-base font-semibold text-white tracking-wide mt-2.5'>
                             <a href={'/contact-us'}>
@@ -57,7 +57,7 @@ export default function Header({ menu, slug }) {
             </div>
             {/* Main nav all viewports */}
             <div className='h-20 bg-black'>
-                <div className='container px-6 xl:px-0'>
+                <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
                         <div className='w-40 cursor-pointer'>
                             LOGO

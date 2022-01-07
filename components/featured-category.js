@@ -41,7 +41,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 ))}
                             </div>
                         </div>
-                        <div className='flex px-5 lg:px-0 flex-col justify-between col-span-2'>
+                        <div className='flex px-5 sm:px-0 md:px-6 xl:px-0 flex-col justify-between col-span-2'>
                             {myArticles.slice(1,4).map((el, index) => (
                                 <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                     {el.featuredImage &&
@@ -73,7 +73,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             ))}
                         </div>
                     </div>
-                    <div className='hidden sm:grid px-5 lg:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
+                    <div className='hidden sm:grid px-5 sm:px-0 md:px-6 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
                             <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
                                 <div className='mb-2  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
@@ -90,11 +90,11 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 </div>
                             </div>
                         ))}
-                        <div  key='ad' className='bg-gray-200 h-72 lg:h-auto sm:row-start-6 sm:row-span-1 sm:col-span-2 lg:col-span-1 lg:row-start-1 lg:row-span-3 lg:col-start-4 mt-10 md:mt-0'>
+                        <div  key='ad' className='bg-gray-200 h-72 sm:row-start-1 sm:row-span-3 sm:col-span-1 sm:col-start-2 lg:row-start-1 lg:row-span-3 lg:col-start-3 lg:col-span-2 xl:h-auto xl:col-span-1 xl:row-start-1 xl:row-span-3 xl:col-start-4 mt-10 md:mt-0'>
                             AD
                         </div>
                     </div>
-                    <div className='md:hidden flex px-5 lg:px-0 flex-col justify-between col-span-2'>
+                    <div className='md:hidden flex px-5 sm:px-0 md:px-6 xl:px-0 flex-col justify-between col-span-2'>
                         {myArticles.slice(5,14).map((el, index) => (
                             <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                 {el.featuredImage &&
@@ -128,7 +128,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             </div>
                         ))}
                     </div>
-                    <div className='lg:grid px-5 lg:px-0 lg:grid-cols-4 gap-5 mt-5'>
+                    <div className='lg:grid px-5 sm:px-0 md:px-6 xl:px-0 lg:grid-cols-4 gap-5 mt-5'>
                         <div className='flex flex-col col-span-2'>
                             {myArticles.slice(14,16).map((el, index) => (
                                 <div key={el.id} className='inline-flex items-center mb-5'>

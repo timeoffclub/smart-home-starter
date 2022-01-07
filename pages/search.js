@@ -89,7 +89,7 @@ export default function Search({ data, navigationMenus, slug }) {
     return (
         <>
             <Header menu={navigationMenus} slug={slug} />
-            <div className='flex justify-center px-5 xl:px-0  my-12'>
+            <div className='flex justify-center px-5 sm:px-0 md:px-6 xl:px-0  my-12'>
                 <SearchForm
                     searchQuery={ searchQuery }
                     setSearchQuery={ setSearchQuery }
@@ -104,13 +104,13 @@ export default function Search({ data, navigationMenus, slug }) {
             :
                 <>
                     <div className='container mb-12'>
-                        <div className={showResultInfo ? 'text-xl my-5 mx-6 xl:mx-0' : 'hidden'}>
+                        <div className={showResultInfo ? 'text-xl my-5 mx-6 sm:mx-0' : 'hidden'}>
                             Your search returned {totalPostResultCount} articles.
                         </div>
                         <div className={searchError ? 'container text-xl my-5' : 'hidden'}>
                             Error: {searchError}
                         </div>
-                        <div className='grid grid-cols-1 px-5 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
+                        <div className='grid grid-cols-1 px-5 sm:px-0 md:px-6 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                             {queryResultPosts?.edges?.map((el) => (
                                 <div key={el.node.id}>
                                     <div className='h-80'>

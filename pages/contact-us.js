@@ -8,7 +8,7 @@ export default function ContactUs({ navigationMenus }) {
     return (
         <>
             <Header menu={navigationMenus} />
-            <div className='container px-6 xl:px-0 my-12 w-full'>
+            <div className='container px-6 sm:px-0 md:px-6 xl:px-0 my-12 w-full'>
                 <div className='w-fit'>
                     <h1 className='text-4xl mb-4 font-semibold text-sky-600'>
                         Contact Us
