@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import Router from 'next/router'
 import SearchForm from './search-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -59,10 +61,32 @@ export default function Header({ menu, slug }) {
             <div className='h-20 bg-black'>
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
-                        <div className='h-full cursor-pointer'>
-                            <img className='hidden md:block h-10 mt-6' src={'/Smart-Home-Starter_Logo-White.png'}/>
-                            <img className='md:hidden h-14 mt-3' src={'/SHSLogo.png'}/>
-                        </div>
+                        <Link href={'/'}>
+                            <a>
+                                <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
+                                    <Image 
+                                        src={'/Smart-Home-Starter_Logo-White.png'}
+                                        alt={'Smart Home Starter'}
+                                        layout='responsive'
+                                        width={78}
+                                        height={10}
+                                    />
+                                </div>
+                            </a>
+                        </Link>
+                        <Link href={'/'}>
+                            <a>
+                                <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
+                                    <Image
+                                        src={'/SHSLogo.png'}
+                                        alt={'Smart Home Starter'}
+                                        layout='responsive'
+                                        width={10}
+                                        height={10}
+                                    />
+                                </div>
+                            </a>
+                        </Link>
                         <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 icon={faTimes}

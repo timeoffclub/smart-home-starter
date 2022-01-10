@@ -14,7 +14,6 @@ import Link from 'next/link'
 import { kebabCase } from '../lib/utils'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
-    console.log(post)
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
