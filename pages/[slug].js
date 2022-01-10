@@ -75,12 +75,13 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                             <Moment format={'MMM D, YYYY'}>{post.date}</Moment>
                         </div>
                         <div className='flex text-smart-blue mb-3 text-3xl'>
-                        <div className='mr-1'>
+                        <div className='mr-3'>
                             <FacebookShareButton
+                                className='w-full h-full'
                                 url={`https://smarthomestarter.com/${post.slug}`}
                                 hashtag={`#smart home`}
                             >
-                                <FontAwesomeIcon icon={faFacebookSquare} className='mr-1'/>
+                                <FontAwesomeIcon icon={faFacebookSquare} size='lg'/>
                             </FacebookShareButton>
                         </div>
                         <div>
@@ -88,7 +89,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                                 url={`https://smarthomestarter.com/${post.slug}`}
                                 hashtag={`#smart home`}
                             >
-                                <FontAwesomeIcon icon={faTwitterSquare} />
+                                <FontAwesomeIcon icon={faTwitterSquare} size='lg' />
                             </TwitterShareButton>
                         </div>
                         </div>
@@ -107,15 +108,15 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         </div>
                     }
                     <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
-                    <div className='flex w-full gap-3'>
+                    <div className='sm:flex w-full gap-3'>
                         {post.categories.edges.map((el) => (
                             <div
                                 key={el.node.name}
-                                className='p-3 flex-1 text-center cursor-pointer text-white bg-smart-blue text-lg border-0 focus:outline-none appearance-none'
+                                className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-lg border-0 focus:outline-none appearance-none'
                             >
                             <Link href={`/category/${kebabCase(el.node.name)}`}>
                                 <a>
-                                        See more {el.node.name} articles
+                                        More {el.node.name} articles
                                 </a>
                             </Link>
                             </div>
