@@ -75,18 +75,22 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                             <Moment format={'MMM D, YYYY'}>{post.date}</Moment>
                         </div>
                         <div className='flex text-smart-blue mb-3 text-3xl'>
+                        <div className='mr-1'>
                             <FacebookShareButton
                                 url={`https://smarthomestarter.com/${post.slug}`}
                                 hashtag={`#smart home`}
                             >
                                 <FontAwesomeIcon icon={faFacebookSquare} className='mr-1'/>
                             </FacebookShareButton>
+                        </div>
+                        <div>
                             <TwitterShareButton
                                 url={`https://smarthomestarter.com/${post.slug}`}
                                 hashtag={`#smart home`}
                             >
                                 <FontAwesomeIcon icon={faTwitterSquare} />
                             </TwitterShareButton>
+                        </div>
                         </div>
                     </div>
                     {post.featuredImage &&
