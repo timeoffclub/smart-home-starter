@@ -10,7 +10,7 @@ export default function ContactUs({ navigationMenus }) {
             <Header menu={navigationMenus} />
             <div className='container px-6 sm:px-0 md:px-6 xl:px-0 my-12 w-full'>
                 <div className='w-fit'>
-                    <h1 className='text-4xl mb-4 font-semibold text-sky-600'>
+                    <h1 className='text-4xl mb-4 font-semibold text-smart-blue'>
                         Contact Us
                     </h1>
                     <p className='text-lg mb-4'>

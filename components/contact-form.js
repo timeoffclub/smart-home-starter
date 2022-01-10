@@ -21,7 +21,7 @@ export default function ContactForm() {
                 <textarea className='w-full bg-gray-200 h-48 appearance-none' id='message' name='message' />
                 <ValidationError prefix='Message' field='message' errors={state.errors} />
             </div>
-                <button className='bg-sky-600 text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 appearance-none' type='submit' disabled={state.submitting}>
+                <button className='bg-smart-blue text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 appearance-none' type='submit' disabled={state.submitting}>
                     Submit
                 </button>
         </form>

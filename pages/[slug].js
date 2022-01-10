@@ -7,10 +7,14 @@ import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsWithTag } from '../lib/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faInstagramSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
+import { FacebookShareButton, FacebookShareCount, TwitterShareButton } from 'react-share'
 import Moment from 'react-moment'
 import 'moment-timezone'
+import Link from 'next/link'
+import { kebabCase } from '../lib/utils'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
+    console.log(post)
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
@@ -71,10 +75,19 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         <div className='text-lg'>
                             <Moment format={'MMM D, YYYY'}>{post.date}</Moment>
                         </div>
-                        <div className='flex text-sky-600 mb-3 text-3xl'>
-                           <FontAwesomeIcon icon={faFacebookSquare} className='mr-1'/>
-                           <FontAwesomeIcon icon={faInstagramSquare} className='mr-1'/>
-                           <FontAwesomeIcon icon={faTwitterSquare} />
+                        <div className='flex text-smart-blue mb-3 text-3xl'>
+                            <FacebookShareButton
+                                url={`https://smarthomestarter.com/${post.slug}`}
+                                hashtag={`#smart home`}
+                            >
+                                <FontAwesomeIcon icon={faFacebookSquare} className='mr-1'/>
+                            </FacebookShareButton>
+                            <TwitterShareButton
+                                url={`https://smarthomestarter.com/${post.slug}`}
+                                hashtag={`#smart home`}
+                            >
+                                <FontAwesomeIcon icon={faTwitterSquare} />
+                            </TwitterShareButton>
                         </div>
                     </div>
                     {post.featuredImage &&
@@ -91,10 +104,23 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         </div>
                     }
                     <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
+                    <div className='flex w-full gap-3'>
+                        {post.categories.edges.map((el) => (
+                            <div
+                                key={el.node.name}
+                                className='p-3 flex-1 text-center cursor-pointer text-white bg-smart-blue text-lg border-0 focus:outline-none appearance-none'
+                            >
+                            <Link href={`/category/${kebabCase(el.node.name)}`}>
+                                <a>
+                                        See more {el.node.name} articles
+                                </a>
+                            </Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className='hidden lg:inline col-span-1'>
-                    <div className='sidebar-ad w-full bg-gray-300 h-[700px] mb-14'>
-                        AD
+                    <div className='sidebar-ad w-full h-[300px] mb-14'>
                     </div>
                     <div className='text-3xl font-semibold mb-5'>
                         Related Articles
@@ -107,23 +133,22 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                                     {el.title}
                                 </a>
                             </div>
-                            <div className='text-sky-600 text-base font-medium uppercase tracking-wider'>
+                            <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
                                 {el.categories.nodes.map((cat, index) => (
                                     <span key={cat.id}>
-                                        <a className='text-sky-600 hover:text-blue-500' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-smart-blue hover:text-smart-green' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>
                         </div>
                     ))}
                     <div className='border-y-2 border-y-gray-500 py-12 my-14'>
-                        <div className='text-4xl text-sky-600 font-semibold mb-5 tracking-wider'>
+                        <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
                             Sign up for our newsletter
                         </div>
                         <Newsletter mode={'light'}/>
                     </div>
-                    <div className='sidebar-ad-sticky w-full bg-gray-300 h-[700px] top-10 sticky'>
-                        AD
+                    <div className='sidebar-ad-sticky w-full h-[300px] top-10 sticky'>
                     </div>
                 </div>
             </div>

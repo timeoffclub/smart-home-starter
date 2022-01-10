@@ -37,7 +37,7 @@ export default function Newsletter({ mode }) {
                     </div>
                 )}
                 <div
-                    className='bg-sky-600 text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 mt-2 appearance-none'
+                    className='bg-smart-blue text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 mt-2 appearance-none'
                     type='button'
                     disabled={state === 'LOADING'}
                     onClick={subscribe}

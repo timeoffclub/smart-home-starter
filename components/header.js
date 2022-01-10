@@ -59,16 +59,17 @@ export default function Header({ menu, slug }) {
             <div className='h-20 bg-black'>
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
-                        <div className='w-40 cursor-pointer'>
-                            LOGO
+                        <div className='h-full cursor-pointer'>
+                            <img className='hidden md:block h-10 mt-6' src={'/Smart-Home-Starter_Logo-White.png'}/>
+                            <img className='md:hidden h-14 mt-3' src={'/SHSLogo.png'}/>
                         </div>
-                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[79px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[79px] text-stone-50 font-light'}>
+                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 icon={faTimes}
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
-                        <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[79px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[79px] text-stone-50 font-light'}>
+                        <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 className={mobileNav ? 'hidden' : 'block'}
                                 icon={faBars}
@@ -78,7 +79,7 @@ export default function Header({ menu, slug }) {
                         <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
-                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-sky-600 tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
+                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
                                     onMouseEnter={() => {setMegaMenu(el.menuItems.nodes), setActiveLabel(el.name)}}
                                     key={el.id}
                                 >
@@ -150,11 +151,11 @@ export default function Header({ menu, slug }) {
                 ))}
                 <div
                     onClick={() => {setMobileNav(false), setModalOpen(true)}} 
-                    className={mobileNav ? 'text-sky-600 px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}
+                    className={mobileNav ? 'text-smart-blue px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}
                 >
                     Subscribe
                 </div>
-                <div  className={mobileNav ? 'text-sky-600 px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}>
+                <div  className={mobileNav ? 'text-smart-blue px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}>
                     <a href={'/contact-us'}>
                         Contact Us
                     </a>

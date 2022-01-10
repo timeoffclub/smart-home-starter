@@ -4,14 +4,19 @@ module.exports = {
         "./components/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        fontFamily: {
-            'sans': ['Source Sans Pro'],
-            'display': ['Passion One']
+        extend: {
+            colors: {
+            'smart-blue': '#52B0E0',
+            'smart-green': '#2DFA91',
+            },
+            fontFamily: {
+                'sans': ['Source Sans Pro'],
+                'display': ['Passion One']
+            },
+            container: {
+                center: true,
+            }
         },
-        container: {
-            center: true,
-        },
-        extend: {},
     },
     plugins: [],
 }

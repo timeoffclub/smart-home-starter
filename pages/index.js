@@ -31,13 +31,13 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                 </div>
             </div>
             <div className='container mt-14'>
-                <div className='mx-4 sm:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
+                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mb-5'>
                     <a href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
                         {hardware.categoryName.edges[0].node.name}
                     </a>
                 </div>
                 <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
-                <div className='mx-4 sm:mx-0 text-7xl text-sky-600 font-display tracking-wide mb-5'>
+                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mb-5'>
                     <a href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
                         {brands.categoryName.edges[0].node.name}
                     </a>

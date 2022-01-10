@@ -37,7 +37,7 @@ export default function NewsletterModal({ onClose }) {
 
     return (
         <div className='absolute w-screen h-screen bg-black/50 z-50'>
-            <div className='relative top-40 md:top-8 sm:mx-auto text-xl text-sky-600 bg-black py-8 w-full sm:w-[500px]'>
+            <div className='relative top-0 md:top-8 sm:mx-auto text-xl text-smart-blue bg-black py-8 w-full sm:w-[500px]'>
                 <FontAwesomeIcon 
                     className='cursor-pointer absolute top-4 right-4'
                     icon={faWindowClose}
@@ -47,7 +47,7 @@ export default function NewsletterModal({ onClose }) {
                     <div className='w-full'>
                         <div className='flex flex-wrap justify-center'>
                                 {state === 'IDLE' && 
-                                    <div className='text-sky-600 text-bold text-center text-4xl mb-6'>
+                                    <div className='text-smart-blue text-bold text-center text-4xl mb-6'>
                                         Sign up for our newsletter for news, deals and other stuff
                                     </div>
                                 }
@@ -61,7 +61,7 @@ export default function NewsletterModal({ onClose }) {
                                         <div className='text-5xl mb-6'>
                                             <FontAwesomeIcon className='text-white' icon={faBadgeCheck}/>
                                         </div>
-                                        <div className='text-sky-600 text-bold text-center text-4xl mb-6'>
+                                        <div className='text-smart-blue text-bold text-center text-4xl mb-6'>
                                             You&apos;ve been added to our list. See ya soon!
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@ export default function NewsletterModal({ onClose }) {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <div
-                                className='bg-sky-600 text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 mt-2 appearance-none'
+                                className='bg-smart-blue text-white text-lg text-bold w-fit cursor-pointer px-7 py-2 mt-2 appearance-none'
                                 type='button'
                                 disabled={state === 'LOADING'}
                                 onClick={subscribe}

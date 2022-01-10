@@ -63,7 +63,7 @@ export default function Search({ data, navigationMenus, slug }) {
         
         setSearchError( '' )
         
-        fetchPosts(80, null, searchQuery)
+        fetchPosts(100, null, searchQuery)
     }
 
     useEffect( () => {
@@ -79,12 +79,12 @@ export default function Search({ data, navigationMenus, slug }) {
         */
         if ( searchQueryString ) {
             setSearchQuery( searchQueryString )
-            fetchPosts(80, null, searchQueryString)
+            fetchPosts(100, null, searchQueryString)
         }
         
     }, [ searchQueryString ] )
     
-    const totalPostResultCount =  queryResultPosts?.edges?.length
+    const totalPostResultCount = (queryResultPosts?.edges?.length < 100 ? queryResultPosts?.edges?.length : `more than ${queryResultPosts?.edges?.length}`)
 
     return (
         <>
@@ -133,11 +133,11 @@ export default function Search({ data, navigationMenus, slug }) {
                                                     {el.node.title}
                                                 </a>
                                             </div>
-                                            <div className='text-sky-600'>
+                                            <div className='text-smart-blue'>
                                                 {el.node.categories.edges.map((cat, index) => (
                                                     <span key={cat.node.id}>
                                                         <a
-                                                            className='text-base font-semibold text-sky-600 hover:text-blue-500 uppercase tracking-wider'
+                                                            className='text-base font-semibold text-smart-blue hover:text-smart-green uppercase tracking-wider'
                                                             href={`../category/${cat.node.slug}`}>{cat.node.name}
                                                         </a> 
                                                         {index < (el.node.categories.edges.length - 1) ? 
