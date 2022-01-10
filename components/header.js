@@ -61,7 +61,7 @@ export default function Header({ menu, slug }) {
             <div className='h-20 bg-black'>
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
-                        <Link href={'/'}>
+                        <Link href={process.env.NEXT_PUBLIC_URL}>
                             <a>
                                 <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
                                     <Image 
@@ -74,8 +74,8 @@ export default function Header({ menu, slug }) {
                                 </div>
                             </a>
                         </Link>
-                        <Link href={'/'}>
-                            <a>
+                        <Link href={process.env.NEXT_PUBLIC_URL}>
+                            <a className='w-full'>
                                 <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                     <Image
                                         src={'/SHSLogo.png'}
@@ -146,13 +146,16 @@ export default function Header({ menu, slug }) {
             </div>
             {/* Mobile search - beneath main nav on mobile viewports, unless slug is /search */}
             <div className={slug !== 'search' ? 'block' : 'hidden'}>
-                <div className={'flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900  px-6 md:px-10'}>
-                    <SearchForm
-                        searchQuery={ searchQuery }
-                        setSearchQuery={ setSearchQuery }
-                        handleSearchFormSubmit={handleSearchFormSubmit}
-                        mode={'dark'}
-                    />
+                <div>
+                    <label className='text-smart-blue flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900  px-6 md:px-10'>
+                        <SearchForm
+                            searchQuery={ searchQuery }
+                            setSearchQuery={ setSearchQuery }
+                            handleSearchFormSubmit={handleSearchFormSubmit}
+                            mode={'dark'}
+                        />
+                        <span className='ml-3'>Search</span>
+                    </label>
                 </div>
             </div>
             {/* Mobile nav - beneath main nav on mobile viewports */}
