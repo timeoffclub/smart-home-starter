@@ -75,7 +75,7 @@ export default function Header({ menu, slug }) {
                             </a>
                         </Link>
                         <Link href={process.env.NEXT_PUBLIC_URL}>
-                            <a className='w-full lg:w-auto'>
+                            <a className=''>
                                 <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                     <Image
                                         src={'/SHSLogo.png'}
