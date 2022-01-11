@@ -105,10 +105,10 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
 				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
-					<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide lg:basis-1/2'}`}>
+					<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
 						{category.edges[0].node.name}
 					</div>
-					<div className={category.edges[0].node.description ? 'text-lg lg:basis-1/2 md:text-base font-medium tracking-wider lg:pl-5' : 'hidden'}>
+					<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-medium tracking-wider lg:pl-5' : 'hidden'}>
 						{category.edges[0].node.description || ''}
 					</div>
 				</div>
