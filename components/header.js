@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import Router from 'next/router'
 import SearchForm from './search-form'
@@ -78,28 +79,32 @@ export default function Header({ menu, slug }) {
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
-                        <a href={process.env.NEXT_PUBLIC_URL}>
-                            <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
-                                <Image 
-                                    src={'/Smart-Home-Starter_Logo-White.png'}
-                                    alt={'Smart Home Starter'}
-                                    layout='responsive'
-                                    width={78}
-                                    height={10}
-                                />
-                            </div>
-                        </a>
-                        <a href={process.env.NEXT_PUBLIC_URL} className='w-full md:hidden flex justify-center'>
-                            <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
-                                <Image
-                                    src={'/SHSLogo.png'}
-                                    alt={'Smart Home Starter'}
-                                    layout='responsive'
-                                    width={10}
-                                    height={10}
-                                />
-                            </div>
-                        </a>
+                        <Link href={process.env.NEXT_PUBLIC_URL}>
+                            <a>
+                                <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
+                                    <Image 
+                                        src={'/Smart-Home-Starter_Logo-White.png'}
+                                        alt={'Smart Home Starter'}
+                                        layout='responsive'
+                                        width={78}
+                                        height={10}
+                                    />
+                                </div>
+                            </a>
+                        </Link>
+                        <Link href={process.env.NEXT_PUBLIC_URL}>
+                            <a className='w-full md:hidden flex justify-center'>
+                                <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
+                                    <Image
+                                        src={'/SHSLogo.png'}
+                                        alt={'Smart Home Starter'}
+                                        layout='responsive'
+                                        width={10}
+                                        height={10}
+                                    />
+                                </div>
+                            </a>
+                        </Link>
                         <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 icon={faSearch}
