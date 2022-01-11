@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost', 'smarthomestart.wpengine.com'],
+    domains: ['localhost', 'shsprods.wpengine.com'],
   }
 }
