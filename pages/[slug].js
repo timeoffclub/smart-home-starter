@@ -10,6 +10,7 @@ import { faFacebookSquare, faInstagramSquare, faTwitterSquare } from '@fortaweso
 import { FacebookShareButton, FacebookShareCount, TwitterShareButton } from 'react-share'
 import Moment from 'react-moment'
 import 'moment-timezone'
+import Link from 'next/link'
 import { kebabCase } from '../lib/utils'
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
@@ -113,9 +114,11 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                                 key={el.node.name}
                                 className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-lg border-0 focus:outline-none appearance-none'
                             >
-                                <a href={`/category/${kebabCase(el.node.name)}`}>
-                                    More {el.node.name} articles
+                            <Link href={`/category/${kebabCase(el.node.name)}`}>
+                                <a>
+                                        More {el.node.name} articles
                                 </a>
+                            </Link>
                             </div>
                         ))}
                     </div>
