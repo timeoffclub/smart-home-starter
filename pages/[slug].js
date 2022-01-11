@@ -121,8 +121,6 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     </div>
                 </div>
                 <div className='hidden lg:inline col-span-1'>
-                    <div className='sidebar-ad w-full h-[600px] mb-14'>
-                    </div>
                     <div className='text-3xl font-semibold mb-5'>
                         Related Articles
                     </div>
@@ -148,8 +146,6 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                             Sign up for our newsletter
                         </div>
                         <Newsletter mode={'light'}/>
-                    </div>
-                    <div className='sidebar-ad-sticky w-full h-[600px] top-10 sticky'>
                     </div>
                 </div>
             </div>
