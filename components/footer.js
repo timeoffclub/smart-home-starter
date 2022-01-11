@@ -1,5 +1,4 @@
 import Newsletter from './newsletter'
-import Link from 'next/link'
 import Image from 'next/image'
 import { kebabCase } from '../lib/utils'
 
@@ -10,19 +9,17 @@ export default function Header({ myMenu }) {
             <div className='container px-5 sm:px-0 md:px-6 xl:px-0 '>
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
                     <div className='flex flex-col xl:justify-between'>
-                        <Link href={process.env.NEXT_PUBLIC_URL}>
-                            <a>
-                                <div className='relative hidden md:block h-16 w-80 cursor-pointer'>
-                                    <Image 
-                                        src={'/Smart-Home-Starter_Logo-White.png'}
-                                        alt={'Smart Home Starter'}
-                                        layout='responsive'
-                                        width={65}
-                                        height={8}
-                                    />
-                                </div>
-                            </a>
-                        </Link>
+                        <a href={process.env.NEXT_PUBLIC_URL}>
+                            <div className='relative hidden md:block h-16 w-80 cursor-pointer'>
+                                <Image 
+                                    src={'/Smart-Home-Starter_Logo-White.png'}
+                                    alt={'Smart Home Starter'}
+                                    layout='responsive'
+                                    width={65}
+                                    height={8}
+                                />
+                            </div>
+                        </a>
                         <div className='mb-12'>
                             <div className='text-4xl text-smart-blue font-semibold tracking-wider mb-9'>
                                 Sign up for our newsletter
