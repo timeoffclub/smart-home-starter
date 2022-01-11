@@ -30,12 +30,12 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         </a>
                         {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                             <span key={cat.node.id} className='text-smart-blue text-md font-semibold uppercase tracking-wider'>
-                                <a href={`../category/${cat.node.slug}`} className='text-smart-blue font-semibold hover:text-smart-green'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
+                                <a href={`../category/${cat.node.slug}`} className='text-smart-blue font-semibold hover:text-smart-teal'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
                             </span>
                         ))}
                     </div>
                 </div>
-                <div className='sm:grid grid-cols-2 sm:col-span-2 gap-x-5 mx-6 lg:mx-0'>
+                <div className='hidden md:grid grid-cols-2 md:col-span-2 gap-x-5 mx-6 lg:mx-0'>
                     <div className='col-span-2 text-smart-blue font-bold text-2xl tracking-wider mb-5'>
                         Top Articles
                     </div>
@@ -49,9 +49,46 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
                                 {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                     <span key={cat.node.id}>
-                                        <a className='text-smart-blue font-semibold hover:text-smart-green' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className='md:hidden flex px-5 sm:px-0 md:px-6 xl:px-0 flex-col justify-between col-span-2'>
+                    <div className='col-span-2 text-smart-blue font-bold text-2xl tracking-wider mb-5'>
+                        Top Articles
+                    </div>
+                    {myArticles.slice(1,7).map((el, index) => (
+                        <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
+                            {el.featuredImage &&
+                                <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
+                                    <Image
+                                        src={el.featuredImage.node.sourceUrl}
+                                        alt={el.featuredImage.node.altText}
+                                        layout='fill'
+                                        objectFit='cover'
+                                        blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                    />
+                                </a>
+                            }
+                            <div className='ml-2'>
+                                <div className='text-xl font-medium mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
+                                    <a href={`../${el.slug}`}>
+                                        {el.title}
+                                    </a>
+                                </div>
+                                <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                                    {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
+                                        <span key={cat.node.id}>
+                                            <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>
+                                                {cat.node.name}
+                                            </a>
+                                            {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))}

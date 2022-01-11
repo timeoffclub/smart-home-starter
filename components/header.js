@@ -19,6 +19,7 @@ export default function Header({ menu, slug }) {
     const [activeLabel, setActiveLabel] = useState(null)
     const [mobileNav, setMobileNav] = useState(null)
     const [searchInput, setSearchInput] = useState(null)
+    const [mobileSearchInput, setMobileSearchInput] = useState(null)
     const [ searchQuery, setSearchQuery ] = useState( '' )
     
     const handleSearchFormSubmit = ( event ) => {
@@ -29,6 +30,10 @@ export default function Header({ menu, slug }) {
 
     const toggleMobileNav = () => {
         setMobileNav(!mobileNav)
+    }
+
+    const toggleMobileSearch = () => {
+        setMobileSearchInput(!mobileSearchInput)
     }
 
     return (
@@ -61,7 +66,7 @@ export default function Header({ menu, slug }) {
             <div className='h-20 bg-black'>
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
-                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
+                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light mr-2' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 icon={faTimes}
                                 onClick={() => toggleMobileNav()}
@@ -88,7 +93,7 @@ export default function Header({ menu, slug }) {
                             </a>
                         </Link>
                         <Link href={process.env.NEXT_PUBLIC_URL}>
-                            <a className=''>
+                            <a className='w-full md:hidden flex justify-center'>
                                 <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                     <Image
                                         src={'/SHSLogo.png'}
@@ -100,6 +105,12 @@ export default function Header({ menu, slug }) {
                                 </div>
                             </a>
                         </Link>
+                        <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
+                            <FontAwesomeIcon
+                                icon={faSearch}
+                                onClick={() => toggleMobileSearch()}
+                            />
+                        </div>
                         <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
@@ -144,20 +155,6 @@ export default function Header({ menu, slug }) {
                     mode={'dark'}
                 />
             </div>
-            {/* Mobile search - beneath main nav on mobile viewports, unless slug is /search */}
-            <div className={slug !== 'search' ? 'block' : 'hidden'}>
-                <div>
-                    <label className='text-smart-blue flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900  px-6 md:px-10'>
-                        <SearchForm
-                            searchQuery={ searchQuery }
-                            setSearchQuery={ setSearchQuery }
-                            handleSearchFormSubmit={handleSearchFormSubmit}
-                            mode={'dark'}
-                        />
-                        <span className='ml-3'>Search</span>
-                    </label>
-                </div>
-            </div>
             {/* Mobile nav - beneath main nav on mobile viewports */}
             <div
                 className={
@@ -166,11 +163,25 @@ export default function Header({ menu, slug }) {
                         slug === 'search' ? 
                             'absolute lg:hidden z-50 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12' 
                         :
-                            'absolute lg:hidden z-50 top-44 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12'
+                            'absolute lg:hidden z-50 top-20 left-0 w-screen h-fit bg-black transition-all ease-in-out duration-400 py-12'
                     :
                         'absolute lg:hidden w-screen z-50 h-0 bg-black transition-all ease-in-out duration-400'
                     }
                 >
+                {/* Mobile search - beneath main nav on mobile viewports, unless slug is /search */}
+                <div className={mobileSearchInput ? 'block' : 'hidden'}>
+                    <div>
+                        <label className='text-smart-blue flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900  px-6 md:px-10'>
+                            <SearchForm
+                                searchQuery={ searchQuery }
+                                setSearchQuery={ setSearchQuery }
+                                handleSearchFormSubmit={handleSearchFormSubmit}
+                                mode={'dark'}
+                            />
+                            <span className='ml-3'>Search</span>
+                        </label>
+                    </div>
+                </div>
                 {menu.map((el) => (
                     <div className={mobileNav ? 'px-6 bg-black ' : 'hidden'} key={el.id}>
                         <Accordion primary={el.name} secondary={el.menuItems.nodes} onToggleNav={toggleMobileNav}/>

@@ -137,7 +137,7 @@ export default function Search({ data, navigationMenus, slug }) {
                                                 {el.node.categories.edges.map((cat, index) => (
                                                     <span key={cat.node.id}>
                                                         <a
-                                                            className='text-base font-semibold text-smart-blue hover:text-smart-green uppercase tracking-wider'
+                                                            className='text-base font-semibold text-smart-blue hover:text-smart-teal uppercase tracking-wider'
                                                             href={`../category/${cat.node.slug}`}>{cat.node.name}
                                                         </a> 
                                                         {index < (el.node.categories.edges.length - 1) ? 

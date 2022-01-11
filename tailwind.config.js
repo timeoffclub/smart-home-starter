@@ -8,6 +8,7 @@ module.exports = {
             colors: {
             'smart-blue': '#52B0E0',
             'smart-green': '#2DFA91',
+            'smart-teal': '#48C8C7',
             },
             fontFamily: {
                 'sans': ['Source Sans Pro'],

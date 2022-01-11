@@ -42,7 +42,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
             </Head>
             <Script
                 id='load-ads'
-                strategy="afterInteractive"
+                strategy='lazyOnload'
                 dangerouslySetInnerHTML={{
                 __html: `
                 (function(w, d) {
@@ -140,7 +140,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                             <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
                                 {el.categories.nodes.map((cat, index) => (
                                     <span key={cat.id}>
-                                        <a className='text-smart-blue hover:text-smart-green' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>
@@ -232,7 +232,7 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []

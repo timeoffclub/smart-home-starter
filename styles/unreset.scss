@@ -9,7 +9,7 @@
     @layer smart-blue underline;
   }
   p {
-    @apply my-4 text-lg;
+    @apply my-4 text-lg leading-8;
   }
   
   blockquote,
@@ -150,4 +150,16 @@
   pre {
     @apply my-4;
   }
+
+  figure {
+    @apply ml-0;
+  }
+  tr:nth-child(odd) {
+    @apply bg-stone-100;
+  }
+  td {
+    @apply text-left;
+    @apply p-3 border-b border-b-stone-200;
+  }
+  
 }

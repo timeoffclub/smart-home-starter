@@ -1,5 +1,6 @@
 import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug, getFeaturedIdsWithSlug, getPostById } from '../../lib/api'
 import Header from '../../components/header'
+import Script from 'next/script'
 import Head from 'next/head'
 import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
@@ -80,14 +81,35 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 				content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 				/>
 			</Head>
+			<Script
+                id='load-ads'
+                strategy='lazyOnload'
+                dangerouslySetInnerHTML={{
+                __html: `
+                (function(w, d) {
+                    w.adthrive = w.adthrive || {};
+                    w.adthrive.cmd = w.adthrive.cmd || [];
+                    w.adthrive.plugin = 'adthrive-ads-manual';
+                    w.adthrive.host = 'ads.adthrive.com';
+                
+                    var s = d.createElement('script');
+                    s.async = true;
+                    s.referrerpolicy='no-referrer-when-downgrade';
+                    s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                    var n = d.getElementsByTagName('script')[0];
+                    n.parentNode.insertBefore(s, n);
+                })(window, document);
+                `,
+                }}
+            />
 			<Header menu={navigationMenus}/>
 			<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
-				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap lg:flex-nowrap'>
-					<div className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-7xl lg:border-r-2 border-r-black py-3 pr-3 tracking-wide'>
+				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
+					<div className='font-display lg:basis-1/2 text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-7xl lg:border-r-2 border-r-black py-3 pr-3 tracking-wide'>
 						{category.edges[0].node.name}
 					</div>
-					<div className='text-lg md:text-base font-medium tracking-wider lg:pl-5'>
-						{category.edges[0].node.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam ut porttitor'}
+					<div className='text-lg lg:basis-1/2 md:text-base font-medium tracking-wider lg:pl-5'>
+						{category.edges[0].node.description || ''}
 					</div>
 				</div>
 			</div>

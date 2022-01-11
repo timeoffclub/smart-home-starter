@@ -25,7 +25,7 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                             <div  className={isShowing ? 'text-smart-blue text-xl mr-3' : 'hidden'}>
                                 <FontAwesomeIcon icon={faArrowRight}/>
                             </div>
-                            <div className='text-2xl '>
+                            <div className='text-xl'>
                                 {primary}
                             </div>
                         </div>
