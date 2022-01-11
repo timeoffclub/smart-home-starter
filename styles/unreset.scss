@@ -9,7 +9,7 @@
     @layer smart-blue underline;
   }
   p {
-    @apply my-4 text-lg leading-8;
+    @apply my-4 text-lg leading-9;
   }
   
   blockquote,
@@ -93,7 +93,7 @@
   ul,
   menu {
     // should be my-4 for proper reset, but thats ugly af
-    @apply list-disc my-1 pl-10;
+    @apply list-disc my-1 pl-5 text-lg;
   }
   
   ol {
@@ -145,6 +145,7 @@
   b,
   strong {
     font-weight: bold;
+    @apply text-xl;
   }
   
   pre {

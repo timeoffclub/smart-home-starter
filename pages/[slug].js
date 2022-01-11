@@ -134,7 +134,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                                     {el.title}
                                 </a>
                             </div>
-                            <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                            <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                 {el.categories.nodes.map((cat, index) => (
                                     <span key={cat.id}>
                                         <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}

@@ -108,7 +108,7 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 					<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
 						{category.edges[0].node.name}
 					</div>
-					<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-medium tracking-wider lg:pl-5' : 'hidden'}>
+					<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-semibold tracking-wider lg:pl-5' : 'hidden'}>
 						{category.edges[0].node.description || ''}
 					</div>
 				</div>

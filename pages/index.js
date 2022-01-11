@@ -53,8 +53,8 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 </div>
             </div>
             <div className='container mt-14'>
-                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mb-5'>
-                    <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
+                <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
+                    <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
                         {tvs.categoryName.edges[0].node.name}
                     </a>
                 </div>
@@ -69,8 +69,8 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                         AD
                     </div>
                 </div>
-                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mt-12 mb-5'>
-                    <a href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
+                <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                    <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
                         {ring.categoryName.edges[0].node.name}
                     </a>
                 </div>
@@ -85,8 +85,8 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                         AD
                     </div>
                 </div>
-                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mt-12 mb-5'>
-                    <a href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
+                <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                    <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
                         {samsung.categoryName.edges[0].node.name}
                     </a>
                 </div>
@@ -101,8 +101,8 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                         AD
                     </div>
                 </div>
-                <div className='mx-4 sm:mx-0 text-7xl text-smart-blue font-display tracking-wide mt-12 mb-5'>
-                    <a href={kebabCase(`../category/${lg.categoryName.edges[0].node.name}`)}>
+                <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                    <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${lg.categoryName.edges[0].node.name}`)}>
                         {lg.categoryName.edges[0].node.name}
                     </a>
                 </div>

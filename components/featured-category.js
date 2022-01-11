@@ -56,12 +56,12 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div className='ml-2'>
-                                        <div className='text-xl font-medium mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
+                                        <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                             <a href={`../${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>
-                                        <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                                        <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                             {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                                 <span key={cat.node.id}>
                                                     <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
@@ -75,13 +75,13 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                     </div>
                     <div className='hidden sm:grid px-5 sm:px-0 md:px-6 xl:px-0 sm:grid-cols-2 lg:grid-cols-4 lg:min-h-[300px]  gap-5 mt-5'>
                         {myArticles.slice(5,14).map((el) => (
-                            <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-medium mb-2'>
+                            <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-semibold mb-2'>
                                 <div className='mb-2  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                     <a href={`../${el.slug}`}>
                                         {el.title}
                                     </a>
                                 </div>
-                                <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                                <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                     {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                         <span key={cat.node.id}>
                                             <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
@@ -109,12 +109,12 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     </a>
                                 }
                                 <div className='ml-2'>
-                                    <div className='text-xl font-medium mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
+                                    <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                         <a href={`../${el.slug}`}>
                                             {el.title}
                                         </a>
                                     </div>
-                                    <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                                    <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                         {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                             <span key={cat.node.id}>
                                                 <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>
@@ -144,12 +144,12 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div className='ml-2'>
-                                        <div className='text-xl font-medium mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
+                                        <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                             <a href={`../${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>
-                                        <div className='text-smart-blue text-base font-medium uppercase tracking-wider'>
+                                        <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                             {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                                 <span key={cat.node.id}>
                                                     <a className='text-smart-blue font-semibold hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
