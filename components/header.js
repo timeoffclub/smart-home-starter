@@ -61,6 +61,19 @@ export default function Header({ menu, slug }) {
             <div className='h-20 bg-black'>
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
+                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
+                            <FontAwesomeIcon
+                                icon={faTimes}
+                                onClick={() => toggleMobileNav()}
+                            />
+                        </div>
+                        <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
+                            <FontAwesomeIcon
+                                className={mobileNav ? 'hidden' : 'block'}
+                                icon={faBars}
+                                onClick={() => toggleMobileNav()}
+                            />
+                        </div>
                         <Link href={process.env.NEXT_PUBLIC_URL}>
                             <a>
                                 <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
@@ -75,7 +88,7 @@ export default function Header({ menu, slug }) {
                             </a>
                         </Link>
                         <Link href={process.env.NEXT_PUBLIC_URL}>
-                            <a className='w-full lg:w-auto'>
+                            <a className=''>
                                 <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                     <Image
                                         src={'/SHSLogo.png'}
@@ -87,19 +100,6 @@ export default function Header({ menu, slug }) {
                                 </div>
                             </a>
                         </Link>
-                        <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FontAwesomeIcon
-                                icon={faTimes}
-                                onClick={() => toggleMobileNav()}
-                            />
-                        </div>
-                        <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FontAwesomeIcon
-                                className={mobileNav ? 'hidden' : 'block'}
-                                icon={faBars}
-                                onClick={() => toggleMobileNav()}
-                            />
-                        </div>
                         <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
