@@ -1,6 +1,6 @@
 # Block all crawlers for all paths
 User-agent: Googlebot
-Disallow: /nogooglebot/
+Disallow: /
 
 # Allow all crawlers
 User-agent: SEO-PowerSuite-bot
