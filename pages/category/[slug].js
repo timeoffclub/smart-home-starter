@@ -103,60 +103,62 @@ export default function Categories({ posts, featured, category, categorySlug, fi
                 }}
             />
 			<Header menu={navigationMenus}/>
-			<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
-				<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
-					<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
-						{category.edges[0].node.name}
-					</div>
-					<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-semibold tracking-wider lg:pl-5' : 'hidden'}>
-						{category.edges[0].node.description || ''}
-					</div>
-				</div>
-			</div>
-			{!featuredArticle ?
-				<div className='container text-center my-40'>
-					<div className='text-6xl mb-6'>
-						<FontAwesomeIcon icon={faGrimace}/>
-					</div>
-					<div className='text-xl'>
-						It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
+			<body className='adthrive-body'>
+				<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
+					<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
+						<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
+							{category.edges[0].node.name}
+						</div>
+						<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-semibold tracking-wider lg:pl-5' : 'hidden'}>
+							{category.edges[0].node.description || ''}
+						</div>
 					</div>
 				</div>
-			:
-				<>
-					<FeaturedCategory 
-						myArticles={featured} 
-						myCategory={category.edges[0].node.name}
-					/>
-					<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-					<ArticleGrid
-						myArticles={filteredPosts || posts.nodes}
-						myCategory={category.edges[0].node.name}
-					/>
+				{!featuredArticle ?
+					<div className='container text-center my-40'>
+						<div className='text-6xl mb-6'>
+							<FontAwesomeIcon icon={faGrimace}/>
+						</div>
+						<div className='text-xl'>
+							It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
+						</div>
+					</div>
+				:
+					<>
+						<FeaturedCategory 
+							myArticles={featured} 
+							myCategory={category.edges[0].node.name}
+						/>
+						<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
+						<ArticleGrid
+							myArticles={filteredPosts || posts.nodes}
+							myCategory={category.edges[0].node.name}
+						/>
 
-					{filterTab === 'All' &&
-					<div className='flex justify-center mb-12'>
-						{hasNextPage ?
-							<div className='text-xl cursor-pointer' as='div' onClick={() => fetchMorePosts()}>
-								{loadingMorePosts ? 
-									<div>
-										Loading more articles...
-									</div>
-								:
-									<div>
-										Load More
-									</div>
-								}
-							</div>
-						:
-							<div className='text-xl'>
-								No more articles in this category.
-							</div>
-						}
-					</div>
+						{filterTab === 'All' &&
+						<div className='flex justify-center mb-12'>
+							{hasNextPage ?
+								<div className='text-xl cursor-pointer' as='div' onClick={() => fetchMorePosts()}>
+									{loadingMorePosts ? 
+										<div>
+											Loading more articles...
+										</div>
+									:
+										<div>
+											Load More
+										</div>
+									}
+								</div>
+							:
+								<div className='text-xl'>
+									No more articles in this category.
+								</div>
+							}
+						</div>
+					}
+					</>
 				}
-				</>
-			}
+			</body>
 			<Footer myMenu={navigationMenus} />
 		</>
 	)
