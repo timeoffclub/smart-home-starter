@@ -111,7 +111,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                         {post.categories.edges.map((el) => (
                             <div
                                 key={el.node.name}
-                                className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-lg border-0 focus:outline-none appearance-none'
+                                className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-base border-0 focus:outline-none appearance-none'
                             >
                                 <a href={`/category/${kebabCase(el.node.name)}`}>
                                     More {el.node.name} articles
@@ -137,7 +137,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                             <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                 {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
                                     <span key={cat.node.id}>
-                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
+                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>

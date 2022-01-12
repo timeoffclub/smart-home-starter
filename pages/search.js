@@ -141,7 +141,7 @@ export default function Search({ data, navigationMenus, slug }) {
                                                             href={`../category/${cat.node.slug}`}>{cat.node.name}
                                                         </a> 
                                                         {index < (el.node.categories.edges.length - 1) ? 
-                                                            <span>| </span> 
+                                                            <span> | </span> 
                                                         : 
                                                             <span></span>
                                                         }

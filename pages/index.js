@@ -59,7 +59,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>
-                <div className='text-3xl mt-[-50px]'>
+                <div className='text-3xl ml-6 xl:ml-0 mt-[-50px]'>
                     <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
                         View all
                     </a>
@@ -75,7 +75,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <FeaturedCategory myArticles={ring.posts.nodes} myCategory={'Ring'} />
-                <div className='text-3xl mt-[-50px] mb-28'>
+                <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
                     <a href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
                         View all
                     </a>
@@ -91,7 +91,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <FeaturedCategory myArticles={samsung.posts.nodes} myCategory={'Samsung'} />
-                <div className='text-3xl mt-[-50px] mb-28'>
+                <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
                     <a href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
                         View all
                     </a>
@@ -107,7 +107,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <FeaturedCategory myArticles={lg.posts.nodes} myCategory={'LG'} />
-                <div className='text-3xl mt-[-50px] mb-28'>
+                <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
                     <a href={kebabCase(`../category/${lg.categoryName.edges[0].node.name}`)}>
                         View all
                     </a>
