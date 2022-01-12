@@ -4,7 +4,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import Script from 'next/script'
 import Newsletter from '../components/newsletter'
-import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsWithTag } from '../lib/api'
+import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsByCategory } from '../lib/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
@@ -126,7 +126,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     <div className='text-3xl font-semibold mb-5'>
                         Related Articles
                     </div>
-                    {related.map((el) => (
+                    {related.slice(0,4).map((el) => (
                         el.title !== post.title &&
                         <div className='mb-8' key={el.id}>
                             <div className='text-xl mb-1'>
@@ -135,9 +135,9 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                                 </a>
                             </div>
                             <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
-                                {el.categories.nodes.map((cat, index) => (
-                                    <span key={cat.id}>
-                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.slug}`}>{cat.name}</a> {index < (el.categories.nodes.length - 1) ? <span>| </span> : <span></span>}
+                                {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
+                                    <span key={cat.node.id}>
+                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span>| </span> : <span></span>}
                                     </span>
                                 ))}
                             </div>
@@ -158,22 +158,40 @@ export default function Post({ post, related, posts, preview, navigationMenus })
     )
 }
 
-async function getRelatedPosts(tags) {
-    let arr = []
+// In case we ever start tagging articles again.
+// async function getRelatedPosts(tags) {
+//     let arr = []
 
-    tags.forEach((tag) => {
-        arr.push(tag.node.slug)
+//     tags.forEach((tag) => {
+//         arr.push(tag.node.slug)
+//     })
+
+
+//     let data = []
+//     let i = 0
+//     do {
+//         let res = await getPostsWithTag(arr[i])
+//         !data.some((el) => res.posts.nodes.some((node) => node.slug === el.slug)) && data.push(...res.posts.nodes)
+//         i++
+//     } while (i < arr.length)
+
+//     return data
+// }
+
+async function getRelatedPosts(categories) {
+    let arr = []
+    categories.forEach((el) => {
+        arr.push(el.node.name)
     })
 
 
     let data = []
     let i = 0
     do {
-        let res = await getPostsWithTag(arr[i])
+        let res = await getPostsByCategory(arr[i])
         !data.some((el) => res.posts.nodes.some((node) => node.slug === el.slug)) && data.push(...res.posts.nodes)
         i++
     } while (i < arr.length)
-
     return data
 }
             
@@ -186,7 +204,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
         }
     }
     
-    const related = await getRelatedPosts(data?.post?.tags?.edges)
+    const related = await getRelatedPosts(data?.post?.categories?.edges)
     
     let navigationSlugs = [
 		'brands',
