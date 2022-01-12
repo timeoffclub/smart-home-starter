@@ -17,7 +17,7 @@ export default function ContactUs({ navigationMenus }) {
                     content='Have a question or comment? Reach out to us using this contact form.'
                     key='desc'
                 />
-                <meta property='og:title' content={post.title} />
+                <meta property='og:title' content='SmartHomeStarter - Contact Us' />
                 <meta
                     property='og:description'
                     content='Have a question or comment? Reach out to us using this contact form.'
