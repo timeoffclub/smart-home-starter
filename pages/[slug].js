@@ -1,20 +1,29 @@
 import Image from 'next/image'
 import Head from 'next/head'
-import Header from '../components/header'
-import Footer from '../components/footer'
 import Script from 'next/script'
-import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsByCategory } from '../lib/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
-import Moment from 'react-moment'
-import 'moment-timezone'
 import { kebabCase } from '../lib/utils'
+import dynamic from 'next/dynamic'
+
+const Footer = dynamic(() => import('../components/footer'))
+const Header = dynamic(() => import('../components/header'))
+const Newsletter = dynamic(() => import('../components/newsletter'))
+const { FontAwesomeIcon } = dynamic(() => import('@fortawesome/react-fontawesome'))
 
 export default function Post({ post, related, posts, preview, navigationMenus }) {
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
+    }
+    const formatDate = (date) => {
+        let d = new Date(date);
+        return d.toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          })
     }
     return (
         <>
@@ -71,26 +80,27 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     </div>
                     <div className='flex justify-between items-baseline mb-2'>
                         <div className='text-lg'>
-                            <Moment format={'MMM D, YYYY'}>{post.date}</Moment>
+                            {formatDate(post.date)}
                         </div>
-                        <div className='flex text-smart-blue mb-3 text-3xl'>
-                        <div className='mr-3'>
-                            <FacebookShareButton
-                                className='w-full h-full'
-                                url={`https://smarthomestarter.com/${post.slug}`}
-                                hashtag={`#smart home`}
-                            >
-                                <FontAwesomeIcon icon={faFacebookSquare} size='lg'/>
-                            </FacebookShareButton>
-                        </div>
-                        <div>
-                            <TwitterShareButton
-                                url={`https://smarthomestarter.com/${post.slug}`}
-                                hashtag={`#smart home`}
-                            >
-                                <FontAwesomeIcon icon={faTwitterSquare} size='lg' />
-                            </TwitterShareButton>
-                        </div>
+                        <div className='flex mb-3 text-3xl'>
+                            <div className='mr-3'>
+                                <FacebookShareButton
+                                    className='w-full h-full'
+                                    url={`https://smarthomestarter.com/${post.slug}`}
+                                    hashtag={`#smart home`}
+                                >
+                                    <FontAwesomeIcon className='text-smart-blue hover:text-smart-teal' icon={faFacebookSquare} size='1x'/>
+                                </FacebookShareButton>
+                            </div>
+                            <div>
+                                <TwitterShareButton
+                                    className='text-smart-blue hover:text-smart-teal'
+                                    url={`https://smarthomestarter.com/${post.slug}`}
+                                    hashtag={`#smart home`}
+                                >
+                                    <FontAwesomeIcon className='text-smart-blue hover:text-smart-teal' icon={faTwitterSquare} size='1x' />
+                                </TwitterShareButton>
+                            </div>
                         </div>
                     </div>
                     {post.featuredImage &&

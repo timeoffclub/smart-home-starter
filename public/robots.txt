@@ -1,11 +1,11 @@
 # Block all crawlers for all paths
-User-agent: *
-Disallow: /
+User-agent: Googlebot
+Disallow: /nogooglebot/
 
 # Allow all crawlers
-# User-agent: *
-# Allow: /
+User-agent: SEO-PowerSuite-bot
+Allow: /
 
-# Sitemap: http://www.example.com/sitemap.xml
+# Sitemap: http://staging.smarthomestarter.com/sitemap.xml
 
 # Disallow all until production
