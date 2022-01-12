@@ -10,8 +10,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                     {myArticles.map((el, index) => (
                             (index !== 0 && index % 8 === 0) ?
-                                <div className={`bg-gray-200 h-72`} key={index}>
-                                    AD
+                                <div className={`adthrive-ad-container`} key={index}>
                                 </div>
                                 :
                                 <div className='h-80' key={el.id}>
