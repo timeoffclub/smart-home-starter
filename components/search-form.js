@@ -19,7 +19,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
                     type='submit'
                     value='Search'
                     onClick={handleSearchFormSubmit}
-                    className='hidden lg:inline cursor-pointer text-white text-xl bg-neutral-900 border-0 px-5 focus:outline-none appearance-none'
+                    className='inline cursor-pointer text-white text-xl bg-neutral-900 border-0 px-5 focus:outline-none appearance-none'
                 />
             </form>
             <form className={mode === 'light' ? 'flex w-full justify-center' : 'hidden'} onSubmit={handleSearchFormSubmit}>

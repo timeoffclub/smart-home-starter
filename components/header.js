@@ -89,8 +89,8 @@ export default function Header({ menu, slug }) {
                                 />
                             </div>
                         </a>
-                        <a href={process.env.NEXT_PUBLIC_URL} className='w-full md:hidden flex justify-center'>
-                            <div className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
+                        <div className='w-full md:hidden flex justify-center'>
+                            <a href={process.env.NEXT_PUBLIC_URL} className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                 <Image
                                     src={'/SHSLogo.png'}
                                     alt={'Smart Home Starter'}
@@ -98,8 +98,8 @@ export default function Header({ menu, slug }) {
                                     width={10}
                                     height={10}
                                 />
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                         <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                             <FontAwesomeIcon
                                 icon={faSearch}
@@ -173,7 +173,6 @@ export default function Header({ menu, slug }) {
                                 handleSearchFormSubmit={handleSearchFormSubmit}
                                 mode={'dark'}
                             />
-                            <span className='ml-3'>Search</span>
                         </label>
                     </div>
                 </div>
