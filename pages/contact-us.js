@@ -1,5 +1,6 @@
 import ContactForm from '../components/contact-form'
 import Header from '../components/header'
+import Head from 'next/head'
 import Footer from '../components/footer'
 import { getMenuBySlug } from '../lib/api'
 
