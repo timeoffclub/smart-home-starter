@@ -135,7 +135,7 @@ export default function Post({ post, related, navigationMenus }) {
                     <div className='text-3xl font-semibold mb-5'>
                         Related Articles
                     </div>
-                    {related.slice(0,4).map((el) => (
+                    {related.slice(0,2).map((el) => (
                         el.title !== post.title &&
                         <div className='mb-8' key={el.id}>
                             <div className='text-xl mb-1'>
