@@ -66,7 +66,7 @@ export default function Post({ post, related, posts, preview, navigationMenus })
                     <div className='text-base text-gray-500 font-extralight'>
                         The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
                     </div>
-                    <div className='text-5xl font-bold tracking-wider mt-12 mb-8'>
+                    <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
                         {post.title}
                     </div>
                     <div className='flex justify-between items-baseline mb-2'>
