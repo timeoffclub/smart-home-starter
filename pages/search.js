@@ -128,7 +128,7 @@ export default function Search({ data, navigationMenus, slug }) {
                                             </div>
                                         }
                                         <div>
-                                            <div className='text-lg mb-3'>
+                                            <div className='text-lg mb-3 font-semibold'>
                                                 <a href={`../${el.node.slug}`}>
                                                     {el.node.title}
                                                 </a>

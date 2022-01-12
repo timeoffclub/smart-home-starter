@@ -31,7 +31,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                         </a>
                                     }
                                     <div>
-                                        <div className='text-lg mb-3 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
+                                        <div className='text-lg mb-3 hover:underline decoration-1 underline-offset-4 decoration-gray-300 font-semibold'>
                                             <a href={`../${el.slug}`}>
                                                 {el.title}
                                             </a>
