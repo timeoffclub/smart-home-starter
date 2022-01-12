@@ -1,6 +1,6 @@
 import { getPostsWithSlug, getCategories } from "../../lib/api"
 
-const EXTERNAL_DATA_URL = 'https://shs-vercel.app'
+const EXTERNAL_DATA_URL = 'https://staging.smarthomestarter.com'
 
 function generateSiteMap(posts, categories) {
   return `<?xml version="1.0" encoding="UTF-8"?>
