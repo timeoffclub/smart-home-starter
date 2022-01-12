@@ -7,6 +7,21 @@ export default function ContactUs({ navigationMenus }) {
     
     return (
         <>
+            <Head>
+                <title>
+                    SmartHomeStarter - Contact Us
+                </title>
+                <meta
+                    name='description'
+                    content='Have a question or comment? Reach out to us using this contact form.'
+                    key='desc'
+                />
+                <meta property='og:title' content={post.title} />
+                <meta
+                    property='og:description'
+                    content='Have a question or comment? Reach out to us using this contact form.'
+                />
+            </Head>
             <Header menu={navigationMenus} />
             <div className='container px-6 sm:px-0 md:px-6 xl:px-0 my-12 w-full'>
                 <div className='w-fit'>

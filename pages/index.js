@@ -49,8 +49,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
             </div>
             <NewsLetterPageCTA/>
             <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                <div className='bg-gray-300 w-full h-60 mt-14'>
-                    AD
+                <div className='adthrive-ad-container w-full h-60 mt-14'>
                 </div>
             </div>
             <div className='container mt-14'>
@@ -66,8 +65,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                    <div className='bg-gray-300 w-full h-60 mt-14'>
-                        AD
+                    <div className='adthrive-ad-container w-full h-60 mt-14'>
                     </div>
                 </div>
                 <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
@@ -82,8 +80,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                    <div className='bg-gray-300 w-full h-60 mt-14'>
-                        AD
+                    <div className='adthrive-ad-container w-full h-60 mt-14'>
                     </div>
                 </div>
                 <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
@@ -98,8 +95,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </a>
                 </div>
                 <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                    <div className='bg-gray-300 w-full h-60 mt-14'>
-                        AD
+                    <div className='adthrive-ad-container w-full h-60 mt-14'>
                     </div>
                 </div>
                 <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
