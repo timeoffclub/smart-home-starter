@@ -6,7 +6,7 @@
     @apply absolute top-0 bottom-0 right-0 left-0 w-full h-full;
   }
   a {
-    @layer smart-blue underline;
+    @apply text-smart-blue underline;
   }
   p {
     @apply my-4 text-lg leading-9;

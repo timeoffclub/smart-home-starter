@@ -10,7 +10,7 @@ import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
 
-export default function Post({ post, related, posts, preview, navigationMenus }) {
+export default function Post({ post, related, navigationMenus }) {
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
