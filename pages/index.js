@@ -44,7 +44,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 }}
             />
             <Header menu={navigationMenus}/>
-            <body className='adthrive-body'>
+            <main className='adthrive-body'>
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
                 </div>
@@ -111,7 +111,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                         </a>
                     </div>
                 </div>
-            </body>
+            </main>
 			<Footer myMenu={navigationMenus} />
         </>
     )
