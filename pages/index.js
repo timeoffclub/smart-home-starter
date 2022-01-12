@@ -20,6 +20,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 <title>Smart Home Starter</title>
                 <meta name="description" content="We are two guys into tech exploring the world of smart home technology. We wanted to share some of our favorites with you!" />
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />
             </Head>
             <Script
                 id='load-ads'
