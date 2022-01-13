@@ -45,6 +45,27 @@ export default function Post({ post, related, navigationMenus }) {
                     />
                 }
             </Head>
+                <Script
+                    id='load-ads'
+                    strategy='lazyOnload'
+                    dangerouslySetInnerHTML={{
+                    __html: `
+                    (function(w, d) {
+                        w.adthrive = w.adthrive || {};
+                        w.adthrive.cmd = w.adthrive.cmd || [];
+                        w.adthrive.plugin = 'adthrive-ads-manual';
+                        w.adthrive.host = 'ads.adthrive.com';
+                    
+                        var s = d.createElement('script');
+                        s.async = true;
+                        s.referrerpolicy='no-referrer-when-downgrade';
+                        s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                        var n = d.getElementsByTagName('script')[0];
+                        n.parentNode.insertBefore(s, n);
+                    })(window, document);
+                    `,
+                    }}
+                />
             <Header menu={navigationMenus}/>
             <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
                 <div className='col-span-3 lg:col-span-2'>
