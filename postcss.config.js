@@ -3,7 +3,7 @@ module.exports = {
         'tailwindcss',
         [
             '@fullhuman/postcss-purgecss',
-            process.env.NODE_ENV === 'production'
+            process.env.NODE_ENV === 'development'
             ? {
                 // the paths to all template files
                 content: [
@@ -15,7 +15,6 @@ module.exports = {
                 content.match(/[\w-/:]+(?<!:)/g) || [],
             }
             : false,
-        ],
-        process.env.NODE_ENV === 'production' && 'cssnano'
+        ]
     ],
 }

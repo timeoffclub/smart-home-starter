@@ -8,7 +8,7 @@ import { FaInstagramSquare } from '@react-icons/all-files/fa/FaInstagramSquare'
 import { FaWindowClose } from '@react-icons/all-files/fa/FaWindowClose'
 import { FaBars } from '@react-icons/all-files/fa/FaBars'
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
-import { FaTimes } from '@react-icons/all-files/fa/FaTimes'
+import { IoMdClose } from '@react-icons/all-files/io/IoMdClose'
 import { kebabCase } from '../lib/utils'
 
 const MobileNav = dynamic(() => import('./mobile-nav'))
@@ -72,7 +72,7 @@ export default function Header({ menu, slug }) {
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
                         <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light mr-2' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FaTimes
+                            <IoMdClose
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
