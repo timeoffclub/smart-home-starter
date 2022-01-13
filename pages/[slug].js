@@ -7,8 +7,8 @@ import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsByCategory } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
-import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare"
-import { FaTwitterSquare } from "@react-icons/all-files/fa/FaTwitterSquare"
+import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
+import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 
 export default function Post({ post, related, navigationMenus }) {
     const formatExcerpt = (str) => {
@@ -29,18 +29,18 @@ export default function Post({ post, related, navigationMenus }) {
                     {post.title}
                 </title>
                 <meta
-                    name="description"
+                    name='description'
                     content={formatExcerpt(post.excerpt)}
-                    key="desc"
+                    key='desc'
                 />
-				<meta property="og:title" content={post.title} />
+				<meta property='og:title' content={post.title} />
 				<meta
-                    property="og:description"
+                    property='og:description'
                     content={formatExcerpt(post.excerpt)}
 				/>
                 {post.featuredImage &&
                     <meta
-                        property="og:image"
+                        property='og:image'
                         content={post.featuredImage.node.sourceUrl}
                     />
                 }

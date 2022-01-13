@@ -2,10 +2,13 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Router from 'next/router'
 import SearchForm from './search-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSearch, faTimes } from '@fortawesome/pro-regular-svg-icons'
-import { faWindowClose } from '@fortawesome/pro-light-svg-icons'
-import { faFacebookSquare, faInstagramSquare, faTwitterSquare } from '../node_modules/@fortawesome/free-brands-svg-icons'
+import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
+import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
+import { FaInstagramSquare } from '@react-icons/all-files/fa/FaInstagramSquare'
+import { FaWindowClose } from '@react-icons/all-files/fa/FaWindowClose'
+import { FaBars } from '@react-icons/all-files/fa/FaBars'
+import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
+import { FaTimes } from '@react-icons/all-files/fa/FaTimes'
 import Accordion from './accordian'
 import { kebabCase } from '../lib/utils'
 import NewsletterModal from './newsletter-modal'
@@ -50,13 +53,13 @@ export default function Header({ menu, slug }) {
                             Subscribe
                         </div>
                         <div className='text-3xl font-semibold text-white ml-4 mt-2.5'>
-                            <FontAwesomeIcon icon={faFacebookSquare}/>
+                            <FaFacebookSquare />
                         </div>
                         <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
-                            <FontAwesomeIcon icon={faInstagramSquare}/>
+                            <FaInstagramSquare />
                         </div>
                         <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
-                            <FontAwesomeIcon icon={faTwitterSquare}/>
+                            <FaTwitterSquare />
                         </div>
                     </div>
                 </div>
@@ -66,15 +69,13 @@ export default function Header({ menu, slug }) {
                 <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
                     <div className='flex justify-between'>
                         <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light mr-2' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FontAwesomeIcon
-                                icon={faTimes}
+                            <FaTimes
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
                         <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FontAwesomeIcon
+                            <FaBars
                                 className={mobileNav ? 'hidden' : 'block'}
-                                icon={faBars}
                                 onClick={() => toggleMobileNav()}
                             />
                         </div>
@@ -101,8 +102,7 @@ export default function Header({ menu, slug }) {
                             </a>
                         </div>
                         <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FontAwesomeIcon
-                                icon={faSearch}
+                            <FaSearch
                                 onClick={() => toggleMobileSearch()}
                             />
                         </div>
@@ -124,14 +124,14 @@ export default function Header({ menu, slug }) {
                                     onClick={() => setSearchInput(false)}
                                     className={searchInput ? 'inline text-xl font-semibold cursor-pointer text-white' : 'hidden text-xl font-semibold cursor-pointer text-white'}
                                 >
-                                    <FontAwesomeIcon icon={faWindowClose}/>
+                                    <FaWindowClose />
                                 </div>
                                 <div 
                                     onMouseEnter={() => {setMegaMenu(false), setActiveLabel(null)}}
                                     onClick={() => setSearchInput(true)}
                                     className={searchInput ? 'hidden text-xl font-semibold cursor-pointer text-white' : 'inline text-xl font-semibold cursor-pointer text-white'}
                                 >
-                                    <FontAwesomeIcon icon={faSearch}/>
+                                    <FaSearch />
                                 </div>
                             </div>
                         </div>
