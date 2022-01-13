@@ -3,6 +3,7 @@ module.exports = {
     plugins: {
         tailwindcss: {},
         autoprefixer: {},
-        ...(process.env.NODE_ENV === 'production' ? { cssnano: {}, purgecss: {} } : {})
+        purgecss: {},
+        ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
     },
 }
