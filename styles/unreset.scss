@@ -1,4 +1,7 @@
 .unreset {
+  * {
+    @apply break-words;
+  }
   .wp-block-embed__wrapper {
     @apply relative overflow-hidden w-full pt-[56.25%]
   }
