@@ -1,7 +1,8 @@
 import { useState, useLayoutEffect } from 'react'
 import axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBadgeCheck, faWindowClose, faSpinner } from '@fortawesome/pro-regular-svg-icons'
+import { BiBadgeCheck } from '@react-icons/all-files/bi/BiBadgeCheck'
+import { FaWindowClose } from '@react-icons/all-files/fa/FaWindowClose'
+import { FaSpinner } from '@react-icons/all-files/fa/FaSpinner'
 
 // Hook
 function useLockBodyScroll() {
@@ -38,9 +39,8 @@ export default function NewsletterModal({ onClose }) {
     return (
         <div className='absolute w-screen h-screen bg-black/50 z-50'>
             <div className='relative top-0 md:top-8 sm:mx-auto text-xl text-smart-blue bg-black py-8 w-full sm:w-[500px]'>
-                <FontAwesomeIcon 
+                <FaWindowClose 
                     className='cursor-pointer absolute top-4 right-4'
-                    icon={faWindowClose}
                     onClick={onClose}
                 />
                 <div className='mx-6 md:mx-20'>
@@ -53,13 +53,13 @@ export default function NewsletterModal({ onClose }) {
                                 }
                                 {state === 'LOADING' && 
                                     <div className='flex items-center text-white text-bold text-center text-4xl mb-6 h-44'>
-                                        <FontAwesomeIcon className='fa-spin' icon={faSpinner}/>
+                                        <FaSpinner className='fa-spin'/>
                                     </div>
                                 }
                                 {state === 'SUCCESS' &&
                                     <div className='flex flex-wrap justify-center'>
                                         <div className='text-5xl mb-6'>
-                                            <FontAwesomeIcon className='text-white' icon={faBadgeCheck}/>
+                                            <BiBadgeCheck className='text-white' />
                                         </div>
                                         <div className='text-smart-blue text-bold text-center text-4xl mb-6'>
                                             You&apos;ve been added to our list. See ya soon!

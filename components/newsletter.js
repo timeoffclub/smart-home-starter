@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBadgeCheck } from '@fortawesome/pro-regular-svg-icons'
+import { BiBadgeCheck } from '@react-icons/all-files/bi/BiBadgeCheck'
 
 export default function Newsletter({ mode }) {
     const [email, setEmail] = useState('')
@@ -33,7 +32,7 @@ export default function Newsletter({ mode }) {
                 />
                 {state === 'SUCCESS' && (
                     <div className={mode === 'light' ? 'inline-flex text-black items-center w-1/2 text-2xl mt-2' : 'inline-flex text-white items-center w-1/2 text-2xl mt-2'}>
-                        <FontAwesomeIcon icon={faBadgeCheck}/><span className='ml-1'> Subscribed</span>
+                        <BiBadgeCheck/><span className='ml-1'> Subscribed</span>
                     </div>
                 )}
                 <div

@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSearch, faTimes } from '@fortawesome/pro-regular-svg-icons'
+import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
 
 export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFormSubmit, mode }) {
     return (
@@ -7,7 +6,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
             <form className={mode === 'dark' ? 'flex w-full justify-center' : 'hidden'} onSubmit={handleSearchFormSubmit}>
                 <div className='w-full lg:w-80 relative'>
                     <span className="h-full text-xl absolute inset-y-0 left-2 flex items-center pl-2">
-                        <FontAwesomeIcon icon={faSearch} className='fill-current text-smart-blue'/>
+                        <FaSearch className='fill-current text-smart-blue'/>
                     </span>
                     <input 
                         value={searchQuery}
@@ -25,7 +24,7 @@ export default function SearchForm({ searchQuery, setSearchQuery, handleSearchFo
             <form className={mode === 'light' ? 'flex w-full justify-center' : 'hidden'} onSubmit={handleSearchFormSubmit}>
                 <div className='w-80 relative'>
                     <span className="h-full text-xl absolute inset-y-0 left-2 flex items-center pl-2">
-                        <FontAwesomeIcon icon={faSearch} className='fill-current text-smart-blue'/>
+                        <FaSearch className='fill-current text-smart-blue'/>
                     </span>
                     <input 
                         value={searchQuery}

@@ -6,8 +6,6 @@ import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleGrid from '../../components/article-grid'
 import ArticleFilterBar from '../../components/article-filter-bar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGrimace } from '@fortawesome/pro-regular-svg-icons'
 import { useState, useEffect } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
@@ -116,9 +114,6 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 				</div>
 				{!featuredArticle ?
 					<div className='container text-center my-40'>
-						<div className='text-6xl mb-6'>
-							<FontAwesomeIcon icon={faGrimace}/>
-						</div>
 						<div className='text-xl'>
 							It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
 						</div>

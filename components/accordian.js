@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp, faArrowRight } from '@fortawesome/pro-regular-svg-icons'
+import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown'
+import { FaChevronUp } from '@react-icons/all-files/fa/FaChevronUp'
+import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight'
 import { kebabCase } from '../lib/utils'
 
 export default function Accordion({primary, secondary, onToggleNav}) {
@@ -23,7 +24,7 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                 <div className='text-white pb-3'>
                         <div className='flex items-center'>
                             <div  className={isShowing ? 'text-smart-blue text-xl mr-3' : 'hidden'}>
-                                <FontAwesomeIcon icon={faArrowRight}/>
+                                <FaArrowRight />
                             </div>
                             <div className='text-xl'>
                                 {primary}
@@ -31,10 +32,10 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                         </div>
                 </div>
                 <div className={isShowing ? 'hidden' : 'text-smart-blue font-light pb-3 text-2xl'}>
-                    <FontAwesomeIcon icon={faChevronDown}/>
+                    <FaChevronDown/>
                 </div>
                 <div className={isShowing ? 'text-smart-blue font-light pb-3 text-2xl' : 'hidden'}>
-                <FontAwesomeIcon icon={faChevronUp}/>
+                <FaChevronUp />
                 </div>
             </div>
             <div className='ml-8'>
