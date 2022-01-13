@@ -45,7 +45,6 @@ export default function Post({ post, related, navigationMenus }) {
                     />
                 }
             </Head>
-            {/*
                 <Script
                     id='load-ads'
                     strategy='lazyOnload'
@@ -67,7 +66,6 @@ export default function Post({ post, related, navigationMenus }) {
                     `,
                     }}
                 />
-            */}
             <Header menu={navigationMenus}/>
             <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
                 <div className='col-span-3 lg:col-span-2'>
