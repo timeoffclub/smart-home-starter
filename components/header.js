@@ -16,6 +16,7 @@ const SearchForm = dynamic(() => import('./search-form'))
 const NewsletterModal = dynamic(() => import('./newsletter-modal'))
 
 export default function Header({ menu, slug }) {
+    console.log(process.env.NODE_ENV)
 
     const [modalOpen, setModalOpen] = useState(false)
     const [megaMenu, setMegaMenu] = useState(null)
