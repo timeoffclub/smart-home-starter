@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import Script from 'next/script'
 import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsByCategory } from '../lib/api'
@@ -8,8 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
-import dynamic from 'next/dynamic'
-const Footer = dynamic(() => import('../components/footer'))
 
 export default function Post({ post, related, navigationMenus }) {
     const formatExcerpt = (str) => {
