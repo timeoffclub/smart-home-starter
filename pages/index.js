@@ -80,6 +80,36 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                             View all
                         </a>
                     </div>
+                    <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                        <div className='adthrive-ad-container w-full h-60 mt-14'>
+                        </div>
+                    </div>
+                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
+                            {samsung.categoryName.edges[0].node.name}
+                        </a>
+                    </div>
+                    <FeaturedCategory myArticles={samsung.posts.nodes} myCategory={'Samsung'} />
+                    <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
+                        <a href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
+                            View all
+                        </a>
+                    </div>
+                    <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                        <div className='adthrive-ad-container w-full h-60 mt-14'>
+                        </div>
+                    </div>
+                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${lg.categoryName.edges[0].node.name}`)}>
+                            {lg.categoryName.edges[0].node.name}
+                        </a>
+                    </div>
+                    <FeaturedCategory myArticles={lg.posts.nodes} myCategory={'LG'} />
+                    <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
+                        <a href={kebabCase(`../category/${lg.categoryName.edges[0].node.name}`)}>
+                            View all
+                        </a>
+                    </div>
                 </div>
             </main>
 			<Footer myMenu={navigationMenus} />

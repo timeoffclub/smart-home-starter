@@ -11,6 +11,10 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
+export function reportWebVitals(metric) {
+  console.log(metric)
+}
+
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
