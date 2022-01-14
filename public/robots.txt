@@ -1,11 +1,7 @@
-# Block all crawlers for all paths
 User-agent: *
 Disallow: /
 
-# Allow all crawlers
 User-agent: SEO-PowerSuite-bot
 Allow: /
 
-# Sitemap: https://staging.smarthomestarter.com/sitemap.xml
-
-# Disallow all until production
+Sitemap: https://staging.smarthomestarter.com/sitemap.xml
