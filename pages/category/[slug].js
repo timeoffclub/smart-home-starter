@@ -11,12 +11,6 @@ import ArticleFilterBar from '../../components/article-filter-bar'
 import { useState, useEffect } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
-    const router = useRouter()
-
-	if (!router.isFallback && !category) {
-        return <ErrorPage statusCode={404} />
-    }
-
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
@@ -42,6 +36,13 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 			!categories.includes(e.node.name) && categories.push(e.node.name)
 		})
 	})
+
+
+    const router = useRouter()
+
+	if (!router.isFallback && !category) {
+        return <ErrorPage statusCode={404} />
+    }
 
 	const filterTabs = []
 	categories.forEach(el => filterTabs.push({label: el}))
