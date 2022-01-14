@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Script from 'next/script'
@@ -11,9 +12,12 @@ import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 
 export default function Post({ post, related, navigationMenus }) {
+    const router = useRouter()
+
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
+
     const formatDate = (date) => {
         let d = new Date(date);
         return d.toLocaleDateString('en-US', {
@@ -22,145 +26,156 @@ export default function Post({ post, related, navigationMenus }) {
             year: 'numeric',
           })
     }
+
+    if (!router.isFallback && !post?.slug) {
+        return <ErrorPage statusCode={404} />
+    }
+
     return (
-        <>
-            <Head>
-                <title>
-                    {post.title}
-                </title>
-                <meta
-                    name='description'
-                    content={formatExcerpt(post.excerpt)}
-                    key='desc'
-                />
-				<meta property='og:title' content={post.title} />
-				<meta
-                    property='og:description'
-                    content={formatExcerpt(post.excerpt)}
-				/>
-                {post.featuredImage &&
-                    <meta
-                        property='og:image'
-                        content={post.featuredImage.node.sourceUrl}
-                    />
-                }
-            </Head>
-                <Script
-                    id='load-ads'
-                    strategy='afterInteractive'
-                    dangerouslySetInnerHTML={{
-                    __html: `
-                    (function(w, d) {
-                        w.adthrive = w.adthrive || {};
-                        w.adthrive.cmd = w.adthrive.cmd || [];
-                        w.adthrive.plugin = 'adthrive-ads-manual';
-                        w.adthrive.host = 'ads.adthrive.com';
-                    
-                        var s = d.createElement('script');
-                        s.async = true;
-                        s.referrerpolicy='no-referrer-when-downgrade';
-                        s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
-                        var n = d.getElementsByTagName('script')[0];
-                        n.parentNode.insertBefore(s, n);
-                    })(window, document);
-                    `,
-                    }}
-                />
-            <Header menu={navigationMenus}/>
-            <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
-                <div className='col-span-3 lg:col-span-2'>
-                    <div className='text-base text-gray-500 font-extralight'>
-                        The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
-                    </div>
-                    <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
-                        <h1>
+        <div>
+            {router.isFallback ? (
+                <div>Loading…</div>
+            ) : (
+                <>
+                    <Head>
+                        <title>
                             {post.title}
-                        </h1>
-                    </div>
-                    <div className='flex justify-between items-baseline mb-2'>
-                        <div className='text-lg'>
-                            {formatDate(post.date)}
-                        </div>
-                        <div className='flex mb-3 text-3xl'>
-                            <div className='mr-3'>
-                                <FacebookShareButton
-                                    url={`https://smarthomestarter.com/${post.slug}`}
-                                    hashtag={`#smart home`}
-                                >
-                                    <FaFacebookSquare className='text-smart-blue hover:text-smart-teal' />
-                                </FacebookShareButton>
-                            </div>
-                            <div>
-                                <TwitterShareButton
-                                    url={`https://smarthomestarter.com/${post.slug}`}
-                                    hashtag={`#smart home`}
-                                >
-                                    <FaTwitterSquare className='text-smart-blue hover:text-smart-teal' />
-                                </TwitterShareButton>
-                            </div>
-                        </div>
-                    </div>
-                    {post.featuredImage &&
-                        <div className='relative h-96 mb-5'>
-                            <Image
-                                src={post.featuredImage.node.sourceUrl}
-                                alt={post.featuredImage.node.altText}
-                                objectFit='cover'
-                                layout='fill'
-                                // Work-around for no out-of-box dataUrl :/
-                                blurDataURL={`/_next/image?url=${post.featuredImage.node.sourceUrl}&w=16&q=1`}
+                        </title>
+                        <meta
+                            name='description'
+                            content={formatExcerpt(post.excerpt)}
+                            key='desc'
+                        />
+                        <meta property='og:title' content={post.title} />
+                        <meta
+                            property='og:description'
+                            content={formatExcerpt(post.excerpt)}
+                        />
+                        {post.featuredImage &&
+                            <meta
+                                property='og:image'
+                                content={post.featuredImage.node.sourceUrl}
                             />
-                        </div>
-                    }
-                    <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
-                    <div className='sm:flex w-full gap-3'>
-                        {post.categories.edges.map((el) => (
-                            <div
-                                key={el.node.name}
-                                className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-base border-0 focus:outline-none appearance-none'
-                            >
-                                <a href={`/category/${kebabCase(el.node.name)}`}>
-                                    More {el.node.name} articles
-                                </a>
+                        }
+                    </Head>
+                        <Script
+                            id='load-ads'
+                            strategy='afterInteractive'
+                            dangerouslySetInnerHTML={{
+                            __html: `
+                            (function(w, d) {
+                                w.adthrive = w.adthrive || {};
+                                w.adthrive.cmd = w.adthrive.cmd || [];
+                                w.adthrive.plugin = 'adthrive-ads-manual';
+                                w.adthrive.host = 'ads.adthrive.com';
+                            
+                                var s = d.createElement('script');
+                                s.async = true;
+                                s.referrerpolicy='no-referrer-when-downgrade';
+                                s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                                var n = d.getElementsByTagName('script')[0];
+                                n.parentNode.insertBefore(s, n);
+                            })(window, document);
+                            `,
+                            }}
+                        />
+                    <Header menu={navigationMenus}/>
+                        <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
+                            <div className='col-span-3 lg:col-span-2'>
+                                <div className='text-base text-gray-500 font-extralight'>
+                                    The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
+                                </div>
+                                <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
+                                    <h1>
+                                        {post.title}
+                                    </h1>
+                                </div>
+                                <div className='flex justify-between items-baseline mb-2'>
+                                    <div className='text-lg'>
+                                        {formatDate(post.date)}
+                                    </div>
+                                    <div className='flex mb-3 text-3xl'>
+                                        <div className='mr-3'>
+                                            <FacebookShareButton
+                                                url={`https://smarthomestarter.com/${post.slug}`}
+                                                hashtag={`#smart home`}
+                                            >
+                                                <FaFacebookSquare className='text-smart-blue hover:text-smart-teal' />
+                                            </FacebookShareButton>
+                                        </div>
+                                        <div>
+                                            <TwitterShareButton
+                                                url={`https://smarthomestarter.com/${post.slug}`}
+                                                hashtag={`#smart home`}
+                                            >
+                                                <FaTwitterSquare className='text-smart-blue hover:text-smart-teal' />
+                                            </TwitterShareButton>
+                                        </div>
+                                    </div>
+                                </div>
+                                {post.featuredImage &&
+                                    <div className='relative h-96 mb-5'>
+                                        <Image
+                                            src={post.featuredImage.node.sourceUrl}
+                                            alt={post.featuredImage.node.altText}
+                                            objectFit='cover'
+                                            layout='fill'
+                                            // Work-around for no out-of-box dataUrl :/
+                                            blurDataURL={`/_next/image?url=${post.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                        />
+                                    </div>
+                                }
+                                <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
+                                <div className='sm:flex w-full gap-3'>
+                                    {post.categories.edges.map((el) => (
+                                        <div
+                                            key={el.node.name}
+                                            className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-base border-0 focus:outline-none appearance-none'
+                                        >
+                                            <a href={`/category/${kebabCase(el.node.name)}`}>
+                                                More {el.node.name} articles
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-                <div className='hidden lg:inline col-span-1'>
-                    <div className='sidebar-ad w-full mb-14'>
-                    </div>
-                    <div className='text-3xl font-semibold mb-5'>
-                        Related Articles
-                    </div>
-                    {related.slice(0,2).map((el) => (
-                        el.title !== post.title &&
-                        <div className='mb-8' key={el.id}>
-                            <div className='text-xl mb-1'>
-                                <a href={el.slug}>
-                                    {el.title}
-                                </a>
-                            </div>
-                            <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
-                                {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
-                                    <span key={cat.node.id}>
-                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
-                                    </span>
+                            <div className='hidden lg:inline col-span-1'>
+                                <div className='sidebar-ad w-full mb-14'>
+                                </div>
+                                <div className='text-3xl font-semibold mb-5'>
+                                    Related Articles
+                                </div>
+                                {related.slice(0,2).map((el) => (
+                                    el.title !== post.title &&
+                                    <div className='mb-8' key={el.id}>
+                                        <div className='text-xl mb-1'>
+                                            <a href={el.slug}>
+                                                {el.title}
+                                            </a>
+                                        </div>
+                                        <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
+                                            {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
+                                                <span key={cat.node.id}>
+                                                    <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 ))}
+                                <div className='border-y-2 border-y-gray-500 py-12 my-14'>
+                                    <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
+                                        Sign up for our newsletter
+                                    </div>
+                                    <Newsletter mode={'light'}/>
+                                </div>
+                                <div className='sidebar-ad-sticky w-full top-10 sticky'>
+                                </div>
                             </div>
                         </div>
-                    ))}
-                    <div className='border-y-2 border-y-gray-500 py-12 my-14'>
-                        <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
-                            Sign up for our newsletter
-                        </div>
-                        <Newsletter mode={'light'}/>
-                    </div>
-                    <div className='sidebar-ad-sticky w-full top-10 sticky'>
-                    </div>
-                </div>
-            </div>
-            <Footer myMenu={navigationMenus} />
-        </>
+                    <Footer myMenu={navigationMenus} />
+                </>
+            )}
+        </div>
     )
 }
 
