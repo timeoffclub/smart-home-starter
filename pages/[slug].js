@@ -266,6 +266,6 @@ export async function getStaticPaths() {
 
     return {
         paths: data?.map(({ node }) => `/${node.slug}`) || [],
-        fallback: 'blocking'
+        fallback: true
     }
 }
