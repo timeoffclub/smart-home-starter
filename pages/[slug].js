@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import ErrorPage from 'next/error'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Script from 'next/script'
