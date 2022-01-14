@@ -275,7 +275,7 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = process.env.NEXT_PUBLIC_SSG
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []
