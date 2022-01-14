@@ -49,7 +49,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                             <Image
                                                 src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
-                                                layout='fill'
+                                                height={96}
+                                                width={96}
                                                 objectFit='cover'
                                                 blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
@@ -101,7 +102,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         <Image
                                             src={el.featuredImage.node.sourceUrl}
                                             alt={el.featuredImage.node.altText}
-                                            layout='fill'
+                                            height={96}
+                                            width={96}
                                             objectFit='cover'
                                             blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />
@@ -136,7 +138,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                             <Image
                                                 src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
-                                                layout='fill'
+                                                height={96}
+                                                width={96}
                                                 objectFit='cover'
                                                 blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
