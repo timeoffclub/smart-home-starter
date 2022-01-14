@@ -6,6 +6,6 @@ Disallow: /
 User-agent: SEO-PowerSuite-bot
 Allow: /
 
-# Sitemap: http://staging.smarthomestarter.com/sitemap.xml
+# Sitemap: https://staging.smarthomestarter.com/sitemap.xml
 
 # Disallow all until production

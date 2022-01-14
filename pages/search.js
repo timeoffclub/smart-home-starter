@@ -5,7 +5,7 @@ import { getSearchResults, getMenuBySlug } from '../lib/api'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import SearchForm from '../components/search-form'
-import { FaSpinner } from '@react-icons/all-files/fa/FaSpinner'
+import ScaleLoader from "react-spinners/ScaleLoader"
 import { isEmpty } from '../lib/utils'
 
 export default function Search({ data, navigationMenus, slug }) {
@@ -97,8 +97,8 @@ export default function Search({ data, navigationMenus, slug }) {
                 />
             </div>
             {loading ?
-                <div className='flex justify-center h-[800px] text-5xl'>
-                    <FaSpinner className='fa-spin'/>
+                <div className='flex justify-center h-[800px] text-xl'>
+                    <ScaleLoader />
                 </div>
             :
                 <>

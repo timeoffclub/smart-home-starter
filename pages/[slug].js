@@ -120,7 +120,9 @@ export default function Post({ post, related, navigationMenus }) {
                                             src={post.featuredImage.node.sourceUrl}
                                             alt={post.featuredImage.node.altText}
                                             objectFit='cover'
-                                            layout='fill'
+                                            height={384}
+                                            width={633}
+                                            priority
                                             // Work-around for no out-of-box dataUrl :/
                                             blurDataURL={`/_next/image?url=${post.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />

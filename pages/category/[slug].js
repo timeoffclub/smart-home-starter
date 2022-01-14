@@ -74,7 +74,7 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 	return (
 		<>  
             {router.isFallback ? (
-                <div>Loading…</div>
+                <div>We&apos;ve found new content for this page, and we&apos;re updating it. Just a moment...</div>
             ) : (
 				<>
 					<Head>

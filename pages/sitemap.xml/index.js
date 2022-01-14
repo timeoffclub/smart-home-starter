@@ -7,7 +7,7 @@ function generateSiteMap(posts, categories) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>${EXTERNAL_DATA_URL}/contact</loc>
+       <loc>${EXTERNAL_DATA_URL}/contact-us</loc>
      </url>
      ${categories
        .map((el) => {

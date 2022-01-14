@@ -6,8 +6,8 @@ import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 import { FaInstagramSquare } from '@react-icons/all-files/fa/FaInstagramSquare'
 import { FaWindowClose } from '@react-icons/all-files/fa/FaWindowClose'
-import { FaBars } from '@react-icons/all-files/fa/FaBars'
-import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu'
+import { GoSearch } from '@react-icons/all-files/go/GoSearch'
 import { IoMdClose } from '@react-icons/all-files/io/IoMdClose'
 import { kebabCase } from '../lib/utils'
 
@@ -76,7 +76,7 @@ export default function Header({ menu, slug }) {
                             />
                         </div>
                         <div className={mobileNav ? 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FaBars
+                            <GiHamburgerMenu
                                 className={mobileNav ? 'hidden' : 'block'}
                                 onClick={() => toggleMobileNav()}
                             />
@@ -104,7 +104,7 @@ export default function Header({ menu, slug }) {
                             </a>
                         </div>
                         <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
-                            <FaSearch
+                            <GoSearch
                                 onClick={() => toggleMobileSearch()}
                             />
                         </div>
@@ -133,7 +133,7 @@ export default function Header({ menu, slug }) {
                                     onClick={() => setSearchInput(true)}
                                     className={searchInput ? 'hidden text-xl font-semibold cursor-pointer text-white' : 'inline text-xl font-semibold cursor-pointer text-white'}
                                 >
-                                    <FaSearch />
+                                    <GoSearch />
                                 </div>
                             </div>
                         </div>
