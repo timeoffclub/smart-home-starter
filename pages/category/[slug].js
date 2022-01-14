@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+import ErrorPage from 'next/error'
 import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug, getFeaturedIdsWithSlug, getPostById } from '../../lib/api'
 import Header from '../../components/header'
 import Script from 'next/script'
@@ -9,6 +11,12 @@ import ArticleFilterBar from '../../components/article-filter-bar'
 import { useState, useEffect } from 'react'
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
+    const router = useRouter()
+
+	if (!router.isFallback && !category) {
+        return <ErrorPage statusCode={404} />
+    }
+
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
@@ -64,97 +72,103 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 
 	return (
 		<>  
-			<Head>
-				<title>
-					{category.edges[0].node.name} Articles
-				</title>
-				<meta
-					name='description'
-					content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
-					key='desc'
-				/>
-				<meta property="og:title" content={`${category.edges[0].node.name} Articles`} />
-				<meta
-				property="og:description"
-				content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
-				/>
-			</Head>
-			<Script
-                id='load-ads'
-                strategy='lazyOnload'
-                dangerouslySetInnerHTML={{
-                __html: `
-                (function(w, d) {
-                    w.adthrive = w.adthrive || {};
-                    w.adthrive.cmd = w.adthrive.cmd || [];
-                    w.adthrive.plugin = 'adthrive-ads-manual';
-                    w.adthrive.host = 'ads.adthrive.com';
-                
-                    var s = d.createElement('script');
-                    s.async = true;
-                    s.referrerpolicy='no-referrer-when-downgrade';
-                    s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
-                    var n = d.getElementsByTagName('script')[0];
-                    n.parentNode.insertBefore(s, n);
-                })(window, document);
-                `,
-                }}
-            />
-			<Header menu={navigationMenus}/>
-			<main className='adthrive-body'>
-				<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
-					<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
-						<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
-							{category.edges[0].node.name}
-						</div>
-						<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-semibold tracking-wider lg:pl-5' : 'hidden'}>
-							{category.edges[0].node.description || ''}
-						</div>
-					</div>
-				</div>
-				{!featuredArticle ?
-					<div className='container text-center my-40'>
-						<div className='text-xl'>
-							It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
-						</div>
-					</div>
-				:
-					<>
-						<FeaturedCategory 
-							myArticles={featured} 
-							myCategory={category.edges[0].node.name}
+            {router.isFallback ? (
+                <div>Loading…</div>
+            ) : (
+				<>
+					<Head>
+						<title>
+							{category.edges[0].node.name} Articles
+						</title>
+						<meta
+							name='description'
+							content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+							key='desc'
 						/>
-						<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-						<ArticleGrid
-							myArticles={filteredPosts || posts.nodes}
-							myCategory={category.edges[0].node.name}
+						<meta property="og:title" content={`${category.edges[0].node.name} Articles`} />
+						<meta
+						property="og:description"
+						content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 						/>
+					</Head>
+					<Script
+						id='load-ads'
+						strategy='lazyOnload'
+						dangerouslySetInnerHTML={{
+						__html: `
+						(function(w, d) {
+							w.adthrive = w.adthrive || {};
+							w.adthrive.cmd = w.adthrive.cmd || [];
+							w.adthrive.plugin = 'adthrive-ads-manual';
+							w.adthrive.host = 'ads.adthrive.com';
+						
+							var s = d.createElement('script');
+							s.async = true;
+							s.referrerpolicy='no-referrer-when-downgrade';
+							s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+							var n = d.getElementsByTagName('script')[0];
+							n.parentNode.insertBefore(s, n);
+						})(window, document);
+						`,
+						}}
+					/>
+					<Header menu={navigationMenus}/>
+					<main className='adthrive-body'>
+						<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
+							<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
+								<div className={`font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green text-6xl md:text-7xl ${category.edges[0].node.description > 0 && 'lg:border-r-2 border-r-black py-3 pr-3 tracking-wide max-w-md'}`}>
+									{category.edges[0].node.name}
+								</div>
+								<div className={category.edges[0].node.description ? 'text-lg lg:flex-1 md:text-base font-semibold tracking-wider lg:pl-5' : 'hidden'}>
+									{category.edges[0].node.description || ''}
+								</div>
+							</div>
+						</div>
+						{!featuredArticle ?
+							<div className='container text-center my-40'>
+								<div className='text-xl'>
+									It looks like we haven&apos;t written any articles for this category yet, but we are definitely probably working on it. Please check again later.
+								</div>
+							</div>
+						:
+							<>
+								<FeaturedCategory 
+									myArticles={featured} 
+									myCategory={category.edges[0].node.name}
+								/>
+								<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
+								<ArticleGrid
+									myArticles={filteredPosts || posts.nodes}
+									myCategory={category.edges[0].node.name}
+								/>
 
-						{filterTab === 'All' &&
-						<div className='flex justify-center mb-12'>
-							{hasNextPage ?
-								<div className='text-xl cursor-pointer' as='div' onClick={() => fetchMorePosts()}>
-									{loadingMorePosts ? 
-										<div>
-											Loading more articles...
+								{filterTab === 'All' &&
+								<div className='flex justify-center mb-12'>
+									{hasNextPage ?
+										<div className='text-xl cursor-pointer' as='div' onClick={() => fetchMorePosts()}>
+											{loadingMorePosts ? 
+												<div>
+													Loading more articles...
+												</div>
+											:
+												<div>
+													Load More
+												</div>
+											}
 										</div>
 									:
-										<div>
-											Load More
+										<div className='text-xl'>
+											No more articles in this category.
 										</div>
 									}
 								</div>
-							:
-								<div className='text-xl'>
-									No more articles in this category.
-								</div>
 							}
-						</div>
-					}
-					</>
-				}
-			</main>
-			<Footer myMenu={navigationMenus} />
+							</>
+						}
+					</main>
+					<Footer myMenu={navigationMenus} />
+				</>
+			)}
 		</>
 	)
 }
