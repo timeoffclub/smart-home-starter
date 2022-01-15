@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import useInView from 'react-cool-inview'
-import { useRef } from 'react'
 import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
@@ -12,7 +11,6 @@ const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-ct
 const Footer = dynamic(() => import('../components/footer'))
 
 export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
-    const ref = useRef()
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
