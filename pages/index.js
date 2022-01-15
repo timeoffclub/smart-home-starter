@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import useInView from 'react-cool-inview'
+import { useRef } from 'react'
 import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
@@ -11,9 +12,11 @@ const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-ct
 const Footer = dynamic(() => import('../components/footer'))
 
 export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
+    const ref = useRef()
 
     const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
+        // Stop observe when the target enters the viewport, so the "inView" only triggered once
+        unobserveOnEnter: true
     })
 
     return (
@@ -29,51 +32,60 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
                 </div>
-                    <div ref={observe}>
-                        {inView && 
+                <div ref={observe}>
+                    <div>
+                        {inView ?
                             <NewsLetterPageCTA/>
+                        :
+                            <div className='h-48 bg-black w-full'>
+                            </div>
                         }
                     </div>
-                <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                    <div className='adthrive-ad-container w-full mt-14'>
-                    </div>
-                </div>
-                <div className='container mt-14'>
-                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
-                            {tvs.categoryName.edges[0].node.name}
-                        </a>
-                    </div>
-                        <div ref={observe}>
-                            {inView && <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>}
-                        </div>
-                    <div className='text-3xl ml-6 xl:ml-0 mt-[-50px]'>
-                        <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
-                            View all
-                        </a>
-                    </div>
                     <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                        <div className='adthrive-ad-container w-fullmt-14'>
+                        <div className='adthrive-ad-container w-full mt-14'>
                         </div>
                     </div>
-                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
-                            {ring.categoryName.edges[0].node.name}
-                        </a>
-                    </div>
-                    <div ref={observe}>
-                        {inView && <FeaturedCategory myArticles={ring.posts.nodes} myCategory={'Ring'} />}
-                    </div>
-                    <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
-                        <a href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
-                            View all
-                        </a>
+                    <div className='container mt-14'>
+                        <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
+                            <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
+                                {tvs.categoryName.edges[0].node.name}
+                            </a>
+                        </div>
+                            {inView ? 
+                                <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>
+                            :
+                                <div className='h-[1036px] w-full bg-slate-100'>
+                                </div>
+                            }
+                        <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px]'>
+                            <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
+                                View all
+                            </a>
+                        </div>
+                        <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                            <div className='adthrive-ad-container w-full mt-14'>
+                            </div>
+                        </div>
+                        <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                            <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
+                                {ring.categoryName.edges[0].node.name}
+                            </a>
+                        </div>
+                            {inView ? 
+                                <FeaturedCategory myArticles={ring.posts.nodes} myCategory={'Ring'} />
+                            :
+                                <div className='h-[1036px] w-full bg-slate-100'>
+                                </div>
+                            }
+                        <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px] mb-28'>
+                            <a href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
+                                View all
+                            </a>
+                        </div>
                     </div>
                 </div>
             </main>
-            <div ref={observe}>
-                {inView && <Footer myMenu={navigationMenus} />}
-            </div>
+            <Footer myMenu={navigationMenus} />
         </>
     )
 }
