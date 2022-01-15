@@ -38,7 +38,7 @@ export default function NewsletterModal({ onClose }) {
 
     return (
         <div className='absolute w-screen h-screen bg-black/50 z-50'>
-            <div className='relative top-0 md:top-8 sm:mx-auto text-xl text-smart-blue bg-black py-8 w-full sm:w-[500px]'>
+            <div className='relative sm:mx-auto text-xl text-smart-blue bg-black py-8 w-full sm:w-[500px]'>
                 <FaWindowClose 
                     className='cursor-pointer absolute top-4 right-4'
                     onClick={onClose}
