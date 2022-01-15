@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import HomeFeatured from '../components/home-featured'
-import FeaturedCategory from '../components/featured-category'
 import NewsLetterPageCTA from '../components/newsletter-page-cta'
+
+const FeaturedCategory = dynamic(() => import('../components/featured-category'))
 
 export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
     // Converts menuItem labels to slugs, since slugs don't exist on menuItems
