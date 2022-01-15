@@ -35,7 +35,7 @@ export default function Post({ post, related, navigationMenus }) {
     return (
         <div>
             {router.isFallback ? (
-                <div className='container flex justify-center items-center h-screen my-6'>
+                <div className='container flex justify-center items-center h-screen mx-6'>
                     <div className='text-lg'>
                         We&apos;ve found new content for this page, and we&apos;re updating it. Just a moment...
                     </div>
@@ -66,7 +66,7 @@ export default function Post({ post, related, navigationMenus }) {
                     <Header menu={navigationMenus}/>
                         <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
                             <div className='col-span-3 lg:col-span-2'>
-                                <div className='text-base text-gray-500 font-extralight mx-6'>
+                                <div className='text-base text-gray-500 font-extralight'>
                                     The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
                                 </div>
                                 <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
