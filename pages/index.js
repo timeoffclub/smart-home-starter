@@ -4,11 +4,11 @@ import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
 import Header from '../components/header'
-import Footer from '../components/footer'
 import HomeFeatured from '../components/home-featured'
 
 const FeaturedCategory = dynamic(() => import('../components/featured-category'))
 const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
+const Footer = dynamic(() => import('../components/footer'))
 
 export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
 
@@ -71,7 +71,9 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                     </div>
                 </div>
             </main>
-			<Footer myMenu={navigationMenus} />
+            <div ref={observe}>
+                {inView && <Footer myMenu={navigationMenus} />}
+            </div>
         </>
     )
 }
