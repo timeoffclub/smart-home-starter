@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Script from 'next/script'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -22,27 +21,6 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />
             </Head>
-            <Script
-                id='load-ads'
-                strategy='lazyOnload'
-                dangerouslySetInnerHTML={{
-                __html: `
-                (function(w, d) {
-                    w.adthrive = w.adthrive || {};
-                    w.adthrive.cmd = w.adthrive.cmd || [];
-                    w.adthrive.plugin = 'adthrive-ads-manual';
-                    w.adthrive.host = 'ads.adthrive.com';
-                
-                    var s = d.createElement('script');
-                    s.async = true;
-                    s.referrerpolicy='no-referrer-when-downgrade';
-                    s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
-                    var n = d.getElementsByTagName('script')[0];
-                    n.parentNode.insertBefore(s, n);
-                })(window, document);
-                `,
-                }}
-            />
             <Header menu={navigationMenus}/>
             <main className='adthrive-body'>
                 <div className='container mt-14'>
@@ -50,7 +28,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 </div>
                 <NewsLetterPageCTA/>
                 <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                    <div className='adthrive-ad-container w-full h-60 mt-14'>
+                    <div className='adthrive-ad-container w-full mt-14'>
                     </div>
                 </div>
                 <div className='container mt-14'>
@@ -66,7 +44,7 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                         </a>
                     </div>
                     <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
-                        <div className='adthrive-ad-container w-full h-60 mt-14'>
+                        <div className='adthrive-ad-container w-fullmt-14'>
                         </div>
                     </div>
                     <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>

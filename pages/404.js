@@ -1,3 +1,4 @@
+
 export default function Custom404() {
     return (
         <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>

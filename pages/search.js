@@ -1,4 +1,5 @@
 import Router from 'next/router'
+import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { getSearchResults, getMenuBySlug } from '../lib/api'
@@ -87,6 +88,16 @@ export default function Search({ data, navigationMenus, slug }) {
 
     return (
         <>
+            <Head>
+                <title>
+                    Smart Home Starter - Search
+                </title>
+                <meta
+                    name='description'
+                    content="Don't see the article you're looking for? Search our articles."
+                    key='desc'
+                />
+            </Head>
             <Header menu={navigationMenus} slug={slug} />
             <div className='flex justify-center px-5 sm:px-0 md:px-6 xl:px-0  my-12'>
                 <SearchForm
