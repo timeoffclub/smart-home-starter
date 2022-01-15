@@ -54,6 +54,11 @@ export default function Header({ menu, slug }) {
                         <div onClick={() => {setModalOpen(true), setMegaMenuDisabled(true)}} className='text-base cursor-pointer font-semibold text-white tracking-wide ml-4 mt-2.5'>
                             Subscribe
                         </div>
+                        <button type="button" onClick={() => {
+    throw new Error("Sentry Frontend Error");
+}}>
+    Throw error
+</button>
                         <div className='text-3xl font-semibold text-white ml-4 mt-2.5'>
                             <FaFacebookSquare />
                         </div>
