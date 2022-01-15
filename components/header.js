@@ -24,7 +24,7 @@ export default function Header({ menu, slug }) {
     const [mobileNav, setMobileNav] = useState(null)
     const [searchInput, setSearchInput] = useState(null)
     const [mobileSearchInput, setMobileSearchInput] = useState(null)
-    const [ searchQuery, setSearchQuery ] = useState( '' )
+    const [searchQuery, setSearchQuery] = useState( '' )
     
     const handleSearchFormSubmit = ( event ) => {
         event.preventDefault();
@@ -141,30 +141,34 @@ export default function Header({ menu, slug }) {
                 </div>
             </div>
             {/* Main search input - appears when searchInput === true */}
-            <div
-                
-                className={searchInput ? 'hidden lg:flex z-50 absolute top-30 right-12 bg-neutral-900 h-20 p-5 items-center' : 'hidden'}
-            >
-                <SearchForm
-                    searchQuery={ searchQuery }
-                    setSearchQuery={ setSearchQuery }
-                    handleSearchFormSubmit={handleSearchFormSubmit}
-                    mode={'dark'}
-                />
-            </div>
+            {searchInput &&
+                <div
+                    
+                    className={searchInput ? 'hidden lg:flex z-50 absolute top-30 right-12 bg-neutral-900 h-20 p-5 items-center' : 'hidden'}
+                >
+                    <SearchForm
+                        searchQuery={ searchQuery }
+                        setSearchQuery={ setSearchQuery }
+                        handleSearchFormSubmit={handleSearchFormSubmit}
+                        mode={'dark'}
+                    />
+                </div>
+            }
             {/* Mobile nav - beneath main nav on mobile viewports */}
-            <MobileNav 
-                menu={menu} 
-                slug={slug}
-                mobileNav={mobileNav} 
-                mobileSearchInput={mobileSearchInput} 
-                onSetMobileNav={setMobileNav} 
-                onSetModalOpen={setModalOpen}
-                searchQuery={searchQuery}
-                onSetSearchQuery={setSearchQuery}
-                onHandleSearchFormSubmit={handleSearchFormSubmit}
-                onToggleMobileNav={toggleMobileNav}
-            />
+            {mobileNav &&
+                <MobileNav 
+                    menu={menu} 
+                    slug={slug}
+                    mobileNav={mobileNav} 
+                    mobileSearchInput={mobileSearchInput} 
+                    onSetMobileNav={setMobileNav} 
+                    onSetModalOpen={setModalOpen}
+                    searchQuery={searchQuery}
+                    onSetSearchQuery={setSearchQuery}
+                    onHandleSearchFormSubmit={handleSearchFormSubmit}
+                    onToggleMobileNav={toggleMobileNav}
+                />
+            }
             {/* Megamenu - large viewports */}
             {(megaMenu && !megaMenuDisabled) &&
                 <div className='absolute hidden w-full lg:block bg-black z-40 py-5' onMouseLeave={() => {setMegaMenu(null), setActiveLabel(null)}}>

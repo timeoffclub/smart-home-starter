@@ -1,19 +1,20 @@
 import dynamic from 'next/dynamic'
+import useInView from 'react-cool-inview'
 import Head from 'next/head'
+import { kebabCase } from '../lib/utils'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import HomeFeatured from '../components/home-featured'
-import NewsLetterPageCTA from '../components/newsletter-page-cta'
 
 const FeaturedCategory = dynamic(() => import('../components/featured-category'))
+const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
 
 export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
-    // Converts menuItem labels to slugs, since slugs don't exist on menuItems
-    const kebabCase = string => string
-        .replace(/([a-z])([A-Z])/g, "$1-$2")
-        .replace(/[\s_]+/g, '-')
-        .toLowerCase()
+
+    const { observe, inView } = useInView({
+        onEnter: ({ unobserve }) => unobserve(), // only run once
+    })
 
     return (
         <>
@@ -28,7 +29,11 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
                 </div>
-                <NewsLetterPageCTA/>
+                    <div ref={observe}>
+                        {inView && 
+                            <NewsLetterPageCTA/>
+                        }
+                    </div>
                 <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
                     <div className='adthrive-ad-container w-full mt-14'>
                     </div>
@@ -39,7 +44,9 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                             {tvs.categoryName.edges[0].node.name}
                         </a>
                     </div>
-                    <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>
+                        <div ref={observe}>
+                            {inView && <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>}
+                        </div>
                     <div className='text-3xl ml-6 xl:ml-0 mt-[-50px]'>
                         <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
                             View all
@@ -54,7 +61,9 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                             {ring.categoryName.edges[0].node.name}
                         </a>
                     </div>
-                    <FeaturedCategory myArticles={ring.posts.nodes} myCategory={'Ring'} />
+                    <div ref={observe}>
+                        {inView && <FeaturedCategory myArticles={ring.posts.nodes} myCategory={'Ring'} />}
+                    </div>
                     <div className='text-3xl ml-6 xl:ml-0 mt-[-50px] mb-28'>
                         <a href={kebabCase(`../category/${ring.categoryName.edges[0].node.name}`)}>
                             View all
