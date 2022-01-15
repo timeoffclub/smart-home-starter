@@ -35,7 +35,7 @@ export default function Post({ post, related, navigationMenus }) {
     return (
         <div>
             {router.isFallback ? (
-                <div className='container flex justify-center items-center h-screen'>
+                <div className='container flex justify-center items-center h-screen my-6'>
                     <div className='text-lg'>
                         We&apos;ve found new content for this page, and we&apos;re updating it. Just a moment...
                     </div>
