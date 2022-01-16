@@ -3,11 +3,19 @@ import Header from '../../components/header'
 import Head from 'next/head'
 import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
-import ArticleGrid from '../../components/article-grid'
 import ArticleFilterBar from '../../components/article-filter-bar'
 import { useState, useEffect } from 'react'
+import useInView from 'react-cool-inview'
+import dynamic from 'next/dynamic'
+
+const ArticleGrid = dynamic(() => import('../../components/article-grid'))
 
 export default function Categories({ posts, featured, category, categorySlug, filterMenu, navigationMenus }) {
+
+	const { observe, inView } = useInView({
+        // Stop observe when the target enters the viewport, so the "inView" only triggered once
+        unobserveOnEnter: true
+    })
 
 	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
 	featured.length < 20 ?
@@ -103,10 +111,17 @@ export default function Categories({ posts, featured, category, categorySlug, fi
 							myCategory={category.edges[0].node.name}
 						/>
 						<ArticleFilterBar myMenu={filterMenu !== null ? filterMenu : filterTabs} myCategory={category.edges[0].node.name} onFilter={filter} />
-						<ArticleGrid
-							myArticles={filteredPosts || posts.nodes}
-							myCategory={category.edges[0].node.name}
-						/>
+						<div ref={observe}>
+							{inView ?
+								<ArticleGrid
+									myArticles={filteredPosts || posts.nodes}
+									myCategory={category.edges[0].node.name}
+								/>
+							:
+								<div className='h-[2020px] bg-slate-100 w-full'>
+								</div>
+							}
+						</div>
 
 						{filterTab === 'All' &&
 						<div className='flex justify-center mb-12'>
