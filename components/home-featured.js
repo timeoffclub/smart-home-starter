@@ -10,11 +10,12 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                 <div className='relative lg:col-span-2 mb-3 lg:mb-0'>
                     {featuredArticle.featuredImage &&
                         <div className='relative h-96'>
-                            <Image
-                                src={featuredArticle.featuredImage.node.sourceUrl}
+                            <Image 
+                                                    className='transition-all ease-in duration-300'                  src={featuredArticle.featuredImage.node.sourceUrl}
                                 alt={featuredArticle.featuredImage.node.altText}
                                 objectFit='cover'
                                 layout='fill'
+                                placeholder='blur'
                                 blurDataURL={`/_next/image?url=${featuredArticle.featuredImage.node.sourceUrl}&w=16&q=1`}
                             />
                         </div>
@@ -63,12 +64,13 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                             {el.featuredImage &&
                                 <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
-                                    <Image
-                                        src={el.featuredImage.node.sourceUrl}
+                                    <Image 
+                                                    className='transition-all ease-in duration-300'                          src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
                                         height={96}
                                         width={96}
                                         objectFit='cover'
+                                        placeholder='blur'
                                         blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                     />
                                 </a>
@@ -104,6 +106,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                                     alt={el.featuredImage.node.altText}
                                     objectFit='cover'
                                     layout='fill'
+                                    placeholder='blur'
                                     blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                 />
                             </a>

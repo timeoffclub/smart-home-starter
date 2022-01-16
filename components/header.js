@@ -94,8 +94,8 @@ export default function Header({ menu, slug }) {
                         </a>
                         <div className='w-full md:hidden flex justify-center'>
                             <a href={process.env.NEXT_PUBLIC_URL} className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
-                                <Image
-                                    src={'/SHSLogo.png'}
+                                <Image 
+                                                    className='transition-all ease-in duration-300'                      src={'/SHSLogo.png'}
                                     alt={'Smart Home Starter'}
                                     layout='responsive'
                                     width={10}

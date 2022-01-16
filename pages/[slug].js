@@ -99,13 +99,14 @@ export default function Post({ post, related, navigationMenus }) {
                                 </div>
                                 {post.featuredImage &&
                                     <div className='relative h-96 mb-5'>
-                                        <Image
-                                            src={post.featuredImage.node.sourceUrl}
+                                        <Image 
+                                                    className='transition-all ease-in duration-300'                              src={post.featuredImage.node.sourceUrl}
                                             alt={post.featuredImage.node.altText}
                                             objectFit='cover'
                                             height={384}
                                             width={633}
                                             priority
+                                            placeholder='blur'
                                             // Work-around for no out-of-box dataUrl :/
                                             blurDataURL={`/_next/image?url=${post.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />

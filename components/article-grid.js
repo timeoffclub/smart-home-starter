@@ -2,8 +2,6 @@ import Image from 'next/image'
 
 export default function ArticleGrid ({ myArticles, myCategory }) {
 
-    const adArr = [1,2,3,4]
-
     return (
         <>
             <div className='container px-5 sm:px-0 md:px-6 xl:px-0 mb-12'>
@@ -18,6 +16,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                         <a href={`../${el.slug}`}>
                                             <div className='relative h-44 mb-3'>
                                                 <Image 
+                                                    className='transition-all ease-in duration-300'
                                                     src={el.featuredImage.node.sourceUrl}
                                                     alt={el.featuredImage.node.altText}
                                                     objectFit='cover'
