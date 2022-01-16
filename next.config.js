@@ -7,7 +7,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const moduleExports = ({
     reactStrictMode: true,
     images: {
-        domains: ['localhost', 'shsprods.wpengine.com'],
+        domains: ['localhost', 'shsprods.wpengine.com', 'i0.wp.com'],
     }
 })
 
