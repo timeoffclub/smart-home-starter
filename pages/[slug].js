@@ -107,9 +107,6 @@ export default function Post({ post, related, navigationMenus }) {
                                             height={384}
                                             width={633}
                                             priority
-                                            placeholder='blur'
-                                            // Work-around for no out-of-box dataUrl :/
-                                            blurDataURL={`/_next/image?url=${post.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         />
                                     </div>
                                 }

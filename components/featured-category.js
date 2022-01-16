@@ -23,8 +23,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         objectFit='cover'
                                         layout='fill'
                                         placeholder='blur'
-                                        priority // We can do this because we lazy load this component on index
                                         blurDataURL={`/_next/image?url=${featuredArticle.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                        priority // We can do this because we lazy load this component on index
                                     />
                                 </div>
                             }
