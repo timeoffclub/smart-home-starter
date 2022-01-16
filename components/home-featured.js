@@ -65,6 +65,10 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                                 <a href={`../${el.slug}`} className='relative shrink-0'>
                                     <img 
                                         className='h-24 w-24'
+                                        height='96px'
+                                        width='96px'
+                                        height='96px'
+                                        width='96px'
                                         src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
                                     />
