@@ -17,7 +17,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             {featuredArticle.featuredImage &&
                                 <div className='relative h-80'>
                                     <Image 
-                                                    className='transition-all ease-in duration-500'                          src={featuredArticle.featuredImage.node.sourceUrl}
+                                        className='transition-all ease-in duration-500'
+                                        src={featuredArticle.featuredImage.node.sourceUrl}
                                         alt={featuredArticle.featuredImage.node.altText}
                                         objectFit='cover'
                                         layout='fill'

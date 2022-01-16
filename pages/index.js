@@ -14,7 +14,8 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
-        unobserveOnEnter: true
+        unobserveOnEnter: true,
+        rootMargin: "-100px 0px",
     })
 
     return (

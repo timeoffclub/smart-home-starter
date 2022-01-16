@@ -11,12 +11,11 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     {featuredArticle.featuredImage &&
                         <div className='relative h-96'>
                             <Image 
-                                                    className='transition-all ease-in duration-500'                  src={featuredArticle.featuredImage.node.sourceUrl}
+                                src={featuredArticle.featuredImage.node.sourceUrl}
                                 alt={featuredArticle.featuredImage.node.altText}
                                 objectFit='cover'
                                 layout='fill'
-                                placeholder='blur'
-                                blurDataURL={`/_next/image?url=${featuredArticle.featuredImage.node.sourceUrl}&w=16&q=1`}
+                                priority
                             />
                         </div>
                     }
@@ -65,10 +64,11 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             {el.featuredImage &&
                                 <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
                                     <Image 
-                                                    className='transition-all ease-in duration-500'                          src={el.featuredImage.node.sourceUrl}
+                                        className='transition-all ease-in duration-500'
+                                        src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
-                                        height={96}
-                                        width={96}
+                                        height={24}
+                                        width={24}
                                         objectFit='cover'
                                         placeholder='blur'
                                         blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
