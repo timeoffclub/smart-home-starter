@@ -95,7 +95,7 @@ export default function Header({ menu, slug }) {
                         <div className='w-full md:hidden flex justify-center'>
                             <a href={process.env.NEXT_PUBLIC_URL} className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
                                 <Image 
-                                                    className='transition-all ease-in duration-300'                      src={'/SHSLogo.png'}
+                                                    className='transition-all ease-in duration-500'                      src={'/SHSLogo.png'}
                                     alt={'Smart Home Starter'}
                                     layout='responsive'
                                     width={10}
@@ -111,7 +111,7 @@ export default function Header({ menu, slug }) {
                         <div className='hidden lg:flex items-center h-[80px]'>
                             {menu.map((el) => (
                                 <div
-                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-300`}
+                                    className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500`}
                                     onMouseEnter={() => {setMegaMenu(el.menuItems.nodes), setActiveLabel(el.name)}}
                                     key={el.id}
                                 >

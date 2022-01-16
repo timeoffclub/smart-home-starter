@@ -11,7 +11,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     {featuredArticle.featuredImage &&
                         <div className='relative h-96'>
                             <Image 
-                                                    className='transition-all ease-in duration-300'                  src={featuredArticle.featuredImage.node.sourceUrl}
+                                                    className='transition-all ease-in duration-500'                  src={featuredArticle.featuredImage.node.sourceUrl}
                                 alt={featuredArticle.featuredImage.node.altText}
                                 objectFit='cover'
                                 layout='fill'
@@ -65,7 +65,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                             {el.featuredImage &&
                                 <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
                                     <Image 
-                                                    className='transition-all ease-in duration-300'                          src={el.featuredImage.node.sourceUrl}
+                                                    className='transition-all ease-in duration-500'                          src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
                                         height={96}
                                         width={96}

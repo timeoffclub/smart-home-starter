@@ -100,7 +100,7 @@ export default function Post({ post, related, navigationMenus }) {
                                 {post.featuredImage &&
                                     <div className='relative h-96 mb-5'>
                                         <Image 
-                                                    className='transition-all ease-in duration-300'                              src={post.featuredImage.node.sourceUrl}
+                                                    className='transition-all ease-in duration-500'                              src={post.featuredImage.node.sourceUrl}
                                             alt={post.featuredImage.node.altText}
                                             objectFit='cover'
                                             height={384}

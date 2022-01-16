@@ -16,7 +16,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                                         <a href={`../${el.slug}`}>
                                             <div className='relative h-44 mb-3'>
                                                 <Image 
-                                                    className='transition-all ease-in duration-300'
+                                                    className='transition-all ease-in duration-500'
                                                     src={el.featuredImage.node.sourceUrl}
                                                     alt={el.featuredImage.node.altText}
                                                     objectFit='cover'
