@@ -22,8 +22,6 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                         alt={featuredArticle.featuredImage.node.altText}
                                         objectFit='cover'
                                         layout='fill'
-                                        placeholder='blur'
-                                        blurDataURL={`/_next/image?url=${featuredArticle.featuredImage.node.sourceUrl}&w=16&q=1`}
                                         priority // We can do this because we lazy load this component on index
                                     />
                                 </div>
