@@ -48,12 +48,13 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                     {el.featuredImage &&
                                         <a href={`../${el.slug}`} className='relative shrink-0'>
-                                            <img 
-                                                className='h-24 w-24'
-                                                height='96px'
-                                                width='96px'
+                                            <Image 
+                                                className='transition-all ease-in duration-500'
                                                 src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
+                                                height={96}
+                                                width={96}
+                                                objectFit='cover'
                                             />
                                         </a>
                                     }

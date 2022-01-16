@@ -62,13 +62,13 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     {myArticles.slice(1,7).map((el, index) => (
                         <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                             {el.featuredImage &&
-                                <a href={`../${el.slug}`} className='relative shrink-0'>
-                                    <img 
-                                        className='h-24 w-24'
-                                        height='96px'
-                                        width='96px'
+                                <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
+                                    <Image
                                         src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
+                                        height={96}
+                                        width={96}
+                                        objectFit='cover'
                                     />
                                 </a>
                             }
