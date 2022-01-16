@@ -9,11 +9,13 @@ export default function HomeFeatured({ myArticles, myCategory }) {
             <div className='block lg:grid grid-cols-1 lg:grid-cols-4 lg:gap-5'>
                 <div className='relative lg:col-span-2 mb-3 lg:mb-0'>
                     {featuredArticle.featuredImage &&
-                        <div className='h-96'>
-                            <img
-                                className='w-full h-full'
+                        <div className='relative h-96'>
+                            <Image
                                 src={featuredArticle.featuredImage.node.sourceUrl}
                                 alt={featuredArticle.featuredImage.node.altText}
+                                objectFit='cover'
+                                layout='fill'
+                                blurDataURL={`/_next/image?url=${featuredArticle.featuredImage.node.sourceUrl}&w=16&q=1`}
                             />
                         </div>
                     }
@@ -97,10 +99,12 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     <div key={el.id} className='inline-flex flex-wrap w-full mb-5'>
                         {el.featuredImage &&
                             <a href={`../${el.slug}`} className='relative w-full h-56 mb-3'>
-                                <img 
-                                className='h-full w-full'
+                                <Image 
                                     src={el.featuredImage.node.sourceUrl}
                                     alt={el.featuredImage.node.altText}
+                                    objectFit='cover'
+                                    layout='fill'
+                                    blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                 />
                             </a>
                         }
