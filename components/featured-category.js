@@ -103,7 +103,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 {el.featuredImage &&
                                     <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
                                         <Image 
-                                                    className='transition-all ease-in duration-500'                              src={el.featuredImage.node.sourceUrl}
+                                            className='transition-all ease-in duration-500'
+                                            src={el.featuredImage.node.sourceUrl}
                                             alt={el.featuredImage.node.altText}
                                             height={96}
                                             width={96}
@@ -143,7 +144,8 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     {el.featuredImage &&
                                         <a href={`../${el.slug}`} className='relative w-24 h-24 shrink-0'>
                                             <Image 
-                                                    className='transition-all ease-in duration-500'                                  src={el.featuredImage.node.sourceUrl}
+                                                className='transition-all ease-in duration-500'
+                                                src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
                                                 height={96}
                                                 width={96}
