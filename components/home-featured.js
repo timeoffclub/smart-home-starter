@@ -63,10 +63,13 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                             {el.featuredImage &&
                                 <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
-                                    <img
-                                        className='w-[630px] h-96'
+                                    <Image
                                         src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
+                                        height={96}
+                                        width={96}
+                                        objectFit='cover'
+                                        blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                     />
                                 </a>
                             }
@@ -96,10 +99,12 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     <div key={el.id} className='inline-flex flex-wrap w-full mb-5'>
                         {el.featuredImage &&
                             <a href={`../${el.slug}`} className='relative w-full h-56 mb-3'>
-                                <img 
-                                    className='h-56 w-full aspect-auto'
+                                <Image 
                                     src={el.featuredImage.node.sourceUrl}
                                     alt={el.featuredImage.node.altText}
+                                    objectFit='cover'
+                                    layout='fill'
+                                    blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                 />
                             </a>
                         }
