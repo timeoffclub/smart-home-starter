@@ -232,7 +232,7 @@ async function getAllCategories() {
 }
 
 // Generate all paths?
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []

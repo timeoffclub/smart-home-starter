@@ -62,16 +62,11 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     {myArticles.slice(1,7).map((el, index) => (
                         <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                             {el.featuredImage &&
-                                <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
-                                    <Image 
-                                        className='transition-all ease-in duration-500'
+                                <a href={`../${el.slug}`} className='relative shrink-0'>
+                                    <img 
+                                        className='h-24 w-24'
                                         src={el.featuredImage.node.sourceUrl}
                                         alt={el.featuredImage.node.altText}
-                                        height={24}
-                                        width={24}
-                                        objectFit='cover'
-                                        placeholder='blur'
-                                        blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                     />
                                 </a>
                             }

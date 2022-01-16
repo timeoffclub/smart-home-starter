@@ -47,15 +47,11 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             {myArticles.slice(1,4).map((el, index) => (
                                 <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                     {el.featuredImage &&
-                                        <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
-                                            <Image 
-                                                    className='transition-all ease-in duration-500'                                  src={el.featuredImage.node.sourceUrl}
+                                        <a href={`../${el.slug}`} className='relative shrink-0'>
+                                            <img 
+                                                className='h-24 w-24'
+                                                src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
-                                                height={96}
-                                                width={96}
-                                                objectFit='cover'
-                                                placeholder='blur'
-                                                blurDataURL={`/_next/image?url=${el.featuredImage.node.sourceUrl}&w=16&q=1`}
                                             />
                                         </a>
                                     }
@@ -101,7 +97,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         {myArticles.slice(5,14).map((el, index) => (
                             <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                 {el.featuredImage &&
-                                    <a href={`../${el.slug}`} className='relative shrink-0 w-24 h-24'>
+                                    <a href={`../${el.slug}`} className='relative shrink-0 h-24 w-24'>
                                         <Image 
                                             className='transition-all ease-in duration-500'
                                             src={el.featuredImage.node.sourceUrl}
