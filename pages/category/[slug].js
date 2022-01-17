@@ -70,7 +70,7 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 			{router.isFallback ? (
                 <div className='container flex justify-center items-center h-screen mx-6'>
                     <div className='text-lg'>
-                        Found new content for this page. Just a moment while we update it for everyone.
+                        You&apos;ve found new content for this page! Just a moment while we update it for everyone.
                     </div>
                 </div>
 			) : (
