@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug, getFeaturedIdsWithSlug, getPostById } from '../../lib/api'
+import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug } from '../../lib/api'
 import Header from '../../components/header'
 import Head from 'next/head'
 import Footer from '../../components/footer'
@@ -142,29 +142,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 	)
 }
 
-async function getAllFeaturedIdsWithSlug(slug) {
-	let data = []
-    let endCursor = null
-    let hasNextPage = true
-    do {
-        let res = await getFeaturedIdsWithSlug(100, endCursor || null, slug)
-        endCursor = await res?.posts?.pageInfo.endCursor
-        hasNextPage = await res?.posts?.pageInfo.hasNextPage
-        data.push(...res.posts.nodes)
-    } while (hasNextPage)
-
-	return data
-}
-
-async function getMyFeaturedArticles(featuredIds) {
-	let data = []
-	for (const el of featuredIds) {
-		let res = await getPostById(el.id)
-		data.push(res.post)
-	}
-	return data
-}
-
 async function getAllPosts(slug) {
 	let data = {
 			posts: {
@@ -185,9 +162,7 @@ async function getAllPosts(slug) {
 export async function getStaticProps({ params, preview = false}) {
 	const data = await getPropsForCategory(params.slug, 24)
 	const posts = await getAllPosts(params.slug)
-	const featuredIds = await getAllFeaturedIdsWithSlug(params.slug)
-	const myFeaturedIds = featuredIds.filter((el) => el.categories.nodes.length !== 0)
-	const myFeaturedArticles = await getMyFeaturedArticles(myFeaturedIds)
+	const myFeaturedArticles = posts.nodes.filter((post) => post.categories.edges.some((cat) => cat.node.slug === 'featured'))
 
 	let navigationSlugs = [
 		'brands',
