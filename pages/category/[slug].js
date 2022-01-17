@@ -13,7 +13,31 @@ import ErrorPage from 'next/error'
 const ArticleGrid = dynamic(() => import('../../components/article-grid'))
 
 export default function Categories({ posts, featured, category, filterMenu, navigationMenus }) {
+
     const router = useRouter()
+
+	if (!router.isFallback && !category) {
+        return <ErrorPage statusCode={404} />
+    }
+
+	const categories = []
+
+	let featuredArticle
+
+	if (!router.isFallback) {
+		// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
+		featured.length < 20 ?
+		featured = featured.concat(posts.nodes.filter((node) => node.categories.edges.every((el) => el.node.name !== 'Featured')).slice(0, (20 - featured.length)))
+		: featured
+
+		featured.length > 0 ? featuredArticle = featured[0] : posts[0]
+
+		posts.nodes.forEach(el => {
+			el.categories.edges.forEach(e => {
+				!categories.includes(e.node.name) && categories.push(e.node.name)
+			})
+		})
+	}
 
 	const [filteredPosts, setFilteredPosts] = useState(false)
 	const [allLoaded, setAllLoaded] = useState(false)
@@ -22,25 +46,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
         unobserveOnEnter: true
     })
-
-	if (!router.isFallback && !category) {
-        return <ErrorPage statusCode={404} />
-    }
-
-	// If we don't have enough featured posts to fill the featured module, fill the rest of the module with regular posts
-	featured.length < 20 ?
-	featured = featured.concat(posts.nodes.filter((node) => node.categories.edges.every((el) => el.node.name !== 'Featured')).slice(0, (20 - featured.length)))
-	: featured
-
-	let featuredArticle
-    featured.length > 0 ? featuredArticle = featured[0] : posts[0]
-    const categories = []
-
-	posts?.nodes.forEach(el => {
-		el.categories.edges.forEach(e => {
-			!categories.includes(e.node.name) && categories.push(e.node.name)
-		})
-	})
 
 	const filterTabs = []
 	categories.forEach(el => filterTabs.push({label: el}))
@@ -65,7 +70,7 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 			{router.isFallback ? (
                 <div className='container flex justify-center items-center h-screen mx-6'>
                     <div className='text-lg'>
-                        We&apos;ve found new content for this page, and we&apos;re updating it. Just a moment...
+                        Found new content for this page. Just a moment while we update it for everyone.
                     </div>
                 </div>
 			) : (
@@ -214,7 +219,8 @@ async function getAllCategories() {
 }
 
 // Generate all paths?
-const allPaths = true
+// This has to be false to catch errors related to fallback
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []
@@ -227,6 +233,6 @@ export async function getStaticPaths() {
 	
 	return {
 		paths: data?.map(({ node }) => `/category/${node.slug}`) || [],
-		fallback: 'blocking',
+		fallback: true,
 	}
 }

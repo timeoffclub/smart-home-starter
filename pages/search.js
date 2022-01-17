@@ -15,7 +15,7 @@ export default function Search({ data, navigationMenus, slug }) {
     const [ searchError, setSearchError ] = useState( '' )
     const [ queryResultPosts, setQueryResultPosts  ] = useState( {} )
     const [ showResultInfo, setShowResultInfo ] = useState( false )
-	const [loading, setLoading] = useState(false)
+	const [ loading, setLoading ] = useState(false)
 
     // There's really no reason to return every match, but we will keep this here for now.
     // async function getAllSearchResults(first, after, query) {
@@ -103,7 +103,7 @@ export default function Search({ data, navigationMenus, slug }) {
                 <SearchForm
                     searchQuery={ searchQuery }
                     setSearchQuery={ setSearchQuery }
-                    handleSearchFormSubmit={handleSearchFormSubmit}
+                    handleSearchFormSubmit={ handleSearchFormSubmit }
                     mode={'light'}
                 />
             </div>
