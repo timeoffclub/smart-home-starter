@@ -14,6 +14,14 @@ const ArticleGrid = dynamic(() => import('../../components/article-grid'))
 
 export default function Categories({ posts, featured, category, filterMenu, navigationMenus }) {
 
+	const [filteredPosts, setFilteredPosts] = useState(false)
+	const [allLoaded, setAllLoaded] = useState(false)
+
+	const { observe, inView } = useInView({
+        // Stop observe when the target enters the viewport, so the "inView" only triggered once
+        unobserveOnEnter: true
+    })
+
     const router = useRouter()
 
 	if (!router.isFallback && !category) {
@@ -38,14 +46,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 			})
 		})
 	}
-
-	const [filteredPosts, setFilteredPosts] = useState(false)
-	const [allLoaded, setAllLoaded] = useState(false)
-
-	const { observe, inView } = useInView({
-        // Stop observe when the target enters the viewport, so the "inView" only triggered once
-        unobserveOnEnter: true
-    })
 
 	const filterTabs = []
 	categories.forEach(el => filterTabs.push({label: el}))
