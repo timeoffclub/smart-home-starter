@@ -1,10 +1,10 @@
+import { useState } from 'react'
 import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug, getFeaturedIdsWithSlug, getPostById } from '../../lib/api'
 import Header from '../../components/header'
 import Head from 'next/head'
 import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleFilterBar from '../../components/article-filter-bar'
-import { useState } from 'react'
 import useInView from 'react-cool-inview'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -35,7 +35,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 
 	const [filteredPosts, setFilteredPosts] = useState(false)
 	const [allLoaded, setAllLoaded] = useState(false)
-	const [filterTab, setFilterTab] = useState('All')
 
 	posts?.nodes.forEach(el => {
 		el.categories.edges.forEach(e => {
@@ -47,7 +46,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 	categories.forEach(el => filterTabs.push({label: el}))
 
 	const filter = (cat) => {
-		setFilterTab(cat)
 		if (cat === 'All') {
 			setFilteredPosts(posts.nodes)
 			setAllLoaded(true)
@@ -222,7 +220,7 @@ export async function getStaticProps({ params, preview = false}) {
 			filterMenu: data?.filterMenu?.nodes[0]?.menuItems.nodes || null,
 			navigationMenus: navigationMenus
 		},
-        revalidate: 60
+        revalidate: 1
 	}
 }
 
