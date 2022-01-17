@@ -10,7 +10,7 @@ const FeaturedCategory = dynamic(() => import('../components/featured-category')
 const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
 const Footer = dynamic(() => import('../components/footer'))
 
-export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
+export default function Home({ top, tvs, samsung, navigationMenus }) {
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
@@ -104,9 +104,7 @@ export async function getStaticProps({ preview = false}) {
 			preview,
 			top: top?.posts,
 			tvs: tvs,
-			ring: ring,
 			samsung: samsung,
-			lg: lg,
 			navigationMenus: navigationMenus
 		},
         revalidate: 1
