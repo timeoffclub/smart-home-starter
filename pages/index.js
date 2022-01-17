@@ -69,6 +69,10 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
                             View all
                         </a>
                     </div>
+                    <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                        <div className='adthrive-ad-container w-full mt-14'>
+                        </div>
+                    </div>
                 </div>
             </main>
             <Footer myMenu={navigationMenus} />
