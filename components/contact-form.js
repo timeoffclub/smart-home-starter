@@ -5,7 +5,7 @@ export default function ContactForm() {
     const [state, handleSubmit] = useForm(FORM_KEY)
     
     if (state.succeeded) {
-        return <p>Thanks for your submission!</p>
+        return <p>Thanks for reaching out! We'll get back to you soon.</p>
     }
     
     return (
