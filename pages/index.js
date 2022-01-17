@@ -81,11 +81,10 @@ export default function Home({ top, tvs, ring, samsung, lg, navigationMenus }) {
 }
 
 export async function getStaticProps({ preview = false}) {
+    //TODO: Randomize these--or better yet, use some kind of promotion algorithm
     const top = await getPropsForCategory('featured', 24)
     const tvs = await getPropsForCategory('tvs', 24)
-	const ring = await getPropsForCategory('ring', 24)
 	const samsung = await getPropsForCategory('samsung', 24)
-	const lg = await getPropsForCategory('lg', 24)
 	let navigationSlugs = [
 		'brands',
 		'faq',
