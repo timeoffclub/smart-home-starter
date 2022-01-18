@@ -232,14 +232,14 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []
     if (allPaths) {
         data = await getAllPostsWithSlug() // Generates all articles statically
     } else {
-        data = await getPostsWithSlug() // Generates only a few articles, rest loaded on demand
+        data = await getPostsWithSlug() // Generates only a few articles, rest loaded on demand, either on client or server depending on fallback property below
         data = data?.edges
     }
 
