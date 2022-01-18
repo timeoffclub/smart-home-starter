@@ -129,23 +129,33 @@ export default function Post({ post, related, navigationMenus }) {
                                 <div className='text-3xl font-semibold mb-5'>
                                     Related Articles
                                 </div>
-                                {related.slice(0,2).map((el) => (
-                                    el.title !== post.title &&
-                                    <div className='mb-8' key={el.id}>
-                                        <div className='text-xl mb-1'>
-                                            <a href={el.slug}>
-                                                {el.title}
-                                            </a>
+                                {related.length > 0 ?
+                                    related.slice(0,2).map((el) => (
+                                        el.title !== post.title ?
+                                        <div className='mb-8' key={el.id}>
+                                            <div className='text-xl mb-1'>
+                                                <a href={el.slug}>
+                                                    {el.title}
+                                                </a>
+                                            </div>
+                                            <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
+                                                {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
+                                                    <span key={cat.node.id}>
+                                                        <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
-                                            {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
-                                                <span key={cat.node.id}>
-                                                    <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
-                                                </span>
-                                            ))}
+                                        :
+                                        <div className='text-base text-gray-500'>
+                                            No related articles yet
                                         </div>
+                                    ))
+                                :
+                                    <div className='text-base text-gray-500'>
+                                        No related articles yet
                                     </div>
-                                ))}
+                                }
                                 <div className='border-y-2 border-y-gray-500 py-12 my-14'>
                                     <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
                                         Sign up for our newsletter
