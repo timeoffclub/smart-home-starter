@@ -163,7 +163,7 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 //         data.posts.nodes.push(...res.posts.nodes)
 //     } while (hasNextPage)
 //     return data.posts
-}
+// }
 
 export async function getStaticProps({ params, preview = false}) {
 	const data = await getPropsForCategory(params.slug, 24)
