@@ -91,7 +91,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 </div>
                             </div>
                         ))}
-                        <div  key='ad' className='adthrive-ad-container h-72 sm:row-start-1 sm:row-span-3 sm:col-span-1 sm:col-start-2 lg:row-start-1 lg:row-span-3 lg:col-start-3 lg:col-span-2 xl:h-auto xl:col-span-1 xl:row-start-1 xl:row-span-3 xl:col-start-4 mt-10 md:mt-0'>
+                        <div  key='ad' className='adthrive-featured-ad-container h-72 sm:row-start-1 sm:row-span-3 sm:col-span-1 sm:col-start-2 lg:row-start-1 lg:row-span-3 lg:col-start-3 lg:col-span-2 xl:h-auto xl:col-span-1 xl:row-start-1 xl:row-span-3 xl:col-start-4 mt-10 md:mt-0'>
                         </div>
                     </div>
                     <div className='md:hidden flex px-5 sm:px-0 md:px-6 xl:px-0 flex-col justify-between col-span-2'>
@@ -131,7 +131,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             </div>
                         ))}
 
-                        <div  key='ad' className='adthrive-ad-container h-72 sm:row-start-1 sm:row-span-3 sm:col-span-1 sm:col-start-2 lg:row-start-1 lg:row-span-3 lg:col-start-3 lg:col-span-2 xl:h-auto xl:col-span-1 xl:row-start-1 xl:row-span-3 xl:col-start-4 mt-10 md:mt-0'>
+                        <div  key='ad' className='adthrive-featured-container h-72 sm:row-start-1 sm:row-span-3 sm:col-span-1 sm:col-start-2 lg:row-start-1 lg:row-span-3 lg:col-start-3 lg:col-span-2 xl:h-auto xl:col-span-1 xl:row-start-1 xl:row-span-3 xl:col-start-4 mt-10 md:mt-0'>
                         </div>
                     </div>
                     <div className='lg:grid px-5 sm:px-0 md:px-6 xl:px-0 lg:grid-cols-4 gap-5 mt-5'>

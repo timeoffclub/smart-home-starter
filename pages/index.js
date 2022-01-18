@@ -50,7 +50,7 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                     </div>
                     <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
                     <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px]'>
-                        <a href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
+                        <a href={`../category/${kebabCase(hardware.categoryName.edges[0].node.name)}`}>
                             View all
                         </a>
                     </div>
@@ -65,7 +65,7 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                     </div>
                     <FeaturedCategory myArticles={brands.posts.nodes} myCategory={'Samsung'} />
                     <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px] mb-28'>
-                        <a href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
+                        <a href={`../category/${kebabCase(brands.categoryName.edges[0].node.name)}`}>
                             View all
                         </a>
                     </div>

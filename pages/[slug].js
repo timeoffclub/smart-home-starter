@@ -129,9 +129,8 @@ export default function Post({ post, related, navigationMenus }) {
                                 <div className='text-3xl font-semibold mb-5'>
                                     Related Articles
                                 </div>
-                                {related.length > 0 ?
-                                    related.slice(0,2).map((el) => (
-                                        el.title !== post.title ?
+                                {related.filter((el) => el.title !== post.title).length > 0 ?
+                                    related.filter((el) => el.title !== post.title).slice(0,2).map((el) => (
                                         <div className='mb-8' key={el.id}>
                                             <div className='text-xl mb-1'>
                                                 <a href={el.slug}>
@@ -145,10 +144,6 @@ export default function Post({ post, related, navigationMenus }) {
                                                     </span>
                                                 ))}
                                             </div>
-                                        </div>
-                                        :
-                                        <div className='text-base text-gray-500'>
-                                            No related articles yet
                                         </div>
                                     ))
                                 :
