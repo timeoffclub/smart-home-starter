@@ -10,7 +10,7 @@ const FeaturedCategory = dynamic(() => import('../components/featured-category')
 const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
 const Footer = dynamic(() => import('../components/footer'))
 
-export default function Home({ top, tvs, samsung, navigationMenus }) {
+export default function Home({ top, hardware, brands, navigationMenus }) {
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
@@ -44,13 +44,13 @@ export default function Home({ top, tvs, samsung, navigationMenus }) {
                 </div>
                 <div className='container mt-14'>
                     <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
-                            {tvs.categoryName.edges[0].node.name}
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
+                            {hardware.categoryName.edges[0].node.name}
                         </a>
                     </div>
-                    <FeaturedCategory myArticles={tvs.posts.nodes} myCategory={'TVs'}/>
+                    <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
                     <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px]'>
-                        <a href={kebabCase(`../category/${tvs.categoryName.edges[0].node.name}`)}>
+                        <a href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
                             View all
                         </a>
                     </div>
@@ -59,13 +59,13 @@ export default function Home({ top, tvs, samsung, navigationMenus }) {
                         </div>
                     </div>
                     <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
-                            {samsung.categoryName.edges[0].node.name}
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
+                            {brands.categoryName.edges[0].node.name}
                         </a>
                     </div>
-                    <FeaturedCategory myArticles={samsung.posts.nodes} myCategory={'Samsung'} />
+                    <FeaturedCategory myArticles={brands.posts.nodes} myCategory={'Samsung'} />
                     <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px] mb-28'>
-                        <a href={kebabCase(`../category/${samsung.categoryName.edges[0].node.name}`)}>
+                        <a href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
                             View all
                         </a>
                     </div>
@@ -83,8 +83,8 @@ export default function Home({ top, tvs, samsung, navigationMenus }) {
 export async function getStaticProps({ preview = false}) {
     //TODO: Randomize these--or better yet, use some kind of promotion algorithm
     const top = await getPropsForCategory('featured', 24)
-    const tvs = await getPropsForCategory('tvs', 24)
-	const samsung = await getPropsForCategory('samsung', 24)
+    const hardware = await getPropsForCategory('tvs', 24)
+	const brands = await getPropsForCategory('samsung', 24)
 	let navigationSlugs = [
 		'brands',
 		'faq',
@@ -103,8 +103,8 @@ export async function getStaticProps({ preview = false}) {
 		props: {
 			preview,
 			top: top?.posts,
-			tvs: tvs,
-			samsung: samsung,
+			hardware: hardware,
+			brands: brands,
 			navigationMenus: navigationMenus
 		},
         revalidate: 1
