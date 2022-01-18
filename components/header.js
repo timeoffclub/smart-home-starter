@@ -62,13 +62,19 @@ export default function Header({ menu, slug }) {
                                 Subscribe
                             </div>
                             <div className='text-3xl font-semibold text-white ml-4 mt-2.5'>
-                                <FaFacebookSquare />
+                                <a href='http://facebook.com/smarthomestarter'>
+                                    <FaFacebookSquare />
+                                </a>
                             </div>
                             <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
-                                <FaInstagramSquare />
+                                <a href='https://www.instagram.com/smarthomestarter'>
+                                    <FaInstagramSquare />
+                                </a>
                             </div>
                             <div className='text-3xl font-semibold text-white ml-2 mt-2.5'>
-                                <FaTwitterSquare />
+                                <a href='https://twitter.com/smarthomestarte'>
+                                    <FaTwitterSquare />
+                                </a>
                             </div>
                         </div>
                     </div>
