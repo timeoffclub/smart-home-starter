@@ -5,7 +5,7 @@ import ErrorPage from 'next/error'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Newsletter from '../components/newsletter'
-import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getPostsByCategory } from '../lib/api'
+import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getRelatedPostByCategory } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
@@ -126,7 +126,6 @@ export default function Post({ post, related, navigationMenus }) {
                             <div className='hidden lg:inline col-span-1'>
                                 <div className='sidebar-ad w-full mb-14'>
                                 </div>
-                                {/* 
                                 <div className='text-3xl font-semibold mb-5'>
                                     Related Articles
                                 </div>
@@ -147,7 +146,6 @@ export default function Post({ post, related, navigationMenus }) {
                                         </div>
                                     </div>
                                 ))}
-                                */}
                                 <div className='border-y-2 border-y-gray-500 py-12 my-14'>
                                     <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
                                         Sign up for our newsletter
@@ -165,26 +163,6 @@ export default function Post({ post, related, navigationMenus }) {
     )
 }
 
-// In case we ever start tagging articles again.
-// async function getRelatedPosts(tags) {
-//     let arr = []
-
-//     tags.forEach((tag) => {
-//         arr.push(tag.node.slug)
-//     })
-
-
-//     let data = []
-//     let i = 0
-//     do {
-//         let res = await getPostsWithTag(arr[i])
-//         !data.some((el) => res.posts.nodes.some((node) => node.slug === el.slug)) && data.push(...res.posts.nodes)
-//         i++
-//     } while (i < arr.length)
-
-//     return data
-// }
-
 async function getRelatedPosts(categories) {
     let arr = []
     categories.forEach((el) => {
@@ -195,7 +173,7 @@ async function getRelatedPosts(categories) {
     let data = []
     let i = 0
     do {
-        let res = await getPostsByCategory(arr[i])
+        let res = await getRelatedPostByCategory(arr[i])
         !data.some((el) => res.posts.nodes.some((node) => node.slug === el.slug)) && data.push(...res.posts.nodes)
         i++
     } while (i < arr.length)
@@ -211,7 +189,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
         }
     }
     
-    // const related = await getRelatedPosts(data?.post?.categories?.edges)
+    const related = await getRelatedPosts(data?.post?.categories?.edges)
     
     let navigationSlugs = [
 		'brands',
@@ -231,7 +209,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
         props: {
             preview,
             post: data.post,
-            related: data,
+            related: related,
             posts: data.posts,
             navigationMenus: navigationMenus
         },
