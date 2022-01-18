@@ -146,7 +146,8 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 		</>
 	)
 }
-// We can revisit this
+
+// We will revisit this at a later time
 // async function getAllPosts(slug) {
 // 	let data = {
 // 			posts: {
@@ -162,11 +163,11 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 //         data.posts.nodes.push(...res.posts.nodes)
 //     } while (hasNextPage)
 //     return data.posts
-// }
+}
 
 export async function getStaticProps({ params, preview = false}) {
-	const data = await getPostsByCategory(params.slug, 100)
-	const posts = await getAllPosts(params.slug)
+	const data = await getPropsForCategory(params.slug, 24)
+	const posts = await getPostsByCategory(params.slug, 100)
 	const myFeaturedArticles = posts.nodes.filter((post) => post.categories.edges.some((cat) => cat.node.slug === 'featured'))
 
 	let navigationSlugs = [
