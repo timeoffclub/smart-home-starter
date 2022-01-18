@@ -148,6 +148,7 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 }
 
 async function getAllPosts(slug) {
+	console.log(slug)
 	let data = {
 			posts: {
 				nodes: []
@@ -220,7 +221,7 @@ async function getAllCategories() {
 
 // Generate all paths?
 // This has to be false to catch errors related to fallback
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []
