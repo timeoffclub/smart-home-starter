@@ -126,6 +126,7 @@ export default function Post({ post, related, navigationMenus }) {
                             <div className='hidden lg:inline col-span-1'>
                                 <div className='sidebar-ad w-full mb-14'>
                                 </div>
+                                {/* 
                                 <div className='text-3xl font-semibold mb-5'>
                                     Related Articles
                                 </div>
@@ -146,6 +147,7 @@ export default function Post({ post, related, navigationMenus }) {
                                         </div>
                                     </div>
                                 ))}
+                                */}
                                 <div className='border-y-2 border-y-gray-500 py-12 my-14'>
                                     <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
                                         Sign up for our newsletter
@@ -209,7 +211,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
         }
     }
     
-    const related = await getRelatedPosts(data?.post?.categories?.edges)
+    // const related = await getRelatedPosts(data?.post?.categories?.edges)
     
     let navigationSlugs = [
 		'brands',
@@ -229,7 +231,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
         props: {
             preview,
             post: data.post,
-            related: related,
+            related: data,
             posts: data.posts,
             navigationMenus: navigationMenus
         },
@@ -252,7 +254,7 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = false
+const allPaths = true
 
 export async function getStaticPaths() {
     let data = []
