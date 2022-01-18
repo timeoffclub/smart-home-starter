@@ -1,6 +1,6 @@
 import { getPostsWithSlug, getCategories } from "../../lib/api"
 
-const EXTERNAL_DATA_URL = 'https://smarthomestarter.com'
+const EXTERNAL_DATA_URL = 'https://staging.smarthomestarter.com'
 
 function generateSiteMap(posts, categories) {
   return `<?xml version="1.0" encoding="UTF-8"?>

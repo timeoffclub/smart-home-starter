@@ -1,4 +1,7 @@
 User-agent: *
+Disallow: /
+
+User-agent: SEO-PowerSuite-bot
 Allow: /
 
-Sitemap: https://smarthomestarter.com/sitemap.xml
+Sitemap: https://staging.smarthomestarter.com/sitemap.xml
