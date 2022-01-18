@@ -146,26 +146,26 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 		</>
 	)
 }
-
-async function getAllPosts(slug) {
-	let data = {
-			posts: {
-				nodes: []
-		}
-	}
-    let endCursor = null
-    let hasNextPage = true
-    do {
-        let res = await getPostsByCategory(slug, 100, endCursor || null)
-        endCursor = await res?.posts?.pageInfo.endCursor
-        hasNextPage = await res?.posts?.pageInfo.hasNextPage
-        data.posts.nodes.push(...res.posts.nodes)
-    } while (hasNextPage)
-    return data.posts
-}
+// We can revisit this
+// async function getAllPosts(slug) {
+// 	let data = {
+// 			posts: {
+// 				nodes: []
+// 		}
+// 	}
+//     let endCursor = null
+//     let hasNextPage = true
+//     do {
+//         let res = await getPostsByCategory(slug, 100, endCursor || null)
+//         endCursor = await res?.posts?.pageInfo.endCursor
+//         hasNextPage = await res?.posts?.pageInfo.hasNextPage
+//         data.posts.nodes.push(...res.posts.nodes)
+//     } while (hasNextPage)
+//     return data.posts
+// }
 
 export async function getStaticProps({ params, preview = false}) {
-	const data = await getPropsForCategory(params.slug, 24)
+	const data = await getPostsByCategory(params.slug, 100)
 	const posts = await getAllPosts(params.slug)
 	const myFeaturedArticles = posts.nodes.filter((post) => post.categories.edges.some((cat) => cat.node.slug === 'featured'))
 
