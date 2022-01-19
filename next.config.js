@@ -8,7 +8,7 @@ module.exports = {
         return [
             {
                 source: '/ads.txt',
-                destination: 'ads.adthrive.com/sites/6164a6ff014ece4bc4e34c23/ads.txt',
+                destination: 'https://ads.adthrive.com/sites/6164a6ff014ece4bc4e34c23/ads.txt',
                 statusCode: 301,
             }
         ]
