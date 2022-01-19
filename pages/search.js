@@ -3,8 +3,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { getSearchResults, getMenuBySlug } from '../lib/api'
-import Header from '../components/header'
-import Footer from '../components/footer'
 import SearchForm from '../components/search-form'
 import ScaleLoader from "react-spinners/ScaleLoader"
 import { isEmpty } from '../lib/utils'
@@ -98,7 +96,6 @@ export default function Search({ data, navigationMenus, slug }) {
                     key='desc'
                 />
             </Head>
-            <Header menu={navigationMenus} slug={slug} />
             <div className='flex justify-center px-5 sm:px-0 md:px-6 xl:px-0  my-12'>
                 <SearchForm
                     searchQuery={ searchQuery }
@@ -166,30 +163,15 @@ export default function Search({ data, navigationMenus, slug }) {
                     </div>
                 </>
             }
-            <Footer myMenu={navigationMenus}/>
         </>
     )
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-    let navigationSlugs = [
-		'brands',
-		'faq',
-		'entertainment',
-		'in-the-home'
-	]
-	let navigationMenus = []
-	let i = 0
-	do {
-		let res = await getMenuBySlug(navigationSlugs[i])
-		navigationMenus.push(...res?.menus?.nodes)
-		i++
-	} while (i < navigationSlugs.length)
     
     return {
         props: {
             preview,
-            navigationMenus: navigationMenus,
             slug: 'search'
         }
     }

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug } from '../../lib/api'
-import Header from '../../components/header'
 import Head from 'next/head'
 import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
@@ -12,7 +11,7 @@ import ErrorPage from 'next/error'
 
 const ArticleGrid = dynamic(() => import('../../components/article-grid'))
 
-export default function Categories({ posts, featured, category, filterMenu, navigationMenus }) {
+export default function Categories({ posts, featured, category, filterMenu }) {
 
 	const [filteredPosts, setFilteredPosts] = useState(false)
 	const [allLoaded, setAllLoaded] = useState(false)
@@ -90,7 +89,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 						content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 						/>
 					</Head>
-					<Header menu={navigationMenus}/>
 					<main className='adthrive-body'>
 						<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
 							<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
@@ -140,7 +138,6 @@ export default function Categories({ posts, featured, category, filterMenu, navi
 							</>
 						}
 					</main>
-					<Footer myMenu={navigationMenus} />
 				</>
 			)}
 		</>
@@ -169,20 +166,6 @@ export async function getStaticProps({ params, preview = false}) {
 	const posts = await getAllPosts(params.slug)
 	const myFeaturedArticles = posts.nodes.filter((post) => post.categories.edges.some((cat) => cat.node.slug === 'featured'))
 
-	let navigationSlugs = [
-		'brands',
-		'faq',
-		'entertainment',
-		'in-the-home'
-	]
-	let navigationMenus = []
-	let i = 0
-	do {
-		let res = await getMenuBySlug(navigationSlugs[i])
-		navigationMenus.push(...res?.menus?.nodes)
-		i++
-	} while (i < navigationSlugs.length)
-
 	// Let's make sure this category exists. If not, 404
 	if (!data.categoryName.edges[0]) {
 		return {
@@ -198,7 +181,6 @@ export async function getStaticProps({ params, preview = false}) {
 			category: data?.categoryName,
 			// A little data massaging to match shape of filterTabs and catch categories without specified menus
 			filterMenu: data?.filterMenu?.nodes[0]?.menuItems.nodes || null,
-			navigationMenus: navigationMenus
 		},
         revalidate: 1
 	}

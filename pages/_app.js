@@ -5,10 +5,15 @@ import '@fontsource/source-sans-pro/400.css'
 import '@fontsource/source-sans-pro/600.css'
 import '@fontsource/source-sans-pro/700.css'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
+
+import Header from '../components/header'
+import Footer from '../components/footer'
+
+import { getMenuBySlug } from '../lib/api'
 
 // export function reportWebVitals({ id, name, label, value }) {
 //     console.log(name, value, id)
@@ -25,18 +30,46 @@ import * as gtag from '../lib/gtag'
 //     }
 // }
 
-
 function MyApp({ Component, pageProps }) {
+
     const router = useRouter()
+
+
+    const [ nav, setNav ] = useState(null)
+
     useEffect(() => {
+
+        fetchMenus()
+
         const handleRouteChange = (url) => {
             gtag.pageview(url)
         }
+
         router.events.on('routeChangeComplete', handleRouteChange)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
+        
     }, [router.events])
+
+    async function fetchMenus() {
+        
+        let navigationSlugs = [
+            'brands',
+            'faq',
+            'entertainment',
+            'in-the-home'
+        ]
+        let navigationMenus = []
+        let i = 0
+        do {
+            let res = await getMenuBySlug(navigationSlugs[i])
+            navigationMenus.push(...res?.menus?.nodes)
+            i++
+        } while (i < navigationSlugs.length)
+        
+        setNav(navigationMenus)
+    }
 
     return (
         <>
@@ -80,7 +113,20 @@ function MyApp({ Component, pageProps }) {
                 `,
                 }}
             />
+            {!nav ? 
+                <div>
+                    <div className='h-12 bg-neutral-900'></div>
+                    <div className='h-20 bg-black'></div>
+                </div>
+                :
+                <Header menu={nav}/>
+            }
             <Component {...pageProps} />
+            {!nav ? 
+                <div className='h-[740px] bg-black'></div>
+                :
+                <Footer myMenu={nav}/>
+            }
         </>
     )
 }

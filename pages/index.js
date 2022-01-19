@@ -3,14 +3,12 @@ import useInView from 'react-cool-inview'
 import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
 import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
-import Header from '../components/header'
 import HomeFeatured from '../components/home-featured'
 
 const FeaturedCategory = dynamic(() => import('../components/featured-category'))
 const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
-const Footer = dynamic(() => import('../components/footer'))
 
-export default function Home({ top, hardware, brands, navigationMenus }) {
+export default function Home({ top, hardware, brands }) {
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
@@ -25,7 +23,6 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />
             </Head>
-            <Header menu={navigationMenus}/>
             <main className='adthrive-body'>
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
@@ -75,7 +72,6 @@ export default function Home({ top, hardware, brands, navigationMenus }) {
                     </div>
                 </div>
             </main>
-            <Footer myMenu={navigationMenus} />
         </>
     )
 }
@@ -85,19 +81,6 @@ export async function getStaticProps({ preview = false}) {
     const top = await getPropsForCategory('featured', 24)
     const hardware = await getPropsForCategory('tvs', 24)
 	const brands = await getPropsForCategory('samsung', 24)
-	let navigationSlugs = [
-		'brands',
-		'faq',
-		'entertainment',
-		'in-the-home'
-	]
-	let navigationMenus = []
-	let i = 0
-	do {
-		let res = await getMenuBySlug(navigationSlugs[i])
-		navigationMenus.push(...res?.menus?.nodes)
-		i++
-	} while (i < navigationSlugs.length)
 
 	return {
 		props: {
@@ -105,7 +88,6 @@ export async function getStaticProps({ preview = false}) {
 			top: top?.posts,
 			hardware: hardware,
 			brands: brands,
-			navigationMenus: navigationMenus
 		},
         revalidate: 1
 	}

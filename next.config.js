@@ -10,6 +10,7 @@ module.exports = {
                 source: '/ads.txt',
                 destination: 'https://ads.adthrive.com/sites/6164a6ff014ece4bc4e34c23/ads.txt',
                 statusCode: 301,
+                basePath: false
             }
         ]
     }
