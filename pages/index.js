@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import useInView from 'react-cool-inview'
 import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
-import { getPropsForCategory, getMenuBySlug  } from '../lib/api'
+import { getPropsForCategory  } from '../lib/api'
 import HomeFeatured from '../components/home-featured'
 
 const FeaturedCategory = dynamic(() => import('../components/featured-category'))

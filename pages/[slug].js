@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Newsletter from '../components/newsletter'
-import { getPostsWithSlug, getPostAndMorePosts, getMenuBySlug, getRelatedPostByCategory } from '../lib/api'
+import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
@@ -100,8 +100,8 @@ export default function Post({ post, related, navigationMenus }) {
                                         src={post.featuredImage.node.sourceUrl}
                                         alt={post.featuredImage.node.altText}
                                         objectFit='cover'
-                                        height={384}
-                                        width={633}
+                                        layout='fill'
+                                        sizes='50vw'
                                         priority
                                     />
                                 </div>
@@ -218,7 +218,7 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []

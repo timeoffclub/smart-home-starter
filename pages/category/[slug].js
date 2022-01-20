@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { getPropsForCategory, getCategories, getPostsByCategory, getMenuBySlug } from '../../lib/api'
+import { getPropsForCategory, getCategories, getPostsByCategory } from '../../lib/api'
 import Head from 'next/head'
-import Footer from '../../components/footer'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleFilterBar from '../../components/article-filter-bar'
 import useInView from 'react-cool-inview'
@@ -202,7 +201,7 @@ async function getAllCategories() {
 
 // Generate all paths?
 // This has to be false to catch errors related to fallback
-const allPaths = true
+const allPaths = false
 
 export async function getStaticPaths() {
     let data = []

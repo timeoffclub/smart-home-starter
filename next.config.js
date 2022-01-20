@@ -1,5 +1,6 @@
+const { withSentryConfig } = require('@sentry/nextjs')
 
-module.exports = {
+const moduleExports = {
     reactStrictMode: true,
     images: {
         domains: ['localhost', 'shsprods.wpengine.com', 'i0.wp.com'],
@@ -13,13 +14,28 @@ module.exports = {
                 basePath: false
             }
         ]
+    },
+    webpack: (config, options) => {
+        // Generate disallow all robots.txt and add to /public folder in preview
+        if (options.isServer && process.env.VERCEL_ENV === 'preview') {
+          require('./scripts/generate-robotstxt-preview.js');
+        }
+        return config
     }
 }
 
+const sentryWebpackPluginOptions = {
+    // Additional config options for the Sentry Webpack plugin. Keep in mind that
+    // the following options are set automatically, and overriding them is not
+    // recommended:
+    //   release, url, org, project, authToken, configFile, stripPrefix,
+    //   urlPrefix, include, ignore
+    
+    silent: true, // Suppresses all logs
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options.
+};
 
-webpack: (config, options) => {
-    // Generate disallow all robots.txt and add to /public folder in preview
-    if (options.isServer && process.env.VERCEL_ENV === 'preview') {
-      require('./scripts/generate-robotstxt-preview.js');
-    }
-}
+// Make sure adding Sentry options is the last code to run before exporting, to
+// ensure that your source maps include changes from all other Webpack plugins
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

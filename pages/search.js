@@ -2,7 +2,7 @@ import Router from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { getSearchResults, getMenuBySlug } from '../lib/api'
+import { getSearchResults } from '../lib/api'
 import SearchForm from '../components/search-form'
 import ScaleLoader from "react-spinners/ScaleLoader"
 import { isEmpty } from '../lib/utils'
