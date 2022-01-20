@@ -115,7 +115,7 @@ function MyApp({ Component, pageProps }) {
             />
             {!nav ? 
                 <div>
-                    <div className='h-12 bg-neutral-900'></div>
+                    <div className='hidden lg:block h-12 bg-neutral-900'></div>
                     <div className='h-20 bg-black'></div>
                 </div>
                 :
