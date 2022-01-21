@@ -29,7 +29,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             <div className='absolute top-0 bottom-0 w-full h-full bg-opacity-60 bg-black'>
                             </div>
                             <div className='absolute left-0 bottom-0 group:w-full pb-5 px-5'>
-                                <a href={`../${featuredArticle.slug}`}>
+                                <a href={`/${featuredArticle.slug}`}>
                                     <div className='text-3xl text-white font-semibold pb-2 tracking-wider'>
                                         {featuredArticle.title}
                                     </div>
