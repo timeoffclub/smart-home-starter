@@ -130,7 +130,7 @@ export default function Post({ post, related, navigationMenus }) {
                                 related.filter((el) => el.title !== post.title).slice(0,2).map((el) => (
                                     <div className='mb-8' key={el.id}>
                                         <div className='text-xl mb-1'>
-                                            <a href={el.slug}>
+                                            <a href={`/${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>

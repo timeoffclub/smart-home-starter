@@ -41,7 +41,7 @@ export default function Home({ top, hardware, brands }) {
                 </div>
                 <div className='container mt-14'>
                     <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${hardware.categoryName.edges[0].node.name}`)}>
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={`../category/${kebabCase(hardware.categoryName.edges[0].node.name)}`}>
                             {hardware.categoryName.edges[0].node.name}
                         </a>
                     </div>
@@ -56,7 +56,7 @@ export default function Home({ top, hardware, brands }) {
                         </div>
                     </div>
                     <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
-                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={kebabCase(`../category/${brands.categoryName.edges[0].node.name}`)}>
+                        <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={`../category/${kebabCase(brands.categoryName.edges[0].node.name)}`}>
                             {brands.categoryName.edges[0].node.name}
                         </a>
                     </div>

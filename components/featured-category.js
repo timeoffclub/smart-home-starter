@@ -45,7 +45,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             {myArticles.slice(1,4).map((el, index) => (
                                 <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                     {el.featuredImage &&
-                                        <a href={`../${el.slug}`} className='relative shrink-0'>
+                                        <a href={`/${el.slug}`} className='relative shrink-0'>
                                             <Image 
                                                 className='transition-all ease-in duration-500'
                                                 src={el.featuredImage.node.sourceUrl}
@@ -58,7 +58,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     }
                                     <div className='ml-2'>
                                         <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                            <a href={`../${el.slug}`}>
+                                            <a href={`/${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>
@@ -78,7 +78,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         {myArticles.slice(5,14).map((el) => (
                             <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-semibold mb-2'>
                                 <div className='mb-2  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                    <a href={`../${el.slug}`}>
+                                    <a href={`/${el.slug}`}>
                                         {el.title}
                                     </a>
                                 </div>
@@ -98,7 +98,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         {myArticles.slice(5,14).map((el, index) => (
                             <div key={el.id} className='flex items-center mb-3 lg:mb-0'>
                                 {el.featuredImage &&
-                                    <a href={`../${el.slug}`} className='relative shrink-0 h-24 w-24'>
+                                    <a href={`/${el.slug}`} className='relative shrink-0 h-24 w-24'>
                                         <Image 
                                             className='transition-all ease-in duration-500'
                                             src={el.featuredImage.node.sourceUrl}
@@ -113,7 +113,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 }
                                 <div className='ml-2'>
                                     <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                        <a href={`../${el.slug}`}>
+                                        <a href={`/${el.slug}`}>
                                             {el.title}
                                         </a>
                                     </div>
@@ -139,7 +139,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             {myArticles.slice(14,16).map((el, index) => (
                                 <div key={el.id} className='inline-flex items-center mb-5'>
                                     {el.featuredImage &&
-                                        <a href={`../${el.slug}`} className='relative w-24 h-24 shrink-0'>
+                                        <a href={`/${el.slug}`} className='relative w-24 h-24 shrink-0'>
                                             <Image 
                                                 className='transition-all ease-in duration-500'
                                                 src={el.featuredImage.node.sourceUrl}
@@ -154,7 +154,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     }
                                     <div className='ml-2'>
                                         <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                            <a href={`../${el.slug}`}>
+                                            <a href={`/${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>
@@ -173,7 +173,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             {myArticles.slice(18,20).map((el) => (
                                 <div key={el.id} className='col-span-2  sm:col-span-1 inline-flex flex-wrap sm:w-72 md:w-full mb-5'>
                                     {el.featuredImage &&
-                                        <a href={`../${el.slug}`} className='relative w-full h-48 mb-3'>
+                                        <a href={`/${el.slug}`} className='relative w-full h-48 mb-3'>
                                             <Image 
                                                 src={el.featuredImage.node.sourceUrl}
                                                 alt={el.featuredImage.node.altText}
@@ -186,7 +186,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     }
                                     <div className='border-l-4 border-l-smart-blue/0'>
                                         <div className='text-lg font-semibold mb-3 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                            <a href={`../${el.slug}`}>
+                                            <a href={`/${el.slug}`}>
                                                 {el.title}
                                             </a>
                                         </div>
@@ -204,7 +204,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                         {myArticles.slice(17,19).map((el) => (
                             <div key={el.id} className='hidden lg:inline-flex flex-wrap sm:w-72 lg:w-full mb-5'>
                                 {el.featuredImage &&
-                                    <a href={`../${el.slug}`} className='relative w-full h-56 mb-3 '>
+                                    <a href={`/${el.slug}`} className='relative w-full h-56 mb-3 '>
                                         <Image 
                                             src={el.featuredImage.node.sourceUrl}
                                             alt={el.featuredImage.node.altText}
@@ -217,7 +217,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 }
                                 <div className='border-l-4 border-l-smart-blue/0'>
                                     <div className='text-lg mb-3 font-semibold hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
-                                        <a href={`../${el.slug}`}>
+                                        <a href={`/${el.slug}`}>
                                             {el.title}
                                         </a>
                                     </div>
