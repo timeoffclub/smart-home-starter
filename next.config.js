@@ -2,6 +2,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 
 const moduleExports = {
     reactStrictMode: true,
+    trailingSlash: true,
     images: {
         domains: ['localhost', 'shsprods.wpengine.com', 'i0.wp.com'],
     },
