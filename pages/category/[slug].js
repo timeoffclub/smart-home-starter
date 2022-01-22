@@ -25,10 +25,6 @@ export default function Categories({ posts, featured, category, filterMenu, nav}
 
     const router = useRouter()
 
-	if (!router.isFallback && !category) {
-        return <ErrorPage statusCode={404} />
-    }
-
 	const categories = []
 
 	let featuredArticle
@@ -214,7 +210,7 @@ async function getAllCategories() {
 
 // Generate all paths?
 // This has to be false to catch errors related to fallback
-const allPaths = false
+const allPaths = true
 
 export async function getStaticPaths() {
     let data = []

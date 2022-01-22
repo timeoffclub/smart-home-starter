@@ -29,10 +29,6 @@ export default function Post({ post, related, nav }) {
           })
     }
 
-    if (!router.isFallback && !post?.slug) {
-        return <ErrorPage statusCode={404} />
-    }
-
     return (
         <div>
             {router.isFallback ? (
