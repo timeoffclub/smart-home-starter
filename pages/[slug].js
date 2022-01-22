@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
 import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory, getNavigation } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
