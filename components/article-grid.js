@@ -9,7 +9,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                     {myArticles.map((el, index) => (
                         <div className='h-80' key={el.id}>
                             {el.featuredImage &&
-                                <a href={`../${el.slug}`}>
+                                <a href={`/${el.slug}`}>
                                     <div className='relative h-44 mb-3'>
                                         <Image 
                                             className='transition-all ease-in duration-500'
