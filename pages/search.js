@@ -136,7 +136,7 @@ export default function Search({ data, navigationMenus, slug }) {
                                         }
                                         <div>
                                             <div className='text-lg mb-3 font-semibold'>
-                                                <a href={`../${el.node.slug}`}>
+                                                <a href={`/${el.node.slug}`}>
                                                     {el.node.title}
                                                 </a>
                                             </div>
@@ -145,7 +145,7 @@ export default function Search({ data, navigationMenus, slug }) {
                                                     <span key={cat.node.id}>
                                                         <a
                                                             className='text-base font-semibold text-smart-blue hover:text-smart-teal uppercase tracking-wider'
-                                                            href={`../category/${cat.node.slug}`}>{cat.node.name}
+                                                            href={`/category/${cat.node.slug}`}>{cat.node.name}
                                                         </a> 
                                                         {index < (el.node.categories.edges.length - 1) ? 
                                                             <span> | </span> 

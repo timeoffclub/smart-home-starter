@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Router from 'next/router'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
@@ -16,6 +17,7 @@ const SearchForm = dynamic(() => import('./search-form'))
 const NewsletterModal = dynamic(() => import('./newsletter-modal'))
 
 export default function Header({ menu, slug }) {
+    console.log(Router.pathname)
 
     const [modalOpen, setModalOpen] = useState(false)
     const [megaMenu, setMegaMenu] = useState(null)
@@ -187,7 +189,7 @@ export default function Header({ menu, slug }) {
                     <div className='absolute hidden w-full lg:block bg-black z-40 py-5' onMouseLeave={() => {setMegaMenu(null), setActiveLabel(null)}}>
                         <div className='container grid grid-cols-4'>
                             {megaMenu.map((el) => (
-                                <a onClick={() => {setMegaMenu(null)}} href={`../category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
+                                <a onClick={() => {setMegaMenu(null)}} href={`/category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
                                     <div className='justify-self-center cursor-pointer h-10'>
                                         {el.label}
                                     </div>

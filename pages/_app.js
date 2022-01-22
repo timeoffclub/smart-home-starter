@@ -39,18 +39,19 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
 
-        fetchMenus()
-
         const handleRouteChange = (url) => {
             gtag.pageview(url)
         }
+
+        fetchMenus()
 
         router.events.on('routeChangeComplete', handleRouteChange)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
         
-    }, [router.events])
+    }, [router.events, nav])
+    
 
     async function fetchMenus() {
         
