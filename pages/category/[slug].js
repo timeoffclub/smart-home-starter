@@ -25,10 +25,6 @@ export default function Categories({ posts, featured, category, filterMenu, nav}
 
     const router = useRouter()
 
-	if (!router.isFallback && !category) {
-        return <ErrorPage statusCode={404} />
-    }
-
 	const categories = []
 
 	let featuredArticle
