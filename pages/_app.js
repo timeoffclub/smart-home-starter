@@ -10,11 +10,6 @@ import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
-
-import { getMenuBySlug } from '../lib/api'
-
 // export function reportWebVitals({ id, name, label, value }) {
 //     console.log(name, value, id)
 //     // Use `window.gtag` if you initialized Google Analytics as this example:
@@ -34,43 +29,18 @@ function MyApp({ Component, pageProps }) {
 
     const router = useRouter()
 
-
-    const [ nav, setNav ] = useState(null)
-
     useEffect(() => {
 
         const handleRouteChange = (url) => {
             gtag.pageview(url)
         }
 
-        fetchMenus()
-
         router.events.on('routeChangeComplete', handleRouteChange)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
         
-    }, [router.events, nav])
-    
-
-    async function fetchMenus() {
-        
-        let navigationSlugs = [
-            'brands',
-            'faq',
-            'entertainment',
-            'in-the-home'
-        ]
-        let navigationMenus = []
-        let i = 0
-        do {
-            let res = await getMenuBySlug(navigationSlugs[i])
-            navigationMenus.push(...res?.menus?.nodes)
-            i++
-        } while (i < navigationSlugs.length)
-        
-        setNav(navigationMenus)
-    }
+    }, [router.events])
 
     return (
         <>
@@ -114,20 +84,7 @@ function MyApp({ Component, pageProps }) {
                 `,
                 }}
             />
-            {!nav ? 
-                <div>
-                    <div className='hidden lg:block h-12 bg-neutral-900'></div>
-                    <div className='h-20 bg-black'></div>
-                </div>
-                :
-                <Header menu={nav}/>
-            }
             <Component {...pageProps} />
-            {!nav ? 
-                <div className='h-[740px] bg-black'></div>
-                :
-                <Footer myMenu={nav}/>
-            }
         </>
     )
 }

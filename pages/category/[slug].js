@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getPropsForCategory, getCategories, getPostsByCategory } from '../../lib/api'
+import { getPropsForCategory, getCategories, getPostsByCategory, getNavigation } from '../../lib/api'
 import Head from 'next/head'
 import FeaturedCategory from '../../components/featured-category'
 import ArticleFilterBar from '../../components/article-filter-bar'
@@ -8,9 +8,12 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 
+import Header from '../../components/header'
+import Footer from '../../components/footer'
+
 const ArticleGrid = dynamic(() => import('../../components/article-grid'))
 
-export default function Categories({ posts, featured, category, filterMenu }) {
+export default function Categories({ posts, featured, category, filterMenu, nav}) {
 
 	const [filteredPosts, setFilteredPosts] = useState(false)
 	const [allLoaded, setAllLoaded] = useState(false)
@@ -88,6 +91,7 @@ export default function Categories({ posts, featured, category, filterMenu }) {
 						content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 						/>
 					</Head>
+					<Header menu={nav}/>
 					<main className='adthrive-body'>
 						<div className='container px-5 sm:px-0 md:px-6 xl:px-0 grid grid-cols-4 gap-5 my-12'>
 							<div className='flex col-span-4 lg:col-span-2 items-center flex-wrap'>
@@ -137,6 +141,7 @@ export default function Categories({ posts, featured, category, filterMenu }) {
 							</>
 						}
 					</main>
+					<Footer myMenu={nav}/>
 				</>
 			)}
 		</>
@@ -164,6 +169,13 @@ export async function getStaticProps({ params, preview = false}) {
 	const data = await getPropsForCategory(params.slug, 24)
 	const posts = await getAllPosts(params.slug)
 	const myFeaturedArticles = posts.nodes.filter((post) => post.categories.edges.some((cat) => cat.node.slug === 'featured'))
+	const nav = await getNavigation()
+
+    let navigationObject = []
+    navigationObject.push(...nav.menus.nodes[0].menuItems.nodes.filter((el) => el.parentId === null))
+    navigationObject.map((el) => {
+        el.menuItems = [...nav.menus.nodes[0].menuItems.nodes.filter((node) => node.parentId === el.id)]
+    })
 
 	// Let's make sure this category exists. If not, 404
 	if (!data.categoryName.edges[0]) {
@@ -180,6 +192,7 @@ export async function getStaticProps({ params, preview = false}) {
 			category: data?.categoryName,
 			// A little data massaging to match shape of filterTabs and catch categories without specified menus
 			filterMenu: data?.filterMenu?.nodes[0]?.menuItems.nodes || null,
+			nav: navigationObject
 		},
         revalidate: 1
 	}
@@ -201,7 +214,7 @@ async function getAllCategories() {
 
 // Generate all paths?
 // This has to be false to catch errors related to fallback
-const allPaths = false
+const allPaths = true
 
 export async function getStaticPaths() {
     let data = []

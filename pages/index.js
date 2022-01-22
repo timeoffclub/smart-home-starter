@@ -2,13 +2,21 @@ import dynamic from 'next/dynamic'
 import useInView from 'react-cool-inview'
 import Head from 'next/head'
 import { kebabCase } from '../lib/utils'
-import { getPropsForCategory  } from '../lib/api'
+import { getPropsForCategory, getNavigation  } from '../lib/api'
 import HomeFeatured from '../components/home-featured'
+import Header from '../components/header'
+import Footer from '../components/footer'
 
 const FeaturedCategory = dynamic(() => import('../components/featured-category'))
 const NewsLetterPageCTA = dynamic(() => import('../components/newsletter-page-cta'))
 
-export default function Home({ top, hardware, brands }) {
+export default function Home({ top, hardware, brands, nav }) {
+    let navigationObject = []
+    navigationObject.push(...nav.menus.nodes[0].menuItems.nodes.filter((el) => el.parentId === null))
+    navigationObject.map((el) => {
+        el.menuItems = [...nav.menus.nodes[0].menuItems.nodes.filter((node) => node.parentId === el.id)]
+    })
+
 
     const { observe, inView } = useInView({
         // Stop observe when the target enters the viewport, so the "inView" only triggered once
@@ -23,6 +31,7 @@ export default function Home({ top, hardware, brands }) {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />
             </Head>
+            <Header menu={navigationObject}/>
             <main className='adthrive-body'>
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>
@@ -72,6 +81,7 @@ export default function Home({ top, hardware, brands }) {
                     </div>
                 </div>
             </main>
+            <Footer myMenu={navigationObject}/>
         </>
     )
 }
@@ -81,6 +91,7 @@ export async function getStaticProps({ preview = false}) {
     const top = await getPropsForCategory('featured', 24)
     const hardware = await getPropsForCategory('tvs', 24)
 	const brands = await getPropsForCategory('samsung', 24)
+	const nav = await getNavigation()
 
 	return {
 		props: {
@@ -88,6 +99,7 @@ export async function getStaticProps({ preview = false}) {
 			top: top?.posts,
 			hardware: hardware,
 			brands: brands,
+            nav: nav
 		},
         revalidate: 1
 	}

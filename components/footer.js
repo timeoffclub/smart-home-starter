@@ -41,8 +41,8 @@ export default function Header({ myMenu }) {
                         <div className='flex justify-between'>
                             {myMenu.slice(0,2).map((el) => (
                                 <div className='text-smart-blue text-2xl font-semibold tracking-wider' key={el.id}>
-                                    {el.name}
-                                    {el.menuItems.nodes.map((e) => (
+                                    {el.label}
+                                    {el.menuItems.map((e) => (
                                         <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
                                             <div className='text-white text-lg font-semibold tracking-wider mt-2'>
                                                     {e.label}
@@ -58,9 +58,9 @@ export default function Header({ myMenu }) {
                             {myMenu.slice(2,4).map((el) => (
                                 <div className='text-smart-blue text-2xl font-semibold tracking-wider mb-10 xl:mb-0' key={el.id}>
                                     <div className=''>
-                                        {el.name}
+                                        {el.label}
                                     </div>
-                                    {el.menuItems.nodes.map((e) => (
+                                    {el.menuItems.map((e) => (
                                         <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
                                             <div className='text-white text-lg font-semibold tracking-wider mt-2'>
                                                     {e.label}
@@ -76,9 +76,9 @@ export default function Header({ myMenu }) {
                             {myMenu.map((el) => (
                                 <div className='text-smart-blue text-2xl font-semibold tracking-wider mb-5' key={el.id}>
                                     <div className=''>
-                                        {el.name}
+                                        {el.label}
                                     </div>
-                                    {el.menuItems.nodes.map((e) => (
+                                    {el.menuItems.map((e) => (
                                         <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
                                             <div className='text-white text-lg font-semibold tracking-wider mt-2'>
                                                     {e.label}

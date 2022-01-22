@@ -3,13 +3,17 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Newsletter from '../components/newsletter'
-import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory } from '../lib/api'
+import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory, getNavigation } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 
-export default function Post({ post, related, navigationMenus }) {
+import Header from '../components/header'
+import Footer from '../components/footer'
+
+export default function Post({ post, related, nav }) {
+
     const router = useRouter()
 
     const formatExcerpt = (str) => {
@@ -60,6 +64,7 @@ export default function Post({ post, related, navigationMenus }) {
                             />
                         }
                     </Head>
+                    <Header menu={nav}/>
                     <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
                         <div className='col-span-3 lg:col-span-2'>
                             <div className='text-base text-gray-500 font-extralight'>
@@ -158,6 +163,7 @@ export default function Post({ post, related, navigationMenus }) {
                             </div>
                         </div>
                     </div>
+                    <Footer myMenu={nav}/>
                 </>
             )}
         </div>
@@ -183,6 +189,13 @@ async function getRelatedPosts(categories) {
             
 export async function getStaticProps({ params, preview = false, previewData }) {
     const data = await getPostAndMorePosts(params.slug, preview, previewData)
+    const nav = await getNavigation()
+
+    let navigationObject = []
+    navigationObject.push(...nav.menus.nodes[0].menuItems.nodes.filter((el) => el.parentId === null))
+    navigationObject.map((el) => {
+        el.menuItems = [...nav.menus.nodes[0].menuItems.nodes.filter((node) => node.parentId === el.id)]
+    })
 
     if (!data.post) {
         return {
@@ -198,6 +211,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
             post: data.post,
             related: related,
             posts: data.posts,
+            nav: navigationObject
         },
         revalidate: 1
     }
@@ -218,7 +232,7 @@ async function getAllPostsWithSlug() {
 }
 
 // Generate all paths?
-const allPaths = false
+const allPaths = true
 
 export async function getStaticPaths() {
     let data = []

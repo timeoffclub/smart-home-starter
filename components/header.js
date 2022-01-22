@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Router from 'next/router'
-import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
@@ -17,7 +16,6 @@ const SearchForm = dynamic(() => import('./search-form'))
 const NewsletterModal = dynamic(() => import('./newsletter-modal'))
 
 export default function Header({ menu, slug }) {
-    console.log(Router.pathname)
 
     const [modalOpen, setModalOpen] = useState(false)
     const [megaMenu, setMegaMenu] = useState(null)
@@ -126,12 +124,12 @@ export default function Header({ menu, slug }) {
                             <div className='hidden lg:flex items-center h-[80px]'>
                                 {menu.map((el) => (
                                     <div
-                                        className={activeLabel === el.name ? `border-b-white inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500`}
-                                        onMouseEnter={() => {setMegaMenu(el.menuItems.nodes), setActiveLabel(el.name)}}
+                                        className={activeLabel === el.label ? `border-b-white inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500` :  `border-b-black hidden lg:inline-flex text-lg font-semibold text-smart-blue tracking-wider cursor-pointer h-full ml-4 border-b-2 transition ease-in-out duration-500`}
+                                        onMouseEnter={() => {setMegaMenu(el.menuItems), setActiveLabel(el.label)}}
                                         key={el.id}
                                     >
                                         <div className='h-9 self-end'>
-                                            {el.name}
+                                            {el.label}
                                         </div>
                                     </div>
                                 ))}
@@ -158,7 +156,6 @@ export default function Header({ menu, slug }) {
                 {/* Main search input - appears when searchInput === true */}
                 {searchInput &&
                     <div
-                        
                         className={searchInput ? 'hidden lg:flex z-50 absolute top-30 right-12 bg-neutral-900 h-20 p-5 items-center' : 'hidden'}
                     >
                         <SearchForm
@@ -190,7 +187,7 @@ export default function Header({ menu, slug }) {
                         <div className='container grid grid-cols-4'>
                             {megaMenu.map((el) => (
                                 <a onClick={() => {setMegaMenu(null)}} href={`/category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
-                                    <div className='justify-self-center cursor-pointer h-10'>
+                                    <div className='text-center cursor-pointer h-10'>
                                         {el.label}
                                     </div>
                                 </a>

@@ -2,18 +2,27 @@ import Router from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { getSearchResults } from '../lib/api'
+import { getSearchResults, getNavigation } from '../lib/api'
 import SearchForm from '../components/search-form'
 import ScaleLoader from "react-spinners/ScaleLoader"
 import { isEmpty } from '../lib/utils'
 
-export default function Search({ data, navigationMenus, slug }) {
+import Header from '../components/header'
+import Footer from '../components/footer'
+
+export default function Search({ data, nav, slug }) {
     const searchQueryString = process.browser ? ( Router?.query?.s ?? '' ) : ''
     const [ searchQuery, setSearchQuery ] = useState( searchQueryString )
     const [ searchError, setSearchError ] = useState( '' )
     const [ queryResultPosts, setQueryResultPosts  ] = useState( {} )
     const [ showResultInfo, setShowResultInfo ] = useState( false )
 	const [ loading, setLoading ] = useState(false)
+
+    let navigationObject = []
+    navigationObject.push(...nav.menus.nodes[0].menuItems.nodes.filter((el) => el.parentId === null))
+    navigationObject.map((el) => {
+        el.menuItems = [...nav.menus.nodes[0].menuItems.nodes.filter((node) => node.parentId === el.id)]
+    })
 
     // There's really no reason to return every match, but we will keep this here for now.
     // async function getAllSearchResults(first, after, query) {
@@ -96,6 +105,7 @@ export default function Search({ data, navigationMenus, slug }) {
                     key='desc'
                 />
             </Head>
+            <Header menu={navigationObject}/>
             <div className='flex justify-center px-5 sm:px-0 md:px-6 xl:px-0  my-12'>
                 <SearchForm
                     searchQuery={ searchQuery }
@@ -145,7 +155,9 @@ export default function Search({ data, navigationMenus, slug }) {
                                                     <span key={cat.node.id}>
                                                         <a
                                                             className='text-base font-semibold text-smart-blue hover:text-smart-teal uppercase tracking-wider'
-                                                            href={`/category/${cat.node.slug}`}>{cat.node.name}
+                                                            href={`/category/${cat.node.slug}`}
+                                                        >
+                                                            {cat.node.name}
                                                         </a> 
                                                         {index < (el.node.categories.edges.length - 1) ? 
                                                             <span> | </span> 
@@ -163,16 +175,19 @@ export default function Search({ data, navigationMenus, slug }) {
                     </div>
                 </>
             }
+            <Footer myMenu={navigationObject} />
         </>
     )
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
+	const nav = await getNavigation()
     
     return {
         props: {
             preview,
-            slug: 'search'
+            slug: 'search',
+            nav: nav
         }
     }
     

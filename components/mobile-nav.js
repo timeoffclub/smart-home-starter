@@ -32,7 +32,7 @@ export default function MobileNav({ menu, slug, mobileNav, mobileSearchInput, on
             </div>
             {menu.map((el) => (
                 <div className={mobileNav ? 'px-6 bg-black ' : 'hidden'} key={el.id}>
-                    <Accordion primary={el.name} secondary={el.menuItems.nodes} onToggleNav={onToggleMobileNav}/>
+                    <Accordion primary={el.label} secondary={el.menuItems} onToggleNav={onToggleMobileNav}/>
                 </div>
             ))}
             <div
