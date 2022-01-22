@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function FeaturedCategory ({ myArticles, myCategory }) {
     let featuredArticle
@@ -30,13 +29,11 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             <div className='absolute top-0 bottom-0 w-full h-full bg-opacity-60 bg-black'>
                             </div>
                             <div className='absolute left-0 bottom-0 group:w-full pb-5 px-5'>
-                                <Link href={`/${featuredArticle.slug}`}>
-                                <a>
+                                <a href={`/${featuredArticle.slug}`}>
                                     <div className='text-3xl text-white font-semibold pb-2 tracking-wider'>
                                         {featuredArticle.title}
                                     </div>
                                 </a>
-                                </Link>
                                 {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
                                     <span key={cat.node.id} className='text-smart-blue text-lg font-semibold uppercase tracking-wider'>
                                         <a href={`/category/${cat.node.slug}`} className='text-smart-blue font-semibold hover:text-smart-teal'>{cat.node.name}</a> {index < (featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
