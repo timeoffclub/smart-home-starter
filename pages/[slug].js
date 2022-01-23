@@ -208,7 +208,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
             posts: data.posts,
             nav: navigationObject
         },
-        revalidate: 1
+        revalidate: 60
     }
     
 }
