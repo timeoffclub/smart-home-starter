@@ -190,7 +190,7 @@ export async function getStaticProps({ params, preview = false}) {
 			filterMenu: data?.filterMenu?.nodes[0]?.menuItems.nodes || null,
 			nav: navigationObject
 		},
-        revalidate: 60
+        revalidate: 3600
 	}
 }
 

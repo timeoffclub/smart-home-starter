@@ -101,6 +101,6 @@ export async function getStaticProps({ preview = false}) {
 			brands: brands,
             nav: nav
 		},
-        revalidate: 60
+        revalidate: 3600
 	}
 }
