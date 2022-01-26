@@ -19,6 +19,10 @@ export default function Post({ post, related, nav }) {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
 
+    related.filter((el) => el.title !== post.title).slice(0,2).map((el) => {
+        router.prefetch(el.slug)
+    })
+
     const formatDate = (date) => {
         let d = new Date(date);
         return d.toLocaleDateString('en-US', {
