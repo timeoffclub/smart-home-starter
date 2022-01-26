@@ -30,17 +30,17 @@ function MyApp({ Component, pageProps }) {
     const router = useRouter()
 
     useEffect(() => {
-        const loadAds = (w, d) => {
-            w.adthrive = w.adthrive || {};
-            w.adthrive.cmd = w.adthrive.cmd || [];
-            w.adthrive.plugin = 'adthrive-ads-manual';
-            w.adthrive.host = 'ads.adthrive.com';
+        const loadAds = (url) => {
+            window.adthrive = window.adthrive || {};
+            window.adthrive.cmd = window.adthrive.cmd || [];
+            window.adthrive.plugin = 'adthrive-ads-manual';
+            window.adthrive.host = 'ads.adthrive.com';
         
-            var s = d.createElement('script');
+            var s = document.createElement('script');
             s.async = true;
             s.referrerpolicy='no-referrer-when-downgrade';
-            s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
-            var n = d.getElementsByTagName('script')[0];
+            s.src = 'https://' + window.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + window.encodeURIComponent(window.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+            var n = document.getElementsByTagName('script')[0];
             n.parentNode.insertBefore(s, n);
         }
 
@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
-            {/* 
+            
                 <Script
                     id='load-ads'
                     strategy='lazyOnload'
@@ -81,7 +81,6 @@ function MyApp({ Component, pageProps }) {
                         `,
                     }}
                 />
-            */}
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <Script
                 strategy="afterInteractive"
