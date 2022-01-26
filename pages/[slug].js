@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Newsletter from '../components/newsletter'
@@ -15,13 +16,18 @@ export default function Post({ post, related, nav }) {
 
     const router = useRouter()
 
+    useEffect(() => {
+        if (!router.isFallback) {
+            console.log('Doingit!')
+            related.filter((el) => el.title !== post.title).slice(0,2).map((el) => {
+                router.prefetch(el.slug)
+            })
+        }
+    }, [router.isFallback])
+
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, '')
     }
-
-    related.filter((el) => el.title !== post.title).slice(0,2).map((el) => {
-        router.prefetch(el.slug)
-    })
 
     const formatDate = (date) => {
         let d = new Date(date);
