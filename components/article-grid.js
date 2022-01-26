@@ -6,8 +6,8 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
         <>
             <div className='container px-6  2xl:px-0 mb-12'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
-                    {myArticles.map((el, index) => (
-                        <div className='h-80' key={el.id}>
+                    {myArticles.map((el) => (
+                        <div className='article-grid-cell h-80' key={el.id}>
                             {el.featuredImage &&
                                 <a href={`../${el.slug}`}>
                                     <div className='relative h-44 mb-3'>
