@@ -32,6 +32,8 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
 
+        ads.loadAds()
+
         const handleRouteChange = (url) => {
             gtag.pageview(url)
             ads.loadAds()
