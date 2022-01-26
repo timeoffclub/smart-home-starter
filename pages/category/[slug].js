@@ -212,7 +212,7 @@ async function getAllCategories() {
 
 // Generate all paths?
 // This has to be false to catch errors related to fallback
-const allPaths = false
+const allPaths = true
 
 export async function getStaticPaths() {
     let data = []
