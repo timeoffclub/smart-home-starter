@@ -7,7 +7,7 @@ export default function Header({ myMenu }) {
         
     return (
         <div className='bg-black py-12'>
-            <div className='container px-6 xl:px-28 2xl:px-0 '>
+            <div className='container px-6 xl:px-12 2xl:px-0 '>
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
                     <div className='flex flex-col xl:justify-between'>
                         <Link href='/'>

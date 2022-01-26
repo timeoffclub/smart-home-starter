@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
+import * as ads from '../lib/ads'
 
 // export function reportWebVitals({ id, name, label, value }) {
 //     console.log(name, value, id)
@@ -30,29 +31,15 @@ function MyApp({ Component, pageProps }) {
     const router = useRouter()
 
     useEffect(() => {
-        const loadAds = (url) => {
-            window.adthrive = window.adthrive || {};
-            window.adthrive.cmd = window.adthrive.cmd || [];
-            window.adthrive.plugin = 'adthrive-ads-manual';
-            window.adthrive.host = 'ads.adthrive.com';
-        
-            var s = document.createElement('script');
-            s.async = true;
-            s.referrerpolicy='no-referrer-when-downgrade';
-            s.src = 'https://' + window.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + window.encodeURIComponent(window.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
-            var n = document.getElementsByTagName('script')[0];
-            n.parentNode.insertBefore(s, n);
-        }
 
         const handleRouteChange = (url) => {
             gtag.pageview(url)
+            ads.loadAds()
         }
 
         router.events.on('routeChangeComplete', handleRouteChange)
-        router.events.on('routeChangeComplete', loadAds)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
-            router.events.off('routeChangeComplete', loadAds)
         }
         
     }, [router.events])

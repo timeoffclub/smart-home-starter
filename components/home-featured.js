@@ -74,7 +74,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         </div>
                     ))}
                 </div>
-                <div className='md:hidden flex px-6 xl:px-28 2xl:px-0 flex-col justify-between col-span-2'>
+                <div className='md:hidden flex px-6 xl:px-12 2xl:px-0 flex-col justify-between col-span-2'>
                     <div className='col-span-2 text-smart-blue font-bold text-2xl tracking-wider mb-5'>
                         Top Articles
                     </div>

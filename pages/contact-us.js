@@ -29,7 +29,7 @@ export default function ContactUs({ nav }) {
                 />
             </Head>
             <Header menu={navigationObject}/>
-            <div className='container px-6 xl:px-28 2xl:px-0 my-12 w-full'>
+            <div className='container px-6 xl:px-12 2xl:px-0 my-12 w-full'>
                 <div className='w-fit'>
                     <h1 className='text-4xl mb-4 font-semibold text-smart-blue'>
                         Contact Us
