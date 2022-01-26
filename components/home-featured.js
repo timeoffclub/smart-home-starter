@@ -26,7 +26,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                     }
                     <div className='absolute top-0 bottom-0 w-full h-full bg-opacity-60 bg-black'>
                     </div>
-                    <div className='absolute left-0 bottom-0 group:w-full pb-5 px-5'>
+                    <div className='absolute left-0 bottom-0 group:w-full pb-5 px-6'>
                         <Link href={`../${featuredArticle.slug}`}>
                             <a>
                                 <div className='text-2xl text-white font-semibold pb-2 tracking-wider'>
@@ -74,7 +74,7 @@ export default function HomeFeatured({ myArticles, myCategory }) {
                         </div>
                     ))}
                 </div>
-                <div className='md:hidden flex px-5 sm:px-0 md:px-6 xl:px-0 flex-col justify-between col-span-2'>
+                <div className='md:hidden flex px-6 xl:px-28 2xl:px-0 flex-col justify-between col-span-2'>
                     <div className='col-span-2 text-smart-blue font-bold text-2xl tracking-wider mb-5'>
                         Top Articles
                     </div>

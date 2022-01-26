@@ -44,7 +44,7 @@ export default function Home({ top, hardware, brands, nav }) {
                         </div>
                     }
                 </div>
-                <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                <div className='container px-6 xl:px-28 2xl:px-0'>
                     <div className='adthrive-ad-container w-full mt-14'>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default function Home({ top, hardware, brands, nav }) {
                             View all
                         </a>
                     </div>
-                    <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                    <div className='container px-6 xl:px-28 2xl:px-0'>
                         <div className='adthrive-ad-container w-full mt-14'>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ export default function Home({ top, hardware, brands, nav }) {
                             View all
                         </a>
                     </div>
-                    <div className='container px-5 sm:px-0 md:px-6 xl:px-0'>
+                    <div className='container px-6 xl:px-28 2xl:px-0'>
                         <div className='adthrive-ad-container w-full mt-14'>
                         </div>
                     </div>

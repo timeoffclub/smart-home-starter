@@ -5,7 +5,7 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
 
     return (
         <>
-            <div className='container px-5 sm:px-0 md:px-6 xl:px-0 mb-12'>
+            <div className='container px-6 xl:px-28 2xl:px-0 mb-12'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                     {myArticles.map((el, index) => (
                         <div className='h-80' key={el.id}>

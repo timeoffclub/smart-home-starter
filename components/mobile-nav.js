@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import Accordion from './accordian'
 
 const SearchForm = dynamic(() => import('./search-form'))
@@ -42,9 +43,11 @@ export default function MobileNav({ menu, slug, mobileNav, mobileSearchInput, on
                 Subscribe
             </div>
             <div  className={mobileNav ? 'text-smart-blue px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}>
-                <a href={'/contact-us'}>
-                    Contact Us
-                </a>
+                <Link href={'/contact-us'}>
+                    <a>
+                        Contact Us
+                    </a>
+                </Link>
             </div>
         </div>
     )

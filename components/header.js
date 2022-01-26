@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import Router from 'next/router'
 import dynamic from 'next/dynamic'
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
@@ -51,12 +52,14 @@ export default function Header({ menu, slug }) {
             <div className='relative'>
                 {/* Upper nav on large viewports only */}
                 <div className='hidden lg:block h-12 text-white bg-neutral-900'>
-                    <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 sm:px-0 md:px-6 xl:px-0'>
+                    <div onMouseEnter={() => setMegaMenu(false)} className='container px-6 xl:px-28 2xl:px-0'>
                         <div className='hidden md:flex items-center justify-end'>
                             <div className='text-base font-semibold text-white tracking-wide mt-2.5'>
-                                <a href={'/contact-us'}>
-                                    Contact Us
-                                </a>
+                                <Link href={'/contact-us'}>
+                                    <a>
+                                        Contact Us
+                                    </a>
+                                </Link>
                             </div>
                             <div onClick={() => {setModalOpen(true), setMegaMenuDisabled(true)}} className='text-base cursor-pointer font-semibold text-white tracking-wide ml-4 mt-2.5'>
                                 Subscribe
@@ -81,7 +84,7 @@ export default function Header({ menu, slug }) {
                 </div>
                 {/* Main nav all viewports */}
                 <div className='h-20 bg-black'>
-                    <div className='container px-6 sm:px-0 md:px-6 xl:px-0'>
+                    <div className='container px-6 xl:px-28 2xl:px-0'>
                         <div className='flex justify-between'>
                             <div className={mobileNav ? 'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light' : 'hidden lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                                 <IoMdClose
@@ -94,27 +97,32 @@ export default function Header({ menu, slug }) {
                                     onClick={() => toggleMobileNav()}
                                 />
                             </div>
-                            <a href={process.env.NEXT_PUBLIC_URL}>
-                                <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
-                                    <Image 
-                                        src={'/Smart-Home-Starter_Logo-White.png'}
-                                        alt={'Smart Home Starter'}
-                                        layout='responsive'
-                                        width={78}
-                                        height={10}
-                                    />
-                                </div>
-                            </a>
-                            <div className='w-full md:hidden flex justify-center'>
-                                <a href={process.env.NEXT_PUBLIC_URL} className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
-                                    <Image 
-                                                        className='transition-all ease-in duration-500'                      src={'/SHSLogo.png'}
-                                        alt={'Smart Home Starter'}
-                                        layout='responsive'
-                                        width={10}
-                                        height={10}
-                                    />
+                            <Link href='/'>
+                                <a>
+                                    <div className='relative hidden md:block h-16 w-80 pt-6 cursor-pointer'>
+                                        <Image 
+                                            src={'/Smart-Home-Starter_Logo-White.png'}
+                                            alt={'Smart Home Starter'}
+                                            layout='responsive'
+                                            width={78}
+                                            height={10}
+                                        />
+                                    </div>
                                 </a>
+                            </Link>
+                            <div className='w-full md:hidden flex justify-center'>
+                                <Link href='/'>
+                                    <a className='h-14 w-14 pt-3 md:hidden cursor-pointer relative'>
+                                        <Image 
+                                            className='transition-all ease-in duration-500'
+                                            src={'/SHSLogo.png'}
+                                            alt={'Smart Home Starter'}
+                                            layout='responsive'
+                                            width={10}
+                                            height={10}
+                                        />
+                                    </a>
+                                </Link>
                             </div>
                             <div className={'flex lg:hidden text-3xl items-center h-[80px] text-stone-50 font-light'}>
                                 <GoSearch
@@ -186,11 +194,13 @@ export default function Header({ menu, slug }) {
                     <div className='absolute hidden w-full lg:block bg-black z-40 py-5' onMouseLeave={() => {setMegaMenu(null), setActiveLabel(null)}}>
                         <div className='container grid grid-cols-4'>
                             {megaMenu.map((el) => (
-                                <a onClick={() => {setMegaMenu(null)}} href={`/category/${kebabCase(el.label)}`} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
-                                    <div className='text-center cursor-pointer h-10'>
-                                        {el.label}
-                                    </div>
-                                </a>
+                                <Link href={`/category/${kebabCase(el.label)}`}>
+                                    <a onClick={() => {setMegaMenu(null)}} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
+                                        <div className='text-center cursor-pointer h-10'>
+                                            {el.label}
+                                        </div>
+                                    </a>
+                                </Link>
                             ))}
                         </div>
                     </div>

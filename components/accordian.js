@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown'
 import { FaChevronUp } from '@react-icons/all-files/fa/FaChevronUp'
 import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight'
@@ -41,9 +42,11 @@ export default function Accordion({primary, secondary, onToggleNav}) {
             <div className='ml-8'>
                     {secondary.map((el) => (
                         <div className={isShowing ? 'h-fit text-white text-xl py-2 transition-all ease-in-out duration-400' : 'h-0 transition-all ease-in-out duration-400'} key={el.id}>
-                            <a href={`/category/${kebabCase(el.label)}`} onClick={onToggleNav}>
-                                {el.label}
-                            </a>
+                            <Link href={`/category/${kebabCase(el.label)}`}>
+                                <a onClick={onToggleNav}>
+                                    {el.label}
+                                </a>
+                            </Link>
                         </div>
                     ))}
             </div>

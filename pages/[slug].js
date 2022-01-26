@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory, getNavigation } from '../lib/api'
@@ -60,7 +61,7 @@ export default function Post({ post, related, nav }) {
                         }
                     </Head>
                     <Header menu={nav}/>
-                    <div className='container grid grid-cols-3 px-5 lg:px-22 xl:px-40 gap-5 my-12'>
+                    <div className='container grid grid-cols-3 px-6 lg:px-22 xl:px-40 gap-5 my-12'>
                         <div className='col-span-3 lg:col-span-2'>
                             <div className='text-base text-gray-500 font-extralight'>
                                 The Smart Home Starter team picks the products and services we write about. When you buy through our links, we may get a commission.
@@ -113,9 +114,11 @@ export default function Post({ post, related, nav }) {
                                         key={el.node.name}
                                         className='flex items-center p-3 my-3 flex-1 justify-center text-center cursor-pointer text-white font-bold bg-smart-blue text-base border-0 focus:outline-none appearance-none'
                                     >
-                                        <a href={`/category/${kebabCase(el.node.name)}`}>
-                                            More {el.node.name} articles
-                                        </a>
+                                        <Link href={`/category/${kebabCase(el.node.name)}`}>
+                                            <a>
+                                                More {el.node.name} articles
+                                            </a>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>
@@ -130,14 +133,21 @@ export default function Post({ post, related, nav }) {
                                 related.filter((el) => el.title !== post.title).slice(0,2).map((el) => (
                                     <div className='mb-8' key={el.id}>
                                         <div className='text-xl mb-1'>
-                                            <a href={`/${el.slug}`}>
-                                                {el.title}
-                                            </a>
+                                            <Link href={`/${el.slug}`}>
+                                                <a>
+                                                    {el.title}
+                                                </a>
+                                            </Link>
                                         </div>
                                         <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
                                             {el.categories.edges.filter((el) => el.node.name !== 'Featured').map((cat, index) => (
                                                 <span key={cat.node.id}>
-                                                    <a className='text-smart-blue hover:text-smart-teal' href={`../category/${cat.node.slug}`}>{cat.node.name}</a> {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
+                                                    <Link href={`../category/${cat.node.slug}`}>
+                                                        <a className='text-smart-blue hover:text-smart-teal'>
+                                                            {cat.node.name}
+                                                        </a>
+                                                    </Link>
+                                                    {index < (el.categories.edges.filter((el) => el.node.name !== 'Featured').length - 1) ? <span> | </span> : <span></span>}
                                                 </span>
                                             ))}
                                         </div>
