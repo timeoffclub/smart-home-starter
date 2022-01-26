@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ArticleGrid ({ myArticles, myCategory }) {
 
@@ -26,9 +27,11 @@ export default function ArticleGrid ({ myArticles, myCategory }) {
                             }
                             <div>
                                 <div className='text-lg mb-3 hover:underline decoration-1 underline-offset-4 decoration-gray-300 font-semibold'>
-                                    <a href={`/${el.slug}`}>
-                                        {el.title}
-                                    </a>
+                                    <Link href={`/${el.slug}`}>
+                                        <a>
+                                            {el.title}
+                                        </a>
+                                    </Link>
                                 </div>
                                 <div className='text-smart-blue'>
                                     {el.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
