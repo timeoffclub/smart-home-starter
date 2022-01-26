@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }) {
         router.events.on('routeChangeComplete', loadAds)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
-            router.events.on('routeChangeComplete', loadAds)
+            router.events.off('routeChangeComplete', loadAds)
         }
         
     }, [router.events])
