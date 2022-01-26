@@ -83,8 +83,8 @@ export default function Categories({ posts, featured, category, filterMenu, nav}
 						/>
 						<meta property="og:title" content={`${category.edges[0].node.name} Articles`} />
 						<meta
-						property="og:description"
-						content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+							property="og:description"
+							content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
 						/>
 					</Head>
 					<Header menu={nav}/>
