@@ -194,8 +194,8 @@ export default function Header({ menu, slug }) {
                     <div className='absolute hidden w-full lg:block bg-black z-40 py-5' onMouseLeave={() => {setMegaMenu(null), setActiveLabel(null)}}>
                         <div className='container grid grid-cols-4'>
                             {megaMenu.map((el) => (
-                                <Link href={`/category/${kebabCase(el.label)}`}>
-                                    <a onClick={() => {setMegaMenu(null)}} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700' key={el.id}>
+                                <Link href={`/category/${kebabCase(el.label)}`} key={el.id}>
+                                    <a onClick={() => {setMegaMenu(null)}} className='text-base text-white hover:text-gray-200 tracking-wider font-semibold transition ease-in-out duration-700'>
                                         <div className='text-center cursor-pointer h-10'>
                                             {el.label}
                                         </div>
