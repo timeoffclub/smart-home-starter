@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown'
 import { FaChevronUp } from '@react-icons/all-files/fa/FaChevronUp'
 import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight'
@@ -23,14 +22,14 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                         'flex text-white tracking-wider justify-between items-end border-b border-b-white h-20'}
             >
                 <div className='text-white pb-3'>
-                        <div className='flex items-center'>
-                            <div  className={isShowing ? 'text-smart-blue text-xl mr-3' : 'hidden'}>
-                                <FaArrowRight />
-                            </div>
-                            <div className='text-xl'>
-                                {primary}
-                            </div>
+                    <div className='flex items-center'>
+                        <div  className={isShowing ? 'text-smart-blue text-xl mr-3' : 'hidden'}>
+                            <FaArrowRight />
                         </div>
+                        <div className='text-xl'>
+                            {primary}
+                        </div>
+                    </div>
                 </div>
                 <div className={isShowing ? 'hidden' : 'text-smart-blue font-light pb-3 text-2xl'}>
                     <FaChevronDown/>
@@ -42,11 +41,9 @@ export default function Accordion({primary, secondary, onToggleNav}) {
             <div className='ml-8'>
                     {secondary.map((el) => (
                         <div className={isShowing ? 'h-fit text-white text-xl py-2 transition-all ease-in-out duration-400' : 'h-0 transition-all ease-in-out duration-400'} key={el.id}>
-                            <Link href={`/category/${kebabCase(el.label)}`}>
-                                <a onClick={onToggleNav}>
-                                    {el.label}
-                                </a>
-                            </Link>
+                            <a href={`/category/${kebabCase(el.label)}`} onClick={onToggleNav}>
+                                {el.label}
+                            </a>
                         </div>
                     ))}
             </div>

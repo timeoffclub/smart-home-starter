@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
-import * as ads from '../lib/ads'
 
 // export function reportWebVitals({ id, name, label, value }) {
 //     console.log(name, value, id)
@@ -32,11 +31,8 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
 
-        ads.loadAds()
-
         const handleRouteChange = (url) => {
             gtag.pageview(url)
-            ads.loadAds()
         }
 
         router.events.on('routeChangeComplete', handleRouteChange)
@@ -48,6 +44,27 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
+            <Script
+                id='load-ads'
+                strategy='lazyOnload'
+                dangerouslySetInnerHTML={{
+                    __html: `
+                    (function(w, d) {
+                        w.adthrive = w.adthrive || {};
+                        w.adthrive.cmd = w.adthrive.cmd || [];
+                        w.adthrive.plugin = 'adthrive-ads-manual';
+                        w.adthrive.host = 'ads.adthrive.com';
+                    
+                        var s = d.createElement('script');
+                        s.async = true;
+                        s.referrerpolicy='no-referrer-when-downgrade';
+                        s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                        var n = d.getElementsByTagName('script')[0];
+                        n.parentNode.insertBefore(s, n);
+                    })(window, document);
+                    `,
+                }}
+            />
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <Script
                 strategy="afterInteractive"

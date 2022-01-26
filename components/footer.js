@@ -1,28 +1,25 @@
 import Newsletter from './newsletter'
 import Image from 'next/image'
-import Link from 'next/link'
 import { kebabCase } from '../lib/utils'
 
 export default function Header({ myMenu }) {
         
     return (
         <div className='bg-black py-12'>
-            <div className='container px-6 xl:px-12 2xl:px-0 '>
+            <div className='container px-6  2xl:px-0'>
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
                     <div className='flex flex-col xl:justify-between'>
-                        <Link href='/'>
-                            <a>
-                                <div className='relative hidden md:block h-16 w-80 cursor-pointer'>
-                                    <Image 
-                                        src={'/Smart-Home-Starter_Logo-White.png'}
-                                        alt={'Smart Home Starter'}
-                                        layout='responsive'
-                                        width={65}
-                                        height={8}
-                                    />
-                                </div>
-                            </a>
-                        </Link>
+                        <a href={process.env.NEXT_PUBLIC_URL}>
+                            <div className='relative hidden md:block h-16 w-80 cursor-pointer'>
+                                <Image 
+                                    src={'/Smart-Home-Starter_Logo-White.png'}
+                                    alt={'Smart Home Starter'}
+                                    layout='responsive'
+                                    width={65}
+                                    height={8}
+                                />
+                            </div>
+                        </a>
                         <div className='mb-12'>
                             <div className='text-4xl text-smart-blue font-semibold tracking-wider mb-9'>
                                 Sign up for our newsletter
@@ -46,13 +43,11 @@ export default function Header({ myMenu }) {
                                 <div className='text-smart-blue text-2xl font-semibold tracking-wider' key={el.id}>
                                     {el.label}
                                     {el.menuItems.map((e) => (
-                                        <Link href={`/category/${kebabCase(e.label)}`} key={e.id}>
-                                            <a>
-                                                <div className='text-white text-lg font-semibold tracking-wider mt-2'>
-                                                        {e.label}
-                                                </div>
-                                            </a>
-                                        </Link>
+                                        <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
+                                            <div className='text-white text-lg font-semibold tracking-wider mt-2'>
+                                                    {e.label}
+                                            </div>
+                                        </a>
                                     ))}
                                 </div>
                             ))}
@@ -66,13 +61,11 @@ export default function Header({ myMenu }) {
                                         {el.label}
                                     </div>
                                     {el.menuItems.map((e) => (
-                                        <Link href={`/category/${kebabCase(e.label)}`} key={e.id}>
-                                            <a>
-                                                <div className='text-white text-lg font-semibold tracking-wider mt-2'>
-                                                        {e.label}
-                                                </div>
-                                            </a>
-                                        </Link>
+                                        <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
+                                            <div className='text-white text-lg font-semibold tracking-wider mt-2'>
+                                                    {e.label}
+                                            </div>
+                                        </a>
                                     ))}
                                 </div>
                             ))}
@@ -86,13 +79,11 @@ export default function Header({ myMenu }) {
                                         {el.label}
                                     </div>
                                     {el.menuItems.map((e) => (
-                                        <Link href={`/category/${kebabCase(e.label)}`} key={e.id}>
-                                            <a>
-                                                <div className='text-white text-lg font-semibold tracking-wider mt-2'>
+                                        <a href={`/category/${kebabCase(e.label)}`} key={e.id}>
+                                            <div className='text-white text-lg font-semibold tracking-wider mt-2'>
                                                     {e.label}
-                                                </div>
-                                            </a>
-                                        </Link>
+                                            </div>
+                                        </a>
                                     ))}
                                 </div>
                             ))}

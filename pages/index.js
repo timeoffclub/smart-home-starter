@@ -44,38 +44,38 @@ export default function Home({ top, hardware, brands, nav }) {
                         </div>
                     }
                 </div>
-                <div className='container px-6 xl:px-12 2xl:px-0'>
+                <div className='container px-6 sm:px-0 md:px-6  2xl:px-0'>
                     <div className='adthrive-ad-container w-full mt-14'>
                     </div>
                 </div>
                 <div className='container mt-14'>
-                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
+                    <div className='px-6  2xl:px-0 sm:mx-0 md:text-7xl text-6xl tracking-wide mb-5'>
                         <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={`../category/${kebabCase(hardware.categoryName.edges[0].node.name)}`}>
                             {hardware.categoryName.edges[0].node.name}
                         </a>
                     </div>
                     <FeaturedCategory myArticles={hardware.posts.nodes} myCategory={'TVs'}/>
-                    <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px]'>
+                    <div className='text-xl underline underline-offset-2 px-6  2xl:px-0 mt-[-50px]'>
                         <a href={`../category/${kebabCase(hardware.categoryName.edges[0].node.name)}`}>
                             View all
                         </a>
                     </div>
-                    <div className='container px-6 xl:px-12 2xl:px-0'>
+                    <div className='container px-6  2xl:px-0'>
                         <div className='adthrive-ad-container w-full mt-14'>
                         </div>
                     </div>
-                    <div className='mx-4 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
+                    <div className='px-6  2xl:px-0 sm:mx-0 md:text-7xl text-6xl tracking-wide mt-12 mb-5'>
                         <a className='font-display text-transparent bg-clip-text bg-gradient-to-r from-smart-blue to-smart-green' href={`../category/${kebabCase(brands.categoryName.edges[0].node.name)}`}>
                             {brands.categoryName.edges[0].node.name}
                         </a>
                     </div>
                     <FeaturedCategory myArticles={brands.posts.nodes} myCategory={'Samsung'} />
-                    <div className='text-xl underline underline-offset-2 ml-6 xl:ml-0 mt-[-50px] mb-28'>
+                    <div className='text-xl underline underline-offset-2 px-6  2xl:px-0 mt-[-50px] mb-28'>
                         <a href={`../category/${kebabCase(brands.categoryName.edges[0].node.name)}`}>
                             View all
                         </a>
                     </div>
-                    <div className='container px-6 xl:px-12 2xl:px-0'>
+                    <div className='container px-6  2xl:px-0'>
                         <div className='adthrive-ad-container w-full mt-14'>
                         </div>
                     </div>

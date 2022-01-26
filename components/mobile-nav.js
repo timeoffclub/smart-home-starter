@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import Accordion from './accordian'
 
 const SearchForm = dynamic(() => import('./search-form'))
@@ -21,7 +20,7 @@ export default function MobileNav({ menu, slug, mobileNav, mobileSearchInput, on
             {/* Mobile search - beneath main nav on mobile viewports, unless slug is /search */}
             <div className={mobileSearchInput ? 'block' : 'hidden'}>
                 <div>
-                    <label className='text-smart-blue flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900  px-6 md:px-10'>
+                    <label className='text-smart-blue flex lg:hidden justify-center items-center w-full h-24 bg-neutral-900 px-6 md:px-10'>
                         <SearchForm
                             searchQuery={ searchQuery }
                             setSearchQuery={ onSetSearchQuery }
@@ -43,11 +42,9 @@ export default function MobileNav({ menu, slug, mobileNav, mobileSearchInput, on
                 Subscribe
             </div>
             <div  className={mobileNav ? 'text-smart-blue px-6 text-2xl mt-6 cursor-pointer' : 'hidden'}>
-                <Link href={'/contact-us'}>
-                    <a>
-                        Contact Us
-                    </a>
-                </Link>
+                <a href={'/contact-us'}>
+                    Contact Us
+                </a>
             </div>
         </div>
     )

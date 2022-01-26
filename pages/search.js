@@ -106,7 +106,7 @@ export default function Search({ data, nav, slug }) {
                 />
             </Head>
             <Header menu={navigationObject}/>
-            <div className='flex justify-center px-6 xl:px-12 2xl:px-0  my-12'>
+            <div className='flex justify-center px-6  2xl:px-0 my-12'>
                 <SearchForm
                     searchQuery={ searchQuery }
                     setSearchQuery={ setSearchQuery }
@@ -127,7 +127,7 @@ export default function Search({ data, nav, slug }) {
                         <div className={searchError ? 'container text-xl my-5' : 'hidden'}>
                             Error: {searchError}
                         </div>
-                        <div className='grid grid-cols-1 px-6 xl:px-12 2xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
+                        <div className='grid grid-cols-1 px-6  2xl:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
                             {queryResultPosts?.edges?.map((el) => (
                                 <div key={el.node.id}>
                                     <div className='h-80'>
