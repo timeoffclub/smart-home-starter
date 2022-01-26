@@ -7,25 +7,25 @@ function generateSiteMap(posts, categories) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>${EXTERNAL_DATA_URL}/contact-us</loc>
+       <loc>${EXTERNAL_DATA_URL}/contact-us/</loc>
      </url>
      <url>
-       <loc>${EXTERNAL_DATA_URL}/search</loc>
+       <loc>${EXTERNAL_DATA_URL}/search/</loc>
      </url>
      ${categories
        .map((el) => {
          return `
        <url>
-           <loc>${`${EXTERNAL_DATA_URL}/category/${el.node.slug}`}</loc>
+           <loc>${`${EXTERNAL_DATA_URL}/category/${el.node.slug}/`}</loc>
        </url>
      `
        })
        .join('')}
-     ${posts
+     ${posts.posts.edges
        .map((el) => {
          return `
        <url>
-           <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}`}</loc>
+           <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}/`}</loc>
            <lastmod>${el.node.date}</lastmod>
        </url>
      `
@@ -72,11 +72,9 @@ async function getAllCategories() {
 
 export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
-  const postRequest = await getAllPostsWithSlug()
-  const posts = await postRequest.posts.edges
+  const posts = await getAllPostsWithSlug()
 
-  const categoriesRequest = await getAllCategories()
-  const categories = await categoriesRequest
+  const categories = await getAllCategories()
 
   // We generate the XML sitemap with the posts data
   const sitemap = generateSiteMap(posts, categories)
