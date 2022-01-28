@@ -26,7 +26,7 @@ function generateSiteMap(posts, categories) {
          return `
        <url>
            <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}/`}</loc>
-           <lastmod>${el.node.date}</lastmod>
+           <lastmod>${el.node.date + '+00:00'}</lastmod>
        </url>
      `
        })
