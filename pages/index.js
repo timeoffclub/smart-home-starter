@@ -26,7 +26,7 @@ export default function Home({ top, hardware, brands, nav }) {
     return (
         <>
             <Head>
-                <title>Smart Home Starter</title>
+                <title>Smart Home Starter - Home</title>
                 <meta name="description" content="We are two guys into tech exploring the world of smart home technology. We wanted to share some of our favorites with you!" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />

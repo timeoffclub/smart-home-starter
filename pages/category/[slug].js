@@ -74,17 +74,17 @@ export default function Categories({ posts, featured, category, filterMenu, nav}
 				<>
 					<Head>
 						<title>
-							{category.edges[0].node.name} Articles
+							Smart Home Starter - {category.edges[0].node.name} Articles
 						</title>
 						<meta
 							name='description'
-							content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+							content={`${category.edges[0].node.description ? category.edges[0].node.description : 'Check out all of our ' + category.edges[0].node.name + '-related articles, beginning with our featured articles.'}`}
 							key='desc'
 						/>
-						<meta property="og:title" content={`${category.edges[0].node.name} Articles`} />
+						<meta property="og:title" content={`Smart Home Starter - ${category.edges[0].node.name} Articles`} />
 						<meta
 							property="og:description"
-							content={`Check out all of our ${category.edges[0].node.name}-related articles, beginning with our featured articles.`}
+							content={`${category.edges[0].node.description ? category.edges[0].node.description : 'Check out all of our ' + category.edges[0].node.name + '-related articles, beginning with our featured articles.'}`}
 						/>
 					</Head>
 					<Header menu={nav}/>
