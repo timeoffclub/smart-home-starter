@@ -208,7 +208,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
             related: related,
             posts: data.posts,
             nav: navigationObject
-        }
+        },
+        revalidate: 86400
     }
     
 }

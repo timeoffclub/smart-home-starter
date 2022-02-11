@@ -13,6 +13,21 @@ const moduleExports = {
                 destination: 'https://ads.adthrive.com/sites/6164a6ff014ece4bc4e34c23/ads.txt',
                 statusCode: 301,
                 basePath: false
+            },
+            {
+                source: '/adt/:slug*',
+                destination: '/',
+                permanent: false
+            },
+            {
+                source: '/buyer-guide/:slug*',
+                destination: '/',
+                permanent: false
+            },
+            {
+                source: '/recommendations/:slug*',
+                destination: '/',
+                permanent: false
             }
         ]
     },
