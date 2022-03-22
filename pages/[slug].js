@@ -147,7 +147,7 @@ export default function Post({ post, related, nav }) {
                                             Pros
                                         </div>
                                         {post.productReviewFields.pros.map((el) => (
-                                            <div className='flex'>
+                                            <div className='flex' key={el.pro}>
                                                 <div className='pt-1 mr-1 text-blue-400'>
                                                     <AiOutlinePlus/>
                                                 </div>
@@ -162,7 +162,7 @@ export default function Post({ post, related, nav }) {
                                             Cons
                                         </div>
                                         {post.productReviewFields.cons.map((el) => (
-                                            <div className='flex'>
+                                            <div className='flex' key={el.con}>
                                                 <div className='pt-1 mr-1 text-red-500'>
                                                     <AiOutlineMinus/>
                                                 </div>
@@ -182,7 +182,7 @@ export default function Post({ post, related, nav }) {
                                     <div className='my-12'>
                                         <Carousel>
                                             {post.productReviewFields.productGallery.map((el) => (
-                                                <div>
+                                                <div key={el.id}>
                                                     <img src={el.sourceUrl}/>
                                                 </div>
                                             ))}
@@ -195,7 +195,7 @@ export default function Post({ post, related, nav }) {
                                         {post.productReviewFields.specifications[0].specification.map((el, index) => (
                                             !expandSpecs ?
                                                 index < 3 && 
-                                                    <div className={`grid grid-cols-2 text-left- p-3 border-b text-lg ${index % 2 === 0 ? 'bg-stone-100' : 'bg-white'}`}>
+                                                    <div className={`grid grid-cols-2 text-left- p-3 border-b text-lg ${index % 2 === 0 ? 'bg-stone-100' : 'bg-white'}`} key={el.name}>
                                                         <div className='col-span-1 font-bold'>
                                                             {el.name}
                                                         </div>
@@ -204,7 +204,7 @@ export default function Post({ post, related, nav }) {
                                                         </div>
                                                     </div>
                                             :
-                                                <div className={`grid grid-cols-2 text-left- p-3 border-b text-lg ${index % 2 === 0 ? 'bg-stone-100' : 'bg-white'}`}>
+                                                <div className={`grid grid-cols-2 text-left- p-3 border-b text-lg ${index % 2 === 0 ? 'bg-stone-100' : 'bg-white'}`} key={el.name}>
                                                     <div className='col-span-1 font-bold'>
                                                         {el.name}
                                                     </div>
