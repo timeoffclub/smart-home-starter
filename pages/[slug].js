@@ -226,7 +226,9 @@ export default function Post({ post, related, nav }) {
                                 </>
                             }
                             <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
-                            <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                            {post.productReviewFields.productReview &&
+                                <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                            }
                             {!post.productReviewFields.productReview && 
                                 <div className='sm:flex w-full gap-3'>
                                     {post.categories.edges.map((el) => (
