@@ -35,7 +35,7 @@ export default function Accordion({primary, secondary, onToggleNav}) {
                     <FaChevronDown/>
                 </div>
                 <div className={isShowing ? 'text-smart-blue font-light pb-3 text-2xl' : 'hidden'}>
-                <FaChevronUp />
+                    <FaChevronUp />
                 </div>
             </div>
             <div className='ml-8'>

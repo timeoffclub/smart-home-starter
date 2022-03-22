@@ -74,7 +74,7 @@ export default function Search({ data, nav, slug }) {
     }
 
     useEffect( () => {
-        /**
+        /*
         * This is technically not safe because fetchPosts() should be defined inside
         * of useEffect() in order for useEffect() to see all of the variables it uses.
         * This is why Vercel gives us a warning on build. But since fetchPost() calls

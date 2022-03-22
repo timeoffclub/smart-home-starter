@@ -36,11 +36,11 @@ function generateSiteMap(posts, categories) {
 }
 
 function SiteMap() {
-  // getServerSideProps will do the heavy lifting
+    // getServerSideProps will do the heavy lifting
 }
 
 async function getAllPostsWithSlug() {
-      let data = {
+    let data = {
         posts: {
             edges: []
         }
@@ -71,22 +71,22 @@ async function getAllCategories() {
 }
 
 export async function getServerSideProps({ res }) {
-  // We make an API call to gather the URLs for our site
-  const posts = await getAllPostsWithSlug()
-
-  const categories = await getAllCategories()
-
-  // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(posts, categories)
-
-  res.setHeader('Content-Type', 'text/xml')
-  // we send the XML to the browser
-  res.write(sitemap)
-  res.end()
-
-  return {
-    props: {}
-  }
+    // We make an API call to gather the URLs for our site
+    const posts = await getAllPostsWithSlug()
+    
+    const categories = await getAllCategories()
+    
+    // We generate the XML sitemap with the posts data
+    const sitemap = generateSiteMap(posts, categories)
+    
+    res.setHeader('Content-Type', 'text/xml')
+    // we send the XML to the browser
+    res.write(sitemap)
+    res.end()
+    
+    return {
+        props: {}
+    }
 }
 
 export default SiteMap
