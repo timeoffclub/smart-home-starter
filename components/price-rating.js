@@ -4,7 +4,7 @@ export default function PriceRating({ priceCount }) {
     return (
         <>
             {priceCount === 1 &&
-                <div className='flex text-2xl'>
+                <div className='flex lg:text-lg'>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-gray-500'/>
                     <FaDollarSign className='text-gray-500'/>
@@ -12,7 +12,7 @@ export default function PriceRating({ priceCount }) {
                 </div>
             }
             {priceCount === 2 &&
-                <div className='flex text-2xl'>
+                <div className='flex lg:text-lg'>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-gray-500'/>
@@ -20,7 +20,7 @@ export default function PriceRating({ priceCount }) {
                 </div>
             }
             {priceCount === 3 &&
-                <div className='flex text-2xl'>
+                <div className='flex lg:text-lg'>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-black'/>
@@ -28,7 +28,7 @@ export default function PriceRating({ priceCount }) {
                 </div>
             }
             {priceCount === 4 &&
-                <div className='flex text-2xl'>
+                <div className='flex lg:text-lg'>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-black'/>
                     <FaDollarSign className='text-black'/>

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Newsletter from '../components/newsletter'
-import OverallRating from '../components/overall-rating'
 import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory, getNavigation } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { kebabCase } from '../lib/utils'
@@ -15,11 +15,13 @@ import { AiOutlineMinus } from '@react-icons/all-files/ai/AiOutlineMinus'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import PriceRating from '../components/price-rating'
-import BestBuyProduct from '../components/bestbuy-product'
-import PriceScrape from '../components/price-scrape'
-import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
+
+// Let's dynamically load product review components
+const PriceRating = dynamic(() => import('../components/price-rating'))
+const OverallRating = dynamic(() => import('../components/overall-rating'))
+const AmazonProduct = dynamic(() => import('../components/amazon-product'))
+const BestBuyProduct = dynamic(() => import('../components/bestbuy-product'))
+const ProductReviewCarousel = dynamic(() => import('../components/product-review-carousel'))
 
 export default function Post({ post, related, nav }) {
 
@@ -112,14 +114,14 @@ export default function Post({ post, related, nav }) {
                                 </div>
                             </div>
                             {post.productReviewFields.productReview &&
-                                <div className='flex flex-wrap'>
-                                    <div className='flex items-center text-xl mb-3 mr-5'>
+                                <div className='flex justify-between lg:justify-start'>
+                                    <div className='flex items-center lg:text-xl mb-3 mr-5'>
                                         <div className='font-semibold mr-3'>
                                             Overall
                                         </div>
                                         <OverallRating starCount={post.productReviewFields.overallRating}/>
                                     </div>
-                                    <div className='flex items-center text-xl mb-3 mr-5'>
+                                    <div className='flex items-center lg:text-xl mb-3 mr-5'>
                                         <div className='font-semibold mr-3'>
                                             Price
                                         </div>
@@ -148,10 +150,10 @@ export default function Post({ post, related, nav }) {
                                         </div>
                                         {post.productReviewFields.pros.map((el) => (
                                             <div className='flex' key={el.pro}>
-                                                <div className='pt-1 mr-1 text-blue-400'>
+                                                <div className='pt-1 mr-1 text-lg text-blue-400'>
                                                     <AiOutlinePlus/>
                                                 </div>
-                                                <div>
+                                                <div className='text-lg'>
                                                     {el.pro}
                                                 </div>
                                             </div>
@@ -163,10 +165,10 @@ export default function Post({ post, related, nav }) {
                                         </div>
                                         {post.productReviewFields.cons.map((el) => (
                                             <div className='flex' key={el.con}>
-                                                <div className='pt-1 mr-1 text-red-500'>
+                                                <div className='pt-1 mr-1 text-lg text-red-500'>
                                                     <AiOutlineMinus/>
                                                 </div>
-                                                <div>
+                                                <div className='text-lg'>
                                                     {el.con}
                                                 </div>
                                             </div>
@@ -175,18 +177,15 @@ export default function Post({ post, related, nav }) {
                                 </div>
                             }
                             {post.productReviewFields.productReview &&
+                                <>
+                                    <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
                                     <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                                </>
                             }
                             {post.productReviewFields.productReview &&
                                 <>
                                     <div className='my-12'>
-                                        <Carousel>
-                                            {post.productReviewFields.productGallery.map((el) => (
-                                                <div key={el.id}>
-                                                    <img src={el.sourceUrl}/>
-                                                </div>
-                                            ))}
-                                        </Carousel>
+                                        <ProductReviewCarousel images={post.productReviewFields.productGallery} />
                                     </div>
                                     <div className='mb-8'>
                                         <h1 className='text-3xl font-semibold mb-5'>
@@ -227,7 +226,10 @@ export default function Post({ post, related, nav }) {
                             }
                             <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
                             {post.productReviewFields.productReview &&
-                                <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                                <>
+                                    <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
+                                    <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                                </>
                             }
                             {!post.productReviewFields.productReview && 
                                 <div className='sm:flex w-full gap-3'>

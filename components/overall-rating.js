@@ -3,12 +3,11 @@ import { IoMdStarHalf } from '@react-icons/all-files/io/IoMdStarHalf'
 import { IoMdStar } from '@react-icons/all-files/io/IoMdStar'
 
 export default function OverallRating({starCount}) {
-    console.log(starCount)
     
     return (
         <>
             {starCount === '.5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue lg:text-2xl'>
                     <IoMdStarHalf/>
                     <IoMdStarOutline/>
                     <IoMdStarOutline/>
@@ -17,7 +16,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '1' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStarOutline/>
                     <IoMdStarOutline/>
@@ -26,7 +25,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '1.5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStarHalf/>
                     <IoMdStarOutline/>
@@ -35,7 +34,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '2' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStarOutline/>
@@ -44,7 +43,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '2.5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStarHalf/>
@@ -53,7 +52,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '3' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStar/>
@@ -62,7 +61,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '3.5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStar/>
@@ -71,7 +70,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '4' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStar/>
@@ -80,7 +79,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '4.5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStar/>
@@ -89,7 +88,7 @@ export default function OverallRating({starCount}) {
                 </div>
             }
             {starCount === '5' &&
-                <div className='flex text-smart-blue text-3xl'>
+                <div className='flex text-smart-blue text-xl lg:text-2xl'>
                     <IoMdStar/>
                     <IoMdStar/>
                     <IoMdStar/>
