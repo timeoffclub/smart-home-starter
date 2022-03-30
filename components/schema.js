@@ -38,7 +38,7 @@ export default function Schema({ post }) {
                 <script 
                     type='application/ld+json' 
                     dangerouslySetInnerHTML={{__html: 
-                        `
+                        `{
                             '@context': 'https://schema.org/',
                                 '@type': 'Product',
                                 'name': ${post.productReviewFields.productName},
@@ -56,7 +56,7 @@ export default function Schema({ post }) {
                                         'name': 'Trae Jacobs'
                                     }
                                 }
-                        `
+                        }`
                     }}
                 >
                 </script>
