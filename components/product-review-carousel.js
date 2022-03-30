@@ -7,7 +7,7 @@ export default function ProductReviewCarousel({ images }) {
             <Carousel>
                 {images.map((el) => (
                     <div key={el.id}>
-                        <img src={el.sourceUrl}/>
+                        <img src={el.sourceUrl} alt={el.altText}/>
                     </div>
                 ))}
             </Carousel>

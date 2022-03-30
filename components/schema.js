@@ -1,10 +1,10 @@
-import Head from "next/head"
+import Head from 'next/head'
 export default function Schema({ post }) {
 
     console.log(post.productReviewFields.productName)
 
     const formatExcerpt = (str) => {
-        return str.replace(/(<([^>]+)>)/gi, "")
+        return str.replace(/(<([^>]+)>)/gi, '')
     }
     
     let sourceUrl
@@ -19,42 +19,43 @@ export default function Schema({ post }) {
                 {post.title}
             </title>
             <meta
-                name="description"
+                name='description'
                 content={formatExcerpt(post.excerpt)}
-                key="desc"
+                key='desc'
             />
-            <meta property="og:title" content={post.title} />
+            <meta property='og:title' content={post.title} />
             <meta
-                property="og:description"
+                property='og:description'
                 content={formatExcerpt(post.excerpt)}
             />
             {post.featuredImage &&
                 <meta
-                    property="og:image"
+                    property='og:image'
                     content={sourceUrl}
                 />
             }
             {post.productReviewFields.productReview &&
-                <script type="application/ld+json">
-                    {`
-                        "@context": "https://schema.org/",
-                        "@type": "Product",
-                        "name": ${post.productReviewFields.productName},
-                        "image": ${sourceUrl},
-                        "description": ${post.productReviewFields.tldr},
-                        "review": {
-                            "@type": "Review",
-                            "reviewRating": {
-                            "@type": "Rating",
-                            "ratingValue": ${post.productReviewFields.overallRating},
-                            "bestRating": "5"
-                            },
-                            "author": {
-                            "@type": "Person",
-                            "name": "Trae Jacobs"
+                <script type='application/ld+json'>{`
+                    {
+                        '@context': 'https://schema.org/',
+                            '@type': 'Product',
+                            'name': ${post.productReviewFields.productName},
+                            'image': ${sourceUrl},
+                            'description': ${post.productReviewFields.tldr},
+                            'review': {
+                                '@type': 'Review',
+                                'reviewRating': {
+                                    '@type': 'Rating',
+                                    'ratingValue': ${post.productReviewFields.overallRating},
+                                    'bestRating': '5'
+                                },
+                                    'author': {
+                                    '@type': 'Person',
+                                    'name': 'Trae Jacobs'
+                                }
                             }
-                        }
-                    `}
+                    }
+                `}
                 </script>
             }
         </Head>
