@@ -42,7 +42,7 @@ export default function Schema({ post }) {
                             "@context": "https://schema.org/",
                             "@type": "Product",
                             "name": "${post.productReviewFields.productName}",
-                            "image": ${sourceUrl},
+                            "image": [${sourceUrl}],
                             "description": "${post.productReviewFields.tldr}",
                             "review": {
                                 "@type": "Review",
