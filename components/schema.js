@@ -40,22 +40,22 @@ export default function Schema({ post }) {
                     dangerouslySetInnerHTML={{__html: 
                         `{
                             "@context": "https://schema.org/",
-                                "@type": "Product",
-                                "name": ${post.productReviewFields.productName},
-                                "image": ${sourceUrl},
-                                "description": ${post.productReviewFields.tldr},
-                                "review": {
-                                    "@type": "Review",
-                                    "reviewRating": {
-                                        "@type": "Rating",
-                                        "ratingValue": ${post.productReviewFields.overallRating},
-                                        "bestRating": "5"
-                                    },
-                                        "author": {
-                                        "@type": "Person",
-                                        "name": "Trae Jacobs"
-                                    }
+                            "@type": "Product",
+                            "name": "${post.productReviewFields.productName}",
+                            "image": ${sourceUrl},
+                            "description": "${post.productReviewFields.tldr}",
+                            "review": {
+                                "@type": "Review",
+                                "reviewRating": {
+                                    "@type": "Rating",
+                                    "ratingValue": "${post.productReviewFields.overallRating}",
+                                    "bestRating": "5"
+                                },
+                                    "author": {
+                                    "@type": "Person",
+                                    "name": "Trae Jacobs"
                                 }
+                            }
                         }`
                     }}
                 >
