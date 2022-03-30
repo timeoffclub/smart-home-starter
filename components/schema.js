@@ -38,17 +38,17 @@ export default function Schema({ post }) {
                 <script 
                     type='application/ld+json' 
                     dangerouslySetInnerHTML={{__html: 
-                        {
+                        `{
                             '@context': 'https://schema.org/',
                                 '@type': 'Product',
-                                'name': post.productReviewFields.productName,
-                                'image': sourceUrl,
-                                'description': post.productReviewFields.tldr,
+                                'name': ${post.productReviewFields.productName},
+                                'image': ${sourceUrl},
+                                'description': ${post.productReviewFields.tldr},
                                 'review': {
                                     '@type': 'Review',
                                     'reviewRating': {
                                         '@type': 'Rating',
-                                        'ratingValue': post.productReviewFields.overallRating,
+                                        'ratingValue': ${post.productReviewFields.overallRating},
                                         'bestRating': '5'
                                     },
                                         'author': {
@@ -56,7 +56,7 @@ export default function Schema({ post }) {
                                         'name': 'Trae Jacobs'
                                     }
                                 }
-                        }
+                        }`
                     }}
                 >
                 </script>
