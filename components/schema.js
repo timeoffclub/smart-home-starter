@@ -35,25 +35,30 @@ export default function Schema({ post }) {
                 />
             }
             {post.productReviewFields.productReview &&
-                <script type='application/ld+json'>{`
-                    '@context': 'https://schema.org/',
-                        '@type': 'Product',
-                        'name': ${post.productReviewFields.productName},
-                        'image': ${sourceUrl},
-                        'description': ${post.productReviewFields.tldr},
-                        'review': {
-                            '@type': 'Review',
-                            'reviewRating': {
-                                '@type': 'Rating',
-                                'ratingValue': ${post.productReviewFields.overallRating},
-                                'bestRating': '5'
-                            },
-                                'author': {
-                                '@type': 'Person',
-                                'name': 'Trae Jacobs'
-                            }
+                <script 
+                    type='application/ld+json' 
+                    dangerouslySetInnerHTML={{__html: 
+                        {
+                            '@context': 'https://schema.org/',
+                                '@type': 'Product',
+                                'name': post.productReviewFields.productName,
+                                'image': sourceUrl,
+                                'description': post.productReviewFields.tldr,
+                                'review': {
+                                    '@type': 'Review',
+                                    'reviewRating': {
+                                        '@type': 'Rating',
+                                        'ratingValue': post.productReviewFields.overallRating,
+                                        'bestRating': '5'
+                                    },
+                                        'author': {
+                                        '@type': 'Person',
+                                        'name': 'Trae Jacobs'
+                                    }
+                                }
                         }
-                `}
+                    }}
+                >
                 </script>
             }
         </Head>
