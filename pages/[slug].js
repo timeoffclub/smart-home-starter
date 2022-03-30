@@ -15,6 +15,7 @@ import { AiOutlineMinus } from '@react-icons/all-files/ai/AiOutlineMinus'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
+import Schema from '../components/schema'
 
 // Let's dynamically load product review components
 const PriceRating = dynamic(() => import('../components/price-rating'))
@@ -31,10 +32,6 @@ export default function Post({ post, related, nav }) {
 
     const specsToggle = () => {
         setExpandSpecs(!expandSpecs)
-    }
-
-    const formatExcerpt = (str) => {
-        return str.replace(/(<([^>]+)>)/gi, '')
     }
 
     const formatDate = (date) => {
@@ -56,27 +53,7 @@ export default function Post({ post, related, nav }) {
                 </div>
             ) : (
                 <>
-                    <Head>
-                        <title>
-                            {post.title}
-                        </title>
-                        <meta
-                            name='description'
-                            content={formatExcerpt(post.excerpt)}
-                            key='desc'
-                        />
-                        <meta property='og:title' content={post.title} />
-                        <meta
-                            property='og:description'
-                            content={formatExcerpt(post.excerpt)}
-                        />
-                        {post.featuredImage &&
-                            <meta
-                                property='og:image'
-                                content={post.featuredImage.node.sourceUrl}
-                            />
-                        }
-                    </Head>
+                    <Schema post={post}/>
                     <Header menu={nav}/>
                     <div className='container grid grid-cols-3 px-6 lg:px-22 xl:px-40 gap-5 my-12'>
                         <div className='col-span-3 lg:col-span-2'>
@@ -354,7 +331,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
             posts: data.posts,
             nav: navigationObject
         },
-        revalidate: 86400
+        // If it's a product review revalidate set to 90 seconds
+        revalidate: !data.post.productReviewFields.productReview ? 86400 : 90
     }
     
 }

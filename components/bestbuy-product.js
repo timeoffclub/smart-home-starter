@@ -28,7 +28,7 @@ export default function BestBuyProduct({ sku }) {
 
     return (
         <>
-            {productData ?
+            {productData &&
                 <div className='flex justify-center'>
                     {state === 'SUCCESS' &&
                         <a className='w-full lg:w-1/2' href={productData.url} target='_blank' rel='noreferrer'>
@@ -40,8 +40,6 @@ export default function BestBuyProduct({ sku }) {
                         </a>
                     }
                 </div>
-             : 
-                console.log('The product referenced is no longer valid, so the button is hidden.')
             }
         </>
     )
