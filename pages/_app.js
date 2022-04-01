@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
         <>
             <Script
                 id='load-ads'
-                strategy='lazyOnload'
+                strategy='afterInteractive'
                 dangerouslySetInnerHTML={{
                     __html: `
                     (function(w, d) {
