@@ -166,7 +166,7 @@ export default function Post({ post, related, nav }) {
                                     </div>
                                     <div className='mb-8'>
                                         <h1 className='text-3xl font-semibold mb-5'>
-                                            Specs
+                                            Specs and Features
                                         </h1>
                                         {post.productReviewFields.specifications[0].specification.map((el, index) => (
                                             !expandSpecs ?
@@ -199,6 +199,10 @@ export default function Post({ post, related, nav }) {
                                             </div>
                                         }
                                     </div>
+                                    <div>
+                                        
+                                    </div>
+
                                 </>
                             }
                             <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>

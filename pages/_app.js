@@ -31,6 +31,17 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
 
+        import('react-facebook-pixel')
+        .then((x) => x.default)
+        .then((ReactPixel) => {
+            ReactPixel.init(process.env.NEXT_PUBLIC_FB_PIXEL_ID)
+            ReactPixel.pageView()
+            
+            router.events.on('routeChangeComplete', () => {
+                ReactPixel.pageView()
+            })
+        })
+
         const handleRouteChange = (url) => {
             gtag.pageview(url)
         }
