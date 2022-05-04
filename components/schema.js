@@ -34,6 +34,7 @@ export default function Schema({ post }) {
                     content={sourceUrl}
                 />
             }
+            // Usually we would want to do this with next-script, but adthrive wants it in the head
             <script
                 id='load-ads'
                 dangerouslySetInnerHTML={{
