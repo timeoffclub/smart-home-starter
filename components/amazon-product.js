@@ -15,6 +15,7 @@ export default function AmazonProduct({ productId }) {
     
             try {
                 const response = await axios.post('../api/amazon-product', { productId })
+                console.log(response)
                 setProductData(response.data.data)
                 setState('SUCCESS')
             } catch (e) {

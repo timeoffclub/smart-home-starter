@@ -1,7 +1,7 @@
 import Head from "next/head"
 export default function Schema({ post }) {
 
-    console.log(post.productReviewFields.productName)
+    console.log(post.postFields.productName)
 
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, "")
@@ -15,19 +15,44 @@ export default function Schema({ post }) {
     
     return (
         <Head>
-            <title>
-                {post.title}
-            </title>
-            <meta
-                name="description"
-                content={formatExcerpt(post.excerpt)}
-                key="desc"
-            />
-            <meta property="og:title" content={post.title} />
-            <meta
-                property="og:description"
-                content={formatExcerpt(post.excerpt)}
-            />
+            {post.postFields.seoTitle ?
+                <title>
+                    {post.postFields.seoTitle}
+                </title>
+            :
+                <title>
+                    {post.title}
+                </title>
+            }
+            {post.postFields.seoDescription ?
+                <meta
+                    name="description"
+                    content={formatExcerpt(post.postFields.seoDescription)}
+                    key="desc"
+                />
+            :
+                <meta
+                    name="description"
+                    content={formatExcerpt(post.excerpt)}
+                    key="desc"
+                />
+            }
+            {post.postFields.seoTitle ?
+                <meta property="og:title" content={post.postFields.seoTitle} />
+            :
+                <meta property="og:title" content={post.title} />
+            }
+            {post.postFields.seoDescription ?
+                <meta
+                    property="og:description"
+                    content={formatExcerpt(post.postFields.seoDescription)}
+                />
+            :
+                <meta
+                    property="og:description"
+                    content={formatExcerpt(post.excerpt)}
+                />
+            }
             {post.featuredImage &&
                 <meta
                     property="og:image"
