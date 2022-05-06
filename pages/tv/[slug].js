@@ -37,8 +37,8 @@ export default function TvQuery() {
         <div>
             {state === 'SUCCESS' &&
                 <>
-                    {productData.SearchResult.Items.map((el) => (
-                        <div>
+                    {productData.SearchResult.Items.map((el, index) => (
+                        <div key={index}>
                             {el.ItemInfo.Title.DisplayValue}
                         </div>
                     ))}
