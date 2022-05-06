@@ -2,7 +2,7 @@
 // The wrapper is here: https://www.npmjs.com/package/amazon-paapi
 const amazonPaapi = require('amazon-paapi');
 
-function getRequestParams(productId) {
+function getRequestParams(query) {
     
     const commonParameters = { 
         'AccessKey'  : process.env.NEXT_PUBLIC_AMZN_ACCESS_KEY,
@@ -13,19 +13,15 @@ function getRequestParams(productId) {
     }
     
     const requestParameters = {
-        'ItemIds'   : [productId], // array of ASIN ID. Maximum is 10.
-        'ItemIdType': 'ASIN', // Optional. Default value is 'ASIN' and the only value available. If you wish to use UPC and other types please use searchItems.
-        'Condition' : 'New', 
-        'Resources' : [ /** Array of resources. For more details, refer: https://webservices.amazon.com/paapi5/documentation/get-items.html#resources-parameter */
-            // 'Images.Primary.Medium', 
+        Keywords: query,
+        SearchIndex: 'All',
+        ItemCount: 10,
+        Resources: [
             'ItemInfo.Title',
+            'ItemInfo.Features',
+            'ItemInfo.ProductInfo',
             'Offers.Listings.Price'
-        ]
-        // CurrencyOfPreference : , //Optional properties...
-        // LanguagesOfPreference : ,
-        // Merchant : ,
-        // OfferCount : ,
-        // Properties : 
+        ],
     }
 
     return {
@@ -38,15 +34,16 @@ function getRequestParams(productId) {
 
 
 export default async function handler(req, res) {
-    const { productId } = req.body
+    const { query } = req.body
 
-    const {commonParameters, requestParameters} = getRequestParams(productId)
+    const {commonParameters, requestParameters} = getRequestParams(query)
     // Cache response to reduce API calls
     res.setHeader('Cache-Control', 's-maxage=86400')
 
-    amazonPaapi.GetItems(commonParameters, requestParameters)
+    amazonPaapi.SearchItems(commonParameters, requestParameters)
     .then(response => {
-        return res.status(201).json({ data: response.ItemsResult.Items[0] })
+        console.log(response)
+        return res.status(201).json({ data: response })
     })
     .catch(error => {
         return res.status(400).json({
