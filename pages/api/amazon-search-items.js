@@ -15,11 +15,12 @@ function getRequestParams(query) {
     const requestParameters = {
         Keywords: query,
         SearchIndex: 'All',
-        ItemCount: 10,
+        ItemCount: 4,
         Resources: [
             'ItemInfo.Title',
             'ItemInfo.Features',
             'ItemInfo.ProductInfo',
+            'ItemInfo.ManufactureInfo',
             'Offers.Listings.Price'
         ],
     }

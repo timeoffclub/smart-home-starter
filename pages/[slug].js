@@ -68,7 +68,7 @@ export default function Post({ post, related, nav }) {
                             <div className='flex justify-between items-baseline mb-2'>
                                 {!post.productReviewFields.productReview &&
                                     <div className='text-lg'>
-                                        {formatDate(post.date)}
+                                        Last Updated {formatDate(post.modified)}
                                     </div>
                                 }
                                 <div className='flex mb-3 text-3xl'>
