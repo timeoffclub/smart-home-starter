@@ -78,7 +78,7 @@ export default function Output({nav}) {
                                 A <span className='font-bold'>{width}</span> <span className='capitalize font-bold'>{brand}</span> <span className='uppercase'>{hardware}</span> weighs <span className='font-bold'>{avgWeight}</span>lbs.
                             </div>
                             <div className='text-2xl'>
-                                We have used the average of <span className='font-bold'>{productData.SearchResult.Items.length}</span> different <span className='font-bold capitalize'>{brand}</span> TV's.
+                                We have used the average of <span className='font-bold'>{productData.SearchResult.Items.length}</span> different <span className='font-bold capitalize'>{brand}</span> TV&apos;s.
                             </div>
                             <div className='my-12'>
                                 {productData.SearchResult.Items.map((el, index) => (
