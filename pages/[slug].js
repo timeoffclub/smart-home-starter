@@ -119,11 +119,6 @@ export default function Post({ post, related, nav }) {
                                     />
                                 </div>
                             }
-                            {post.productReviewFields.productReview && 
-                                <div className='mt-12'>
-                                    <div className='unreset' dangerouslySetInnerHTML={{__html: post.productReviewFields.leadin}}></div>
-                                </div>
-                            }
                             {post.productReviewFields.productReview &&
                                 <div className='grid lg:grid-cols-2 my-8'>
                                     <div className='mb-3 lg:mb-0'>
@@ -163,6 +158,11 @@ export default function Post({ post, related, nav }) {
                                     <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
                                     <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
                                 </>
+                            }
+                            {post.productReviewFields.productReview && 
+                                <div className='mt-12'>
+                                    <div className='unreset' dangerouslySetInnerHTML={{__html: post.productReviewFields.leadin}}></div>
+                                </div>
                             }
                             {post.productReviewFields.productReview &&
                                 <>
