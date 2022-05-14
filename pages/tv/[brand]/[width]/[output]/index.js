@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getNavigation } from '../../../../../lib/api'
+import { FacebookShareButton, TwitterShareButton } from 'react-share'
+import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
+import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 
 import Header from '../../../../../components/header'
 import Footer from '../../../../../components/footer'
@@ -10,9 +14,9 @@ import Schema from '../../../../../components/schema'
 export default function Output({nav}) {
     const router = useRouter()
     const hardware = router.asPath.split('/')[1]
-    const output = router.asPath.split('/')[2]
-    const brand = router.asPath.split('/')[3]
-    const width = router.asPath.split('/')[4]
+    const brand = router.asPath.split('/')[2]
+    const width = router.asPath.split('/')[3]
+    const output = router.asPath.split('/')[4]
     const query = `${brand} ${hardware} ${width}`
     console.log(query)
 
@@ -20,6 +24,7 @@ export default function Output({nav}) {
     const [state, setState] = useState('IDLE')
     const [errorMessage, setErrorMessage] = useState(null)
     const [avgWeight, setAvgWeight] = useState(null)
+    const [canCarry, setCanCarry] = useState(null)
     
 
     useEffect(() => {
@@ -51,12 +56,24 @@ export default function Output({nav}) {
     const getAvgWeight = (data) => {
         let arr = []
         data.SearchResult.Items.forEach((el) => {
-            if (el.ItemInfo.ProductInfo.ItemDimensions.Weight !== undefined) {
-                arr.push(el.ItemInfo.ProductInfo.ItemDimensions.Weight.DisplayValue)
+            // Check that the ItemDimensions and Weight resource properties exist because they do not always
+            if (el.ItemInfo.ProductInfo.ItemDimensions !== undefined) {
+                el.ItemInfo.ProductInfo.ItemDimensions.Weight !== undefined && arr.push(el.ItemInfo.ProductInfo.ItemDimensions.Weight.DisplayValue)
             }
         })
         let avg = arr.reduce((a, b) => a + b) / arr.length
         setAvgWeight(avg.toFixed())
+        getCanCarry(avg)
+    }
+
+    const getCanCarry = (avg) => {
+        if (avg < 30) {
+            setCanCarry('An average person should be able to carry this on their own.')
+        } else if (avg > 30 && avg < 50) {
+            setCanCarry('Most people will need some help carrying this item.')
+        } else {
+            setCanCarry('You will need some help and possibly some equipment to transport this item.')
+        }
     }
 
     return (
@@ -74,11 +91,39 @@ export default function Output({nav}) {
                                     How Much Does a {width} <span className='capitalize'>{brand}</span> <span className='uppercase'>{hardware}</span> Weigh?
                                 </h1>
                             </div>
-                            <div className='text-2xl mb-4'>
-                                A <span className='font-bold'>{width}</span> <span className='capitalize font-bold'>{brand}</span> <span className='uppercase'>{hardware}</span> weighs <span className='font-bold'>{avgWeight}</span>lbs.
+                            <div className='flex justify-between items-baseline mb-2'>
+                                <div className='flex mb-3 text-3xl'>
+                                    <div className='mr-3'>
+                                        <FacebookShareButton
+                                            url={`https://smarthomestarter.com/${router.asPath}`}
+                                            hashtag={`#smart home`}
+                                        >
+                                            <FaFacebookSquare className='text-smart-blue hover:text-smart-teal' />
+                                        </FacebookShareButton>
+                                    </div>
+                                    <div>
+                                        <TwitterShareButton
+                                            url={`https://smarthomestarter.com/${router.asPath}`}
+                                            hashtag={`#smart home`}
+                                        >
+                                            <FaTwitterSquare className='text-smart-blue hover:text-smart-teal' />
+                                        </TwitterShareButton>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='text-2xl'>
-                                We have used the average of <span className='font-bold'>{productData.SearchResult.Items.length}</span> different <span className='font-bold capitalize'>{brand}</span> TV&apos;s.
+                            <div className='relative h-96 mb-5'>
+                                <Image 
+                                    className='transition-all ease-in duration-500'
+                                    src={productData.SearchResult.Items[0].Images.Primary.Large.URL}
+                                    alt={brand}
+                                    objectFit='cover'
+                                    layout='fill'
+                                    sizes='50vw'
+                                    priority
+                                />
+                            </div>
+                            <div className='text-xl mb-4'>
+                                A <span className='font-bold'>{width}</span> <span className='capitalize font-bold'>{brand}</span> <span className='uppercase'>{hardware}</span> weighs an average of <span className='font-bold'>{avgWeight}</span>lbs. {canCarry} We have used the average of <span className='font-bold'>{productData.SearchResult.Items.length}</span> different <span className='font-bold capitalize'>{brand}</span> TV&apos;s.
                             </div>
                             <div className='my-12'>
                                 {productData.SearchResult.Items.map((el, index) => (
@@ -90,9 +135,6 @@ export default function Output({nav}) {
                                             <div>
                                                 TV Specs and Dimensions:
                                             </div>
-                                        </div>
-                                        <div className='text-lg'>
-                                            Product Dimensions: {el.ItemInfo.ProductInfo.ItemDimensions.Height.DisplayValue} x {el.ItemInfo.ProductInfo.ItemDimensions.Length.DisplayValue} x {el.ItemInfo.ProductInfo.ItemDimensions.Width.DisplayValue}
                                         </div>
                                         {el.ItemInfo.ManufactureInfo.Model !== undefined &&
                                             <div className='text-lg'>

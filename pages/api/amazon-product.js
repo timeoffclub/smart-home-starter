@@ -46,6 +46,7 @@ export default async function handler(req, res) {
 
     amazonPaapi.GetItems(commonParameters, requestParameters)
     .then(response => {
+        console.log(res)
         return res.status(201).json({ data: response.ItemsResult.Items[0] })
     })
     .catch(error => {

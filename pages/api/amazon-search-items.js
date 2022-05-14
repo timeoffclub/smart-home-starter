@@ -17,12 +17,14 @@ function getRequestParams(query) {
         SearchIndex: 'All',
         ItemCount: 4,
         Resources: [
+            'Images.Primary.Large',
             'ItemInfo.Title',
             'ItemInfo.Features',
             'ItemInfo.ProductInfo',
             'ItemInfo.ManufactureInfo',
             'Offers.Listings.Price'
         ],
+        SortBy: 'AvgCustomerReviews'
     }
 
     return {

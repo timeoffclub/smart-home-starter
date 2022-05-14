@@ -4,7 +4,7 @@ const moduleExports = {
     reactStrictMode: true,
     trailingSlash: true,
     images: {
-        domains: ['localhost', 'shsprods.wpengine.com', 'shsstag.wpengine.com'],
+        domains: ['localhost', 'shsprods.wpengine.com', 'shsstag.wpengine.com', 'm.media-amazon.com'],
     },
     async redirects() {
         return [

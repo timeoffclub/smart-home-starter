@@ -119,6 +119,11 @@ export default function Post({ post, related, nav }) {
                                     />
                                 </div>
                             }
+                            {post.productReviewFields.productReview && 
+                                <div className='mt-12'>
+                                    <div className='unreset' dangerouslySetInnerHTML={{__html: post.productReviewFields.leadin}}></div>
+                                </div>
+                            }
                             {post.productReviewFields.productReview &&
                                 <div className='grid lg:grid-cols-2 my-8'>
                                     <div className='mb-3 lg:mb-0'>
@@ -271,7 +276,7 @@ export default function Post({ post, related, nav }) {
                             <div className='border-y-2 border-y-gray-500 py-12 my-14'>
                                 {post.productReviewFields.productReview &&
                                     <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
-                                            Get product reviews straight to your inbox
+                                        Get product reviews straight to your inbox
                                     </div>
                                 }
                                 {!post.productReviewFields.productReview &&

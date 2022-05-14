@@ -30,7 +30,7 @@ export default function AmazonProduct({ productId }) {
     return (
         <>
             {productData &&
-                productData.Offers.Listings[0].ViolatesMAP === false ?
+                productData.Offers.Listings[0].ViolatesMAP === false &&
                     <div className='flex justify-center'>
                         {state === 'SUCCESS' &&
                             <a className='w-full lg:w-1/2' href={productData.DetailPageURL} target='_blank' rel='noreferrer'>
@@ -42,8 +42,6 @@ export default function AmazonProduct({ productId }) {
                             </a>
                         }
                     </div>
-                :
-                    console.log('Product not shown because it violates Amazon minimum advertised price policy')
             }
         </>
     )
