@@ -233,8 +233,6 @@ export default function Post({ post, related, nav }) {
                             }
                         </div>
                         <div className='hidden lg:inline col-span-1'>
-                            <div className='sidebar-ad w-full mb-14'>
-                            </div>
                             {!post.productReviewFields.productReview ?
                                 <>
                                     <div className='text-3xl font-semibold mb-5'>
@@ -273,6 +271,8 @@ export default function Post({ post, related, nav }) {
                                         </div>
                                     </>
                             }
+                            <div className='sidebar-ad w-full mb-14'>
+                            </div>
                             <div className='border-y-2 border-y-gray-500 py-12 my-14'>
                                 {post.productReviewFields.productReview &&
                                     <div className='text-4xl text-smart-blue font-semibold mb-5 tracking-wider'>
