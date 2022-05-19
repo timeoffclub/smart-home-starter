@@ -1,8 +1,6 @@
 import Head from "next/head"
 export default function Schema({ post }) {
 
-    console.log(post.postFields.productName)
-
     const formatExcerpt = (str) => {
         return str.replace(/(<([^>]+)>)/gi, "")
     }

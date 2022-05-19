@@ -15,7 +15,7 @@ function getRequestParams(query) {
     const requestParameters = {
         Keywords: query,
         SearchIndex: 'All',
-        ItemCount: 4,
+        ItemCount: 10,
         Resources: [
             'Images.Primary.Large',
             'ItemInfo.Title',
@@ -23,8 +23,7 @@ function getRequestParams(query) {
             'ItemInfo.ProductInfo',
             'ItemInfo.ManufactureInfo',
             'Offers.Listings.Price'
-        ],
-        SortBy: 'AvgCustomerReviews'
+        ]
     }
 
     return {
@@ -45,7 +44,6 @@ export default async function handler(req, res) {
 
     amazonPaapi.SearchItems(commonParameters, requestParameters)
     .then(response => {
-        console.log(response)
         return res.status(201).json({ data: response })
     })
     .catch(error => {
