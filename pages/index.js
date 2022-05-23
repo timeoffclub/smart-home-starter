@@ -53,7 +53,9 @@ export default function Home({ top, hardware, brands, nav }) {
             </Head>
             <Header menu={navigationObject}/>
             <main className='adthrive-body'>
-                <div className='adthrive-top-ad-container w-full mt-14'>
+                <div className='container px-6  2xl:px-0'>
+                    <div className='adthrive-top-ad-container w-full mt-14'>
+                    </div>
                 </div>
                 <div className='container mt-14'>
                     <HomeFeatured myArticles={top.nodes} myCategory={'Featured'}/>

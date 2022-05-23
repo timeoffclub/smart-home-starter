@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
 import axios from 'axios'
 import { getNavigation } from '../../../../lib/api'
 import Newsletter from '../../../../components/newsletter'
@@ -41,6 +42,32 @@ export default function Width({nav}) {
 
     return (
         <>
+            <Head>
+                <title>Smart Home Starter - TV Brand and Width</title>
+                <meta name="description" content="We are two guys into tech exploring the world of smart home technology. We wanted to share some of our favorites with you!" />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="google-site-verification" content="F4mea1tErzcEzFPCTRuzYG1F3gkXIG12ipkpqKvs-e4" />
+                <script
+                    id='load-ads'
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                        (function(w, d) {
+                            w.adthrive = w.adthrive || {};
+                            w.adthrive.cmd = w.adthrive.cmd || [];
+                            w.adthrive.plugin = 'adthrive-ads-manual';
+                            w.adthrive.host = 'ads.adthrive.com';
+                        
+                            var s = d.createElement('script');
+                            s.async = true;
+                            s.referrerpolicy='no-referrer-when-downgrade';
+                            s.src = 'https://' + w.adthrive.host + '/sites/6164a6ff014ece4bc4e34c23/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                            var n = d.getElementsByTagName('script')[0];
+                            n.parentNode.insertBefore(s, n);
+                        })(window, document);
+                        `,
+                    }}
+                />
+            </Head>
             <Header menu={nav}/>
             {state === 'SUCCESS' &&
                 <div className='container grid grid-cols-3 px-6 lg:px-22 xl:px-40 gap-5 my-12'>
