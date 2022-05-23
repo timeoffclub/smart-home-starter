@@ -3,38 +3,41 @@ import { getPostsWithSlug, getCategories } from "../../lib/api"
 const EXTERNAL_DATA_URL = 'https://smarthomestarter.com'
 
 function generateSiteMap(posts, categories) {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <!--We manually set the two URLs we know already-->
-     <url>
-       <loc>${EXTERNAL_DATA_URL}/contact-us/</loc>
-     </url>
-     <url>
-       <loc>${EXTERNAL_DATA_URL}/search/</loc>
-     </url>
-     ${categories
-       .map((el) => {
-         return `
-       <url>
-           <loc>${`${EXTERNAL_DATA_URL}/category/${el.node.slug}/`}</loc>
-       </url>
-     `
-       })
-       .join('')}
-     ${posts.posts.edges
-       .map((el) => {
-         return `
-       <url>
-           <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}/`}</loc>
-           <lastmod>${el.node.modified + '+00:00'}</lastmod>
-       </url>
-     `
-       })
-       .join('')}
-   </urlset>
- `
+    return `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <!--We manually set the two URLs we know already-->
+            <url>
+                <loc>${EXTERNAL_DATA_URL}/contact-us/</loc>
+            </url>
+            <url>
+                <loc>${EXTERNAL_DATA_URL}/search/</loc>
+            </url>
+            ${categories
+                .map((el) => {
+                    return `
+                    <url>
+                        <loc>${`${EXTERNAL_DATA_URL}/category/${el.node.slug}/`}</loc>
+                    </url>
+                    `
+                })
+                .join('')
+            }
+            ${posts.posts.edges
+                .map((el) => {
+                    return `
+                    <url>
+                        <loc>${`${EXTERNAL_DATA_URL}/${el.node.slug}/`}</loc>
+                        <lastmod>${el.node.modified + '+00:00'}</lastmod>
+                    </url>
+                    `
+                })
+                .join('')
+            }
+        </urlset>
+    `
 }
-
+        
 function SiteMap() {
     // getServerSideProps will do the heavy lifting
 }
@@ -57,7 +60,7 @@ async function getAllPostsWithSlug() {
 }
 
 async function getAllCategories() {
-	let data = []
+    let data = []
     let endCursor = null
     let hasNextPage = true
     do {
@@ -66,8 +69,8 @@ async function getAllCategories() {
         hasNextPage = await res?.pageInfo.hasNextPage
         data.push(...res.edges)
     } while (hasNextPage)
-
-	return data
+    
+    return data
 }
 
 export async function getServerSideProps({ res }) {

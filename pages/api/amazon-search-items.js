@@ -22,7 +22,9 @@ function getRequestParams(query) {
             'ItemInfo.Features',
             'ItemInfo.ProductInfo',
             'ItemInfo.ManufactureInfo',
-            'Offers.Listings.Price'
+            'Offers.Listings.Price',
+            'BrowseNodeInfo.BrowseNodes.SalesRank',
+            'BrowseNodeInfo.WebsiteSalesRank'
         ]
     }
 

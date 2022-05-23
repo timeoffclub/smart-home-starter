@@ -1,17 +1,16 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getNavigation } from '../../../lib/api'
-import Newsletter from '../../../components/newsletter'
-import Header from '../../../components/header'
-import Footer from '../../../components/footer'
-import Schema from '../../../components/schema'
+import { getNavigation } from '../../lib/api'
+import Newsletter from '../../components/newsletter'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
+import Schema from '../../components/schema'
 
-export default function Brand({nav}) {
+export default function Tv({nav}) {
     const router = useRouter()
     const hardware = router.asPath.split('/')[1]
-    const brand = router.asPath.split('/')[2]
-    const routeSearch = `${brand} ${hardware}`
+    const routeSearch = `${hardware}`
 
     const [state, setState] = useState('IDLE')
     const [errorMessage, setErrorMessage] = useState(null)
@@ -34,7 +33,7 @@ export default function Brand({nav}) {
     }, [routeSearch])
 
     const getArrDBMatches = async (term) => {
-        const data = await axios.post('../../../api/find-paapi-search', { query: term, type: 'contains' } )
+        const data = await axios.post('../../api/find-paapi-search', { query: term, type: 'contains' } )
         // We also need to filter out results whose terms do not contain 'tv' once we have other types of hardware in the DB
         return data.data.data.filter((el) => el.data.output !== 'none')
     }
@@ -50,14 +49,14 @@ export default function Brand({nav}) {
                         </div>
                         <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
                             <h1>
-                                <span className='capitalize'>{brand}</span> <span className='uppercase'>{hardware}</span> links
+                                <span className='uppercase'>{hardware}</span> links
                             </h1>
                         </div>
                         <div className='grid grid-cols-2'>
                             {relatedPaths?.map((el, index) => (
                                 <div>
-                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../../${hardware}/${brand}/${el.data.term.split(' ')[2]}/${el.data.output}`} key={index}>
-                                        What is a {el.data.term.split(' ')[2]} <span className='capitalize'>{brand}</span> <span className='uppercase'>{hardware}</span>&apos;s {el.data.output}?
+                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../${hardware}/${el.data.term.split(' ')[0]}/${el.data.term.split(' ')[2]}/${el.data.output}`} key={index}>
+                                        What is a {el.data.term.split(' ')[2]} <span className='capitalize'>{el.data.term.split(' ')[0]}</span> <span className='uppercase'>{hardware}</span>&apos;s {el.data.output}?
                                     </a>
                                 </div>
                             ))}
