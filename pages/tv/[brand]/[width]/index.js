@@ -55,8 +55,8 @@ export default function Width({nav}) {
                         </div>
                         <div className='grid grid-cols-2'>
                             {relatedPaths?.map((el, index) => (
-                                <div>
-                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../../${hardware}/${brand}/${el.data.term.split(' ')[2]}/${el.data.output}`} key={index}>
+                                <div key={index}>
+                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../../${hardware}/${brand}/${el.data.term.split(' ')[2]}/${el.data.output}`}>
                                         What is a {width} <span className='capitalize'>{brand}</span> <span className='uppercase'>{hardware}</span>&apos;s {el.data.output}?
                                     </a>
                                 </div>

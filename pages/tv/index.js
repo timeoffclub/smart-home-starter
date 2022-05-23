@@ -54,8 +54,8 @@ export default function Tv({nav}) {
                         </div>
                         <div className='grid grid-cols-2'>
                             {relatedPaths?.map((el, index) => (
-                                <div>
-                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../${hardware}/${el.data.term.split(' ')[0]}/${el.data.term.split(' ')[2]}/${el.data.output}`} key={index}>
+                                <div key={index}>
+                                    <a className='text-lg text-smart-blue font-semibold hover:text-smart-teal' href={`../../${hardware}/${el.data.term.split(' ')[0]}/${el.data.term.split(' ')[2]}/${el.data.output}`}>
                                         What is a {el.data.term.split(' ')[2]} <span className='capitalize'>{el.data.term.split(' ')[0]}</span> <span className='uppercase'>{hardware}</span>&apos;s {el.data.output}?
                                     </a>
                                 </div>
