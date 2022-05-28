@@ -44,7 +44,9 @@ export default function Output({nav}) {
             setErrorMessage(null)
             try {
                 const searchData = await getExactDBMatch(routeSearch)
-                if (searchData.data[0] !== undefined) {
+                // Check whether the search is in the database and whether that it is not older than a week. If both conditions are true, we use it
+                // Otherwise we fetch new data.
+                if (searchData.data[0] !== undefined && ((Date.now() / 1000) - (searchData.data[0].ts / 1000000) < 604800)) {
                     getAccessories('wall mount')
                     .then((res) => setWallMounts(res))
                     getRelatedWeights(searchData.data[0].data)
@@ -58,7 +60,7 @@ export default function Output({nav}) {
                     fetchPaapiRes()
                 }
             } catch (e) {
-                console.log(e)
+                console.error(e)
                 setErrorMessage(e)
                 setState('ERROR')
             }
@@ -81,7 +83,6 @@ export default function Output({nav}) {
     const fetchPaapiRes = async () => {
         try {
             const response = await axios.post('../../../../api/amazon-search-items', { query: routeSearch })
-            console.log(response)
             const validatedData = validatePaapiData(response.data)
             const validatedDataLength = validatedData.SearchResult.Items.length
             if (validatedDataLength !== 0) {
@@ -99,7 +100,7 @@ export default function Output({nav}) {
                 setState('BAD REQUEST')
             }
         } catch (e) {
-            console.log(e)
+            console.error(e)
             setErrorMessage(e.response.data.error)
             setState('ERROR')
         }
@@ -119,16 +120,6 @@ export default function Output({nav}) {
     // Validate data before we store it in db or add it to view
     // In this case we filter out results whose size does not match our width
     const validatePaapiData = (data) => {
-       console.log( 
-        {
-            "SearchResultTest": {
-                "TotalResultCount": data.data.SearchResult.TotalResultCount,
-                "SearchURL": data.data.SearchResult.SearchURL,
-                "Items": data?.data?.SearchResult?.Items?.filter((el) => {
-                    el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0] && el?.ItemInfo?.Title?.DisplayValue.toLowerCase().includes(brand.toLowerCase())
-                })
-            }
-        })
         return {
             "SearchResult": {
                 "TotalResultCount": data.data.SearchResult.TotalResultCount,
@@ -167,7 +158,6 @@ export default function Output({nav}) {
             return 0;
         }
         arr.sort(compare)
-        console.log(arr.length)
         return arr
     }
 
@@ -188,7 +178,6 @@ export default function Output({nav}) {
         try {
             let data = await getExactDBMatch(`${term} for ${width} ${hardware}`)
             if (data.data.length !== 0) {
-                console.log(data.data[0])
                 return data.data[0]
             } else {
                 try {
