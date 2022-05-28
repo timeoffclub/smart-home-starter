@@ -62,7 +62,7 @@ export default function Post({ post, related, nav }) {
                             </div>
                             <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
                                 <h1>
-                                    {post.title}
+                                    {post.title.replace(/(<([^>]+)>)/gi, "")}
                                 </h1>
                             </div>
                             <div className='flex justify-between items-baseline mb-2'>
@@ -243,7 +243,7 @@ export default function Post({ post, related, nav }) {
                                             <div className='mb-8' key={el.id}>
                                                 <div className='text-xl mb-1'>
                                                     <a href={`/${el.slug}`}>
-                                                        {el.title}
+                                                        {el.title.replace(/(<([^>]+)>)/gi, "")}
                                                     </a>
                                                 </div>
                                                 <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>

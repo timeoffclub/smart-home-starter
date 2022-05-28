@@ -31,7 +31,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             <div className='absolute left-0 bottom-0 group:w-full pb-5 px-5'>
                                 <a href={`/${featuredArticle.slug}`}>
                                     <div className='text-3xl text-white font-semibold pb-2 tracking-wider'>
-                                        {featuredArticle.title}
+                                        {featuredArticle.title.replace(/(<([^>]+)>)/gi, "")}
                                     </div>
                                 </a>
                                 {featuredArticle.categories.edges.filter((e) => e.node.name !== myCategory && e.node.name !== 'Featured').map((cat, index) => (
@@ -59,7 +59,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     <div className='ml-2'>
                                         <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                             <a href={`/${el.slug}`}>
-                                                {el.title}
+                                                {el.title.replace(/(<([^>]+)>)/gi, "")}
                                             </a>
                                         </div>
                                         <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
@@ -79,7 +79,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                             <div key={el.id} className='flex flex-col justify-start min-h-[50px] sm:h-fit text-lg basis-80 font-semibold mb-2'>
                                 <div className='mb-2  hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                     <a href={`/${el.slug}`}>
-                                        {el.title}
+                                        {el.title.replace(/(<([^>]+)>)/gi, "")}
                                     </a>
                                 </div>
                                 <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
@@ -114,7 +114,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 <div className='ml-2'>
                                     <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                         <a href={`/${el.slug}`}>
-                                            {el.title}
+                                            {el.title.replace(/(<([^>]+)>)/gi, "")}
                                         </a>
                                     </div>
                                     <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
@@ -155,7 +155,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     <div className='ml-2'>
                                         <div className='text-xl font-semibold mb-2 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                             <a href={`/${el.slug}`}>
-                                                {el.title}
+                                                {el.title.replace(/(<([^>]+)>)/gi, "")}
                                             </a>
                                         </div>
                                         <div className='text-smart-blue text-base font-semibold uppercase tracking-wider'>
@@ -187,7 +187,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                     <div className='border-l-4 border-l-smart-blue/0'>
                                         <div className='text-lg font-semibold mb-3 hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                             <a href={`/${el.slug}`}>
-                                                {el.title}
+                                                {el.title.replace(/(<([^>]+)>)/gi, "")}
                                             </a>
                                         </div>
                                         <div className='text-base text-smart-blue'>
@@ -218,7 +218,7 @@ export default function FeaturedCategory ({ myArticles, myCategory }) {
                                 <div className='border-l-4 border-l-smart-blue/0'>
                                     <div className='text-lg mb-3 font-semibold hover:underline decoration-1 underline-offset-4 decoration-gray-300'>
                                         <a href={`/${el.slug}`}>
-                                            {el.title}
+                                            {el.title.replace(/(<([^>]+)>)/gi, "")}
                                         </a>
                                     </div>
                                     <div className='text-base text-smart-blue'>

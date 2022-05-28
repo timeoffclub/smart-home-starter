@@ -147,7 +147,7 @@ export default function Search({ data, nav, slug }) {
                                         <div>
                                             <div className='text-lg mb-3 font-semibold'>
                                                 <a href={`/${el.node.slug}`}>
-                                                    {el.node.title}
+                                                    {el.node.title.replace(/(<([^>]+)>)/gi, "")}
                                                 </a>
                                             </div>
                                             <div className='text-smart-blue'>

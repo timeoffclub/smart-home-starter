@@ -15,11 +15,11 @@ export default function Schema({ post }) {
         <Head>
             {post.postFields.seoTitle ?
                 <title>
-                    {post.postFields.seoTitle}
+                    {post.postFields.seoTitle.replace(/(<([^>]+)>)/gi, "")}
                 </title>
             :
                 <title>
-                    {post.title}
+                    {post.title.replace(/(<([^>]+)>)/gi, "")}
                 </title>
             }
             {post.postFields.seoDescription ?
@@ -38,7 +38,7 @@ export default function Schema({ post }) {
             {post.postFields.seoTitle ?
                 <meta property="og:title" content={post.postFields.seoTitle} />
             :
-                <meta property="og:title" content={post.title} />
+                <meta property="og:title" content={post.title.replace(/(<([^>]+)>)/gi, "")} />
             }
             {post.postFields.seoDescription ?
                 <meta

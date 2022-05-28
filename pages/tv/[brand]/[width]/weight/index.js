@@ -31,9 +31,8 @@ export default function Output({nav}) {
 
     // TODO:
     // * Add date to searches stored in db and check to see if older than a week. If so, get new.
-    // * Validate data before showing in view or storing in database. Make sure items are actually tvs, for example.
     // * Create interface from data that anticipates future usage--perhaps other outputs and hardware.
-    // * Build all pages in database using getStaticPaths on each build
+    // * Build all pages in database using getStaticPaths on each build?
     // * Refactor to divide responsibilities into components, e.g., accessories should be its own component
     
 
@@ -82,6 +81,7 @@ export default function Output({nav}) {
     const fetchPaapiRes = async () => {
         try {
             const response = await axios.post('../../../../api/amazon-search-items', { query: routeSearch })
+            console.log(response)
             const validatedData = validatePaapiData(response.data)
             const validatedDataLength = validatedData.SearchResult.Items.length
             if (validatedDataLength !== 0) {
@@ -119,11 +119,21 @@ export default function Output({nav}) {
     // Validate data before we store it in db or add it to view
     // In this case we filter out results whose size does not match our width
     const validatePaapiData = (data) => {
+       console.log( 
+        {
+            "SearchResultTest": {
+                "TotalResultCount": data.data.SearchResult.TotalResultCount,
+                "SearchURL": data.data.SearchResult.SearchURL,
+                "Items": data?.data?.SearchResult?.Items?.filter((el) => {
+                    el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0] && el?.ItemInfo?.Title?.DisplayValue.toLowerCase().includes(brand.toLowerCase())
+                })
+            }
+        })
         return {
             "SearchResult": {
                 "TotalResultCount": data.data.SearchResult.TotalResultCount,
                 "SearchURL": data.data.SearchResult.SearchURL,
-                "Items": data?.data?.SearchResult?.Items?.filter((el) => el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0])
+                "Items": data?.data?.SearchResult?.Items?.filter((el) =>  el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0] && el?.ItemInfo?.Title?.DisplayValue.toLowerCase().includes(brand.toLowerCase()))
             }
         }
     }
@@ -157,6 +167,7 @@ export default function Output({nav}) {
             return 0;
         }
         arr.sort(compare)
+        console.log(arr.length)
         return arr
     }
 
@@ -420,7 +431,7 @@ export default function Output({nav}) {
                                     <span> {canCarry}</span>
                                 </div>
                             </div>
-                            {relatedWeights &&
+                            {relatedWeights?.length !== 0 &&
                                 <div className='text-3xl md:text-4xl font-bold tracking-wider mt-12 mb-8'>
                                     <h2 dangerouslySetInnerHTML={{__html: randomOtherWeightsString(brand)}}>
                                     </h2>
@@ -569,7 +580,7 @@ export default function Output({nav}) {
                                 </div>
                                 <div className='pl-8 text-center'>
                                     <div>
-                                        We&apos;ve messed up or you&apos;ve invented a width for this manufacturer. Either way, you&apos;re too smart for us.
+                                        This item doesn&apos;t appear to exist on Amazon. We suggest you check another time.
                                     </div>
                                 </div>
                             </div>
