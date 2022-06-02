@@ -193,6 +193,7 @@ export default function Output({nav}) {
         }
     }
 
+    // Randomize content below
     const randomIntroString = () => {
         let arr = [
             `When you are shopping for a TV it is important to consider multiple factors like price, weight, features, and even mounting solutions.`,
@@ -233,16 +234,18 @@ export default function Output({nav}) {
     }
 
     const randomWeightString = (w,b,h,wt) => {
+        let textTransform = ''
+        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
         let arr = [
-            `A ${w} <span style='text-transform: capitalize'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
-            `An average ${w} <span style='text-transform: capitalize'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
-            `A ${w} <span style='text-transform: capitalize'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
-            `The weight of a ${w} <span style='text-transform: capitalize'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The average weight of a <span style='text-transform: capitalize'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The <span style='text-transform: capitalize'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs ${wt} lbs.`,
-            `The <span style='text-transform: capitalize'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
-            `The average weight of a <span style='text-transform: capitalize'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The average weight of a ${w} <span style='text-transform: capitalize'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is exactly ${wt} lbs.`,
+            `A ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
+            `An average ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
+            `A ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
+            `The weight of a ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
+            `The average weight of a <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
+            `The <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs ${wt} lbs.`,
+            `The <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
+            `The average weight of a <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
+            `The average weight of a ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is exactly ${wt} lbs.`,
         ]
 
         return arr[Math.floor(Math.random() * arr.length)]
@@ -277,36 +280,40 @@ export default function Output({nav}) {
     }
 
     const randomOtherWeightsString = (b) => {
+        let textTransform = ''
+        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
         let arr = [
-            `Here are other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below are other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Here are the other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Here are the weights for all other <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below are the weights for all other <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below you will find other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below you can find other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below you will see other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below you can see other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below are other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`,
-            `Below you can view the other TV weights for <span style='text-transform: capitalize'>${b}</span> TVs:`
+            `Here are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Here are the other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Here are the weights for all other <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below are the weights for all other <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below you will find other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below you can find other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below you will see other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below you can see other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
+            `Below you can view the other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`
         ]
 
         return arr[Math.floor(Math.random() * arr.length)]
     }
 
     const randomWallMountsString = (w,b) => {
+        let textTransform = ''
+        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
         let arr = [
-            `Any universal TV mount will work for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be suitable for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be appropriate for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will work for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will fit your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will be compatible for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be compatible for your <span style='text-transform: capitalize'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most TV mounts are universal and will work with your <span style='text-transform: capitalize'>${b}</span> ${w} TV. Just check to see if the weights and dimensions are compatible with your TV first.`,
-            `Almost all universal TV mounts will work for your <span style='text-transform: capitalize'>${b}</span> ${w} TV. Verify that it does not exceed the weight limit and fits the dimensions of your TV.`,
-            `Almost all universal TV mounts will be suitable for your <span style='text-transform: capitalize'>${b}</span> ${w} TV. Confirm that it does not exceed the weight limit and fits the dimensions of your TV.`,
-            `Almost all universal TV mounts will be suited for your <span style='text-transform: capitalize'>${b}</span> ${w} TV. Double check that it does not exceed the weight limit and fits the dimensions of your TV.`
+            `Any universal TV mount will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Any universal TV mount will be suitable for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Any universal TV mount will be appropriate for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Most universal TV mount will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Most universal TV mount will fit your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Most universal TV mount will be compatible for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Any universal TV mount will be compatible for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
+            `Most TV mounts are universal and will work with your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Just check to see if the weights and dimensions are compatible with your TV first.`,
+            `Almost all universal TV mounts will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Verify that it does not exceed the weight limit and fits the dimensions of your TV.`,
+            `Almost all universal TV mounts will be suitable for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Confirm that it does not exceed the weight limit and fits the dimensions of your TV.`,
+            `Almost all universal TV mounts will be suited for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Double check that it does not exceed the weight limit and fits the dimensions of your TV.`
         ]
 
         return arr[Math.floor(Math.random() * arr.length)]
@@ -372,7 +379,7 @@ export default function Output({nav}) {
                             </div>
                             <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
                                 <h1>
-                                    How Much Does a {width} <span className='capitalize'>{brand}</span> <span className='uppercase'>{hardware}</span> Weigh?
+                                    How Much Does a {width} <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span> Weigh?
                                 </h1>
                             </div>
                             <div className='flex justify-between items-baseline mb-2'>
@@ -440,7 +447,7 @@ export default function Output({nav}) {
                             }
                             <div className='text-3xl md:text-4xl font-bold tracking-wider mt-12 mb-8'>
                                 <h2>
-                                    Best selling <span className='font-bold'>{width}</span> <span className='capitalize font-bold'>{brand}</span> <span className='uppercase'>{hardware}</span>
+                                    Best selling <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span>
                                 </h2>
                             </div>
                             <div className='flex border-[1px] border-gray-300 items-center p-2'>
@@ -484,7 +491,7 @@ export default function Output({nav}) {
                                 <>
                                     <div className='text-3xl md:text-4xl font-bold tracking-wider mt-12 mb-8'>
                                         <h2>
-                                            What wall mount do I need for my <span className='font-bold'>{width}</span> <span className='capitalize font-bold'>{brand}</span> <span className='uppercase'>{hardware}</span>?
+                                            What wall mount do I need for my <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span>?
                                         </h2>
                                     </div>
                                     <div className='text-xl mb-4'>

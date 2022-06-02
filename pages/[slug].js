@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import useInView from 'react-cool-inview'
 import Newsletter from '../components/newsletter'
 import { getPostsWithSlug, getPostAndMorePosts, getRelatedPostByCategory, getNavigation } from '../lib/api'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
@@ -30,9 +31,10 @@ export default function Post({ post, related, nav }) {
 
     const [ expandSpecs, setExpandSpecs ] = useState(false)
 
-    const specsToggle = () => {
-        setExpandSpecs(!expandSpecs)
-    }
+    const { observe, inView } = useInView({
+        // Stop observe when the target enters the viewport, so the "inView" only triggered once
+        unobserveOnEnter: true
+    })
 
     const formatDate = (date) => {
         let d = new Date(date);
@@ -156,7 +158,7 @@ export default function Post({ post, related, nav }) {
                             {post.productReviewFields.productReview &&
                                 <>
                                     <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
-                                    <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
+                                    {/* <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/> */}
                                 </>
                             }
                             {post.productReviewFields.productReview && 
@@ -211,12 +213,19 @@ export default function Post({ post, related, nav }) {
                                 </>
                             }
                             <div className='unreset' dangerouslySetInnerHTML={{__html: post.content}}></div>
-                            {post.productReviewFields.productReview &&
-                                <>
-                                    <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
-                                    <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/>
-                                </>
-                            }
+                            {/* We lazy load this to create a delay between calls to the API */}
+                            <div ref={observe}>
+                                {inView ?
+                                    post.productReviewFields.productReview &&
+                                        <>
+                                            <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
+                                            {/* <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/> */}
+                                        </>
+                                :
+                                    <div>
+                                    </div>
+                                }
+                            </div>
                             {!post.productReviewFields.productReview && 
                                 <div className='sm:flex w-full gap-3'>
                                     {post.categories.edges.map((el) => (
