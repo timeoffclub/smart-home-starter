@@ -12,6 +12,8 @@ import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare'
 import Header from '../../../../../components/header'
 import Footer from '../../../../../components/footer'
 import Schema from '../../../../../components/schema'
+import { isOld } from '../../../../../lib/utils'
+import { randomIntroString, randomOtherWeightsString, randomSecondString, randomWallMountsString, randomWallMountsStringTwo, randomWeightString } from '../../../../../lib/copy-gen'
 
 export default function Output({nav}) {
     const router = useRouter()
@@ -46,18 +48,69 @@ export default function Output({nav}) {
                 const searchData = await getExactDBMatch(routeSearch)
                 // Check whether the search is in the database and whether that it is not older than a week. If both conditions are true, we use it
                 // Otherwise we fetch new data.
-                if (searchData.data[0] !== undefined && ((Date.now() / 1000) - (searchData.data[0].ts / 1000000) < 604800)) {
-                    getAccessories('wall mount')
-                    .then((res) => setWallMounts(res))
-                    getRelatedWeights(searchData.data[0].data)
-                    .then((res) => setRelatedWeights(res))
-                    setSearchResults(searchData.data[0].data)
-                    setAvgWeight(getAvgWeight(searchData.data[0].data))
-                    getCanCarry(avgWeight)
-                    setBestSelling(getBestSelling(searchData.data[0].data))
-                    setState('SUCCESS')
+                if (searchData.data[0] !== undefined) {
+                    if (!isOld(searchData.data[0].ts, 604800)) {
+                        getAccessories('wall mount')
+                        .then((res) => setWallMounts(res))
+                        getRelatedWeights(searchData.data[0].data)
+                        .then((res) => setRelatedWeights(res))
+                        setSearchResults(searchData.data[0].data)
+                        console.log('Database results -----------------------------')
+                        console.log(searchData.data[0].data)
+                        setAvgWeight(getAvgWeight(searchData.data[0].data))
+                        getCanCarry(avgWeight)
+                        setBestSelling(getBestSelling(searchData.data[0].data))
+                        setState('SUCCESS')
+                    } else {
+                        // In this case we need to store the document id, fetch the paapi results and then update the updated data
+                        // using the document id
+                        const documentId = searchData.data[0].ref['@ref'].id
+                        const response = await fetchPaapiRes(routeSearch)
+                        console.log('Database result is stale. Fetching paapi results...')
+                        console.log('Unvalidated paapi response data --------------------------')
+                        console.log(response.data)
+                        const validatedData = validatePaapiData(response.data)
+                        console.log('Validated data ------------------')
+                        console.log(validatedData)
+                        const validatedDataLength = validatedData.SearchResult.Items.length
+                        if (validatedDataLength !== 0) {
+                            updateDatabaseSearch(routeSearch, validatedData, documentId)
+                            setSearchResults(validatedData)
+                            getAccessories('wall mount')
+                            .then((res) => setWallMounts(res))
+                            getRelatedWeights(validatedData)
+                            .then((res) => setRelatedWeights(res))
+                            setAvgWeight(getAvgWeight(validatedData))
+                            getCanCarry(avgWeight)
+                            setBestSelling(getBestSelling(validatedData))
+                            setState('SUCCESS')
+                        } else {
+                            setState('BAD REQUEST')
+                        }
+                    }
                 } else {
-                    fetchPaapiRes()
+                    const response = await fetchPaapiRes(routeSearch)
+                    console.log('Nothing in the database. Fetching paapi results...')
+                    console.log('Unvalidated paapi response data --------------------------')
+                    console.log(response.data)
+                    const validatedData = validatePaapiData(response.data)
+                    console.log('Validated data ------------------')
+                    console.log(validatedData)
+                    const validatedDataLength = validatedData.SearchResult.Items.length
+                    if (validatedDataLength !== 0) {
+                        addDatabaseSearch(routeSearch, validatedData, 'weight')
+                        setSearchResults(validatedData)
+                        getAccessories('wall mount')
+                        .then((res) => setWallMounts(res))
+                        getRelatedWeights(validatedData)
+                        .then((res) => setRelatedWeights(res))
+                        setAvgWeight(getAvgWeight(validatedData))
+                        getCanCarry(avgWeight)
+                        setBestSelling(getBestSelling(validatedData))
+                        setState('SUCCESS')
+                    } else {
+                        setState('BAD REQUEST')
+                    }
                 }
             } catch (e) {
                 console.error(e)
@@ -80,25 +133,11 @@ export default function Output({nav}) {
     }
 
     // New paapi query
-    const fetchPaapiRes = async () => {
+    // This should only fetch and return the data
+    const fetchPaapiRes = async (term) => {
         try {
-            const response = await axios.post('../../../../api/amazon-search-items', { query: routeSearch })
-            const validatedData = validatePaapiData(response.data)
-            const validatedDataLength = validatedData.SearchResult.Items.length
-            if (validatedDataLength !== 0) {
-                addDatabaseSearch(routeSearch, validatedData, 'weight')
-                setSearchResults(validatedData)
-                getAccessories('wall mount')
-                .then((res) => setWallMounts(res))
-                getRelatedWeights(validatedData)
-                .then((res) => setRelatedWeights(res))
-                setAvgWeight(getAvgWeight(validatedData))
-                getCanCarry(avgWeight)
-                setBestSelling(getBestSelling(validatedData))
-                setState('SUCCESS')
-            } else {
-                setState('BAD REQUEST')
-            }
+            const response = await axios.post('../../../../api/amazon-search-items', { query: term })
+            return response
         } catch (e) {
             console.error(e)
             setErrorMessage(e.response.data.error)
@@ -117,14 +156,27 @@ export default function Output({nav}) {
         }
     }
 
+    // Updates search results in database
+    const updateDatabaseSearch = async (query, data, documentId) => {
+        console.log(query, data, documentId)
+        try {
+            const response = await axios.post('../../../../api/update-paapi-search', { query, data, documentId })
+            return response
+        } catch (e) {
+            console.error(e)
+            console.error('There was an error, and search was not added to the database.')
+        }
+    }
+
     // Validate data before we store it in db or add it to view
     // In this case we filter out results whose size does not match our width
+    // Returns an empty Items array if no valid data
     const validatePaapiData = (data) => {
         return {
             "SearchResult": {
                 "TotalResultCount": data.data.SearchResult.TotalResultCount,
                 "SearchURL": data.data.SearchResult.SearchURL,
-                "Items": data?.data?.SearchResult?.Items?.filter((el) =>  el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0] && el?.ItemInfo?.Title?.DisplayValue.toLowerCase().includes(brand.toLowerCase()))
+                "Items": data?.data?.SearchResult?.Items?.filter((el) => el?.ItemInfo?.ProductInfo?.Size?.DisplayValue.slice(0,2) === width.split('-')[0] && el?.ItemInfo?.Title?.DisplayValue.toLowerCase().includes(brand.toLowerCase()) && el?.ItemInfo?.ProductInfo?.ItemDimensions?.Weight !== undefined)
             }
         }
     }
@@ -138,8 +190,12 @@ export default function Output({nav}) {
                 arr.push(el.ItemInfo.ProductInfo.ItemDimensions.Weight.DisplayValue)
             }
         })
-        let avg = arr.reduce((a, b) => a + b) / arr.length
-        return avg.toFixed()
+        if (arr.length > 1) {
+            let avg = arr.reduce((a, b) => a + b) / arr.length
+            return avg.toFixed()
+        } else if (arr.length === 1) {
+            return arr[0].toFixed()
+        }
     }
 
     // Get weights for other widths to be displayed in table
@@ -178,12 +234,18 @@ export default function Output({nav}) {
         try {
             let data = await getExactDBMatch(`${term} for ${width} ${hardware}`)
             if (data.data.length !== 0) {
-                return data.data[0]
+                if (isOld(data.data[0].ts, 604800)) {
+                    let documentId = data.data[0].ref['@ref'].id
+                    let res = await axios.post('../../../../api/amazon-search-items', { query: `${term} for ${width} ${hardware}` })
+                    updateDatabaseSearch(`${term} for ${width} ${hardware}`, res.data.data, documentId)
+                } else {
+                    return data.data[0]
+                }
             } else {
                 try {
-                    let data = await axios.post('../../../../api/amazon-search-items', { query: `${term} for ${width} ${hardware}` })
-                    addDatabaseSearch(`${term} for ${width} ${hardware}`, data.data.data, 'none' )
-                    return data.data
+                    let res = await axios.post('../../../../api/amazon-search-items', { query: `${term} for ${width} ${hardware}` })
+                    addDatabaseSearch(`${term} for ${width} ${hardware}`, res.data.data, 'none' )
+                    return res.data
                 } catch (e) {
                     console.error(e)
                 }
@@ -191,64 +253,6 @@ export default function Output({nav}) {
         } catch (e) {
             console.error(e)
         }
-    }
-
-    // Randomize content below
-    const randomIntroString = () => {
-        let arr = [
-            `When you are shopping for a TV it is important to consider multiple factors like price, weight, features, and even mounting solutions.`,
-            `When you are browsing for a TV it is important to consider multiple factors like price, features, weight, and even mounting solutions.`,
-            `When you are shopping for a TV it is critical to consider multiple factors like price, weight, features, and even mounting solutions.`,
-            `When you are looking for a new TV, it's crucial to consider multiple factors such as features, weight, price, and mounting solutions.`,
-            `When you are looking to purchase a new TV, it's crucial to consider multiple factors such as features, weight, price, and mounting solutions.`,
-            `When you are looking to purchase a new TV, it's crucial to consider multiple elements such as features, weight, price, and mounting solutions.`,
-            `When you are looking to purchase a new TV for your home, it's crucial to consider multiple elements such as features, weight, price, and mounting solutions.`,
-            `When you are looking to purchase a new TV for your home, it's important to consider multiple elements such as features, weight, price, and mounting solutions.`,
-            `When you are looking to purchase a new TV for your home, it's critical to consider multiple elements such as features, weight, price, and mounting solutions.`,
-            `People who are interested in new TVs should consider several factors like features, weight, price, and mounting solutions.`,
-            `People who are interested in new TVs should consider several elements like features, weight, price, and mounting solutions.`,
-            `People who are interested in new TVs should consider several variables like features, weight, price, and mounting solutions.`,
-            `People who are interested in new TVs should consider several aspects like features, weight, price, and mounting solutions.`,
-            `When you are shopping around for a new TVs should consider several elements like features, weight, price, and mounting solutions.`,
-            `When you are shopping around for a new TVs should consider several variables like features, weight, price, and mounting solutions.`,
-            `When you are shopping around for a new TVs should consider several aspects like features, weight, price, and mounting solutions.`
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
-    }
-
-    const randomSecondString = () => {
-        let arr = [
-            `Most consumers want a lighter TV because it is easier to transport, package, and unload from their car. Being able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most people want a lighter TV because it is easier to transport, package, and unload from their car. Being able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most consumers want a TV that weighs less because it is easier to transport, package, and unload from their car. Being able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most consumers want a lighter TV because it is easy to transport, package, and unload from their car. Being able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most people want a TV that is light because it is easier to carry, package, and unload from their car. Being able to carry your TV ensures reduces the change of damage while in transport.`,
-            `Most consumers want a lighter TV because it is easier to transport, package, and unload from their car and into their home. Being able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most people want a lighter TV because it is much easier to transport, package, and unload from their car. Being able to simply carry your TV ensures minimizing any damage while in transport.`,
-            `Most folks want a TV that weighs less because it is easier to transport, package, and unload from their car. You want to be able to easily carry your TV ensures minimizing any damage while in transport.`,
-            `Most individuals want a TV that weighs less because it is much easier to carry, package, and remove from their car. Being able to carry your TV ensures minimizing any damage while traveling with it.`
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
-    }
-
-    const randomWeightString = (w,b,h,wt) => {
-        let textTransform = ''
-        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
-        let arr = [
-            `A ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
-            `An average ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
-            `A ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> weighs on average ${wt} lbs.`,
-            `The weight of a ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The average weight of a <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs ${wt} lbs.`,
-            `The <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> weighs exactly ${wt} lbs.`,
-            `The average weight of a <span style='text-transform: ${textTransform}'>${b}</span> ${w} <span style='text-transform: uppercase'>${h}</span> is ${wt} lbs.`,
-            `The average weight of a ${w} <span style='text-transform: ${textTransform}'>${b}</span> <span style='text-transform: uppercase'>${h}</span> is exactly ${wt} lbs.`,
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
     }
 
     const getCanCarry = (avg) => {
@@ -277,68 +281,6 @@ export default function Output({nav}) {
         } else {
             setCanCarry('You will need some help and possibly some equipment to transport this item.')
         }
-    }
-
-    const randomOtherWeightsString = (b) => {
-        let textTransform = ''
-        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
-        let arr = [
-            `Here are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Here are the other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Here are the weights for all other <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below are the weights for all other <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below you will find other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below you can find other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below you will see other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below you can see other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below are other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`,
-            `Below you can view the other TV weights for <span style='text-transform: ${textTransform}'>${b}</span> TVs:`
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
-    }
-
-    const randomWallMountsString = (w,b) => {
-        let textTransform = ''
-        b === 'lg' || b === 'tcl' ? textTransform = 'uppercase' : textTransform = 'capitalize'
-        let arr = [
-            `Any universal TV mount will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be suitable for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be appropriate for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will fit your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most universal TV mount will be compatible for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Any universal TV mount will be compatible for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV as long as its within its dimensions and weigh limit.`,
-            `Most TV mounts are universal and will work with your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Just check to see if the weights and dimensions are compatible with your TV first.`,
-            `Almost all universal TV mounts will work for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Verify that it does not exceed the weight limit and fits the dimensions of your TV.`,
-            `Almost all universal TV mounts will be suitable for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Confirm that it does not exceed the weight limit and fits the dimensions of your TV.`,
-            `Almost all universal TV mounts will be suited for your <span style='text-transform: ${textTransform}'>${b}</span> ${w} TV. Double check that it does not exceed the weight limit and fits the dimensions of your TV.`
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
-    }
-
-    const randomWallMountsStringTwo = () => {
-        let arr = [
-            `Other things to be aware of are if you want it to move forward and back, swivel to the left or right, or if the height should be adjustable for situations like a fireplace.`,
-            `Other factors to be cognizant of are if you want it to move forward and back, swivel to the left or right, or if the height should be adjustable for situations like a fireplace.`,
-            `Other variables to be cognizant of are if you want it to move forward and back, swivel to the left or right, or if the height should be adjustable for situations like a fireplace.`,
-            `Other factors to be cognizant of is if you want the height to be adjustable, move back or forward, or if you want to swivel it to the left or right.`,
-            `Other variables to be aware of is if you want the height to be adjustable, move back or forward, or if you want to swivel it to the left or right.`,
-            `Other things to be aware of is if you want the height to be adjustable, move back or forward, or if you want to swivel it to the left or right.`,
-            `Other things to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Other variables to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Other factors to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Other details to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Other details to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Other details to be aware of is if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Also take note of if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Also take note of if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`,
-            `Also take note of if you want to swivel it to the left or right, if you want the height to be adjustable, or move back or forward.`
-        ]
-
-        return arr[Math.floor(Math.random() * arr.length)]
     }
 
     return (
@@ -379,7 +321,7 @@ export default function Output({nav}) {
                             </div>
                             <div className='text-4xl md:text-5xl font-bold tracking-wider mt-12 mb-8'>
                                 <h1>
-                                    How Much Does a {width} <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span> Weigh?
+                                    How Much Does a <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span> Weigh?
                                 </h1>
                             </div>
                             <div className='flex justify-between items-baseline mb-2'>
@@ -576,7 +518,7 @@ export default function Output({nav}) {
                                 </div>
                                 <div className='pl-8 text-center'>
                                     <div>
-                                        This item doesn&apos;t appear to exist on Amazon. We suggest you check another time.
+                                        This item doesn&apos;t appear to exist on Amazon, or its data is incomplete. We suggest you check another time.
                                     </div>
                                 </div>
                             </div>

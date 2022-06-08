@@ -36,6 +36,10 @@ export default function Post({ post, related, nav }) {
         unobserveOnEnter: true
     })
 
+    const specsToggle = () => {
+        setExpandSpecs(!expandSpecs)
+    }
+
     const formatDate = (date) => {
         let d = new Date(date);
         return d.toLocaleDateString('en-US', {
