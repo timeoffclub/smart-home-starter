@@ -32,7 +32,6 @@ export default function Output({nav}) {
     const [wallMounts, setWallMounts] = useState(null)
 
     // TODO:
-    // * Add date to searches stored in db and check to see if older than a week. If so, get new.
     // * Create interface from data that anticipates future usage--perhaps other outputs and hardware.
     // * Build all pages in database using getStaticPaths on each build?
     // * Refactor to divide responsibilities into components, e.g., accessories should be its own component
