@@ -1,5 +1,6 @@
 import Newsletter from './newsletter'
 import Image from 'next/image'
+import Link from 'next/link'
 import { kebabCase } from '../lib/utils'
 
 export default function Header({ myMenu }) {
@@ -34,9 +35,11 @@ export default function Header({ myMenu }) {
                                 This site is owned and operated by Time Off Club, LLC. Smarthomestarter.com is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. This site also participates in other affiliate programs and is compensated for referring traffic and business to these companies.
                             </div>
                             <div className='text-lg text-smart-blue hover:text-smart-teal font-semibold tracking-wider mb-3'>
-                                <a href='/privacy-policy'>
-                                    Privacy Policy
-                                </a>
+                                <Link href='/privacy-policy'>
+                                    <a>
+                                        Privacy Policy
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
