@@ -13,7 +13,7 @@ import Header from '../../../../../components/header'
 import Footer from '../../../../../components/footer'
 import Schema from '../../../../../components/schema'
 import { isOld } from '../../../../../lib/utils'
-import { randomIntroString, randomOtherWeightsString, randomSecondString, randomWallMountsString, randomWallMountsStringTwo, randomWeightString } from '../../../../../lib/copy-gen'
+import { randomIntroString, randomOtherWeightsString, randomSecondString, randomWallMountsString, randomWallMountsStringTwo, randomWallMountsStringThree, randomWeightString, bestSellingTvs } from '../../../../../lib/copy-gen'
 
 export default function Output({nav}) {
     const router = useRouter()
@@ -386,10 +386,8 @@ export default function Output({nav}) {
                                     ))}
                                 </div>
                             }
-                            <div className='text-3xl md:text-4xl font-bold tracking-wider mt-12 mb-8'>
-                                <h2>
-                                    Best selling <span className='font-bold'>{width}</span> <span className={`${brand === 'lg' || brand === 'tcl' ? 'uppercase' : 'capitalize'}`}>{brand}</span> <span className='uppercase'>{hardware}</span>
-                                </h2>
+                            <div className='text-xl mt-12 mb-8'>
+                                   {bestSellingTvs()}
                             </div>
                             <div className='flex border-[1px] border-gray-300 items-center p-2'>
                                 <div className='flex flex-1 w-1/4 h-fit'>
@@ -439,10 +437,13 @@ export default function Output({nav}) {
                                         <span dangerouslySetInnerHTML={{__html: randomWallMountsString(width, brand)}}/>
                                         <span> {randomWallMountsStringTwo()}</span>
                                     </div>
-                                    <div className='text-3xl md:text-4xl font-bold tracking-wider mt-12 mb-8'>
-                                        <h2>
+                                    <div className='mt-12 mb-8'>
+                                        <h2 className='text-3xl md:text-4xl tracking-wider font-bold mb-4'>
                                             Top <span className='uppercase'>{hardware}</span> mounts for a <span className='font-bold'>{width}</span> <span className='uppercase'>{hardware}</span>?
                                         </h2>
+                                        <div className='text-xl mb-4'>
+                                            {randomWallMountsStringThree()}
+                                        </div>
                                     </div>
                                     {wallMounts.data.SearchResult.Items.map((el, index) => (
                                         index < 3 &&
