@@ -22,7 +22,7 @@ import Schema from '../components/schema'
 const PriceRating = dynamic(() => import('../components/price-rating'))
 const OverallRating = dynamic(() => import('../components/overall-rating'))
 const AmazonProduct = dynamic(() => import('../components/amazon-product'))
-const BestBuyProduct = dynamic(() => import('../components/bestbuy-product'))
+const WalmartProduct = dynamic(() => import('../components/walmart-product'))
 const ProductReviewCarousel = dynamic(() => import('../components/product-review-carousel'))
 
 export default function Post({ post, related, nav }) {
@@ -118,7 +118,7 @@ export default function Post({ post, related, nav }) {
                                         className='transition-all ease-in duration-500'
                                         src={post.featuredImage.node.sourceUrl}
                                         alt={post.featuredImage.node.altText}
-                                        objectFit='cover'
+                                        objectFit='contain'
                                         layout='fill'
                                         sizes='50vw'
                                         priority
@@ -162,7 +162,7 @@ export default function Post({ post, related, nav }) {
                             {post.productReviewFields.productReview &&
                                 <>
                                     <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
-                                    {/* <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/> */}
+                                    <WalmartProduct productId={post.productReviewFields.productPriceLinks[0].walmartProductId}/>
                                 </>
                             }
                             {post.productReviewFields.productReview && 
@@ -223,7 +223,7 @@ export default function Post({ post, related, nav }) {
                                     post.productReviewFields.productReview &&
                                         <>
                                             <AmazonProduct productId={post.productReviewFields.productPriceLinks[0].amazonProductId}/>
-                                            {/* <BestBuyProduct sku={post.productReviewFields.productPriceLinks[0].bestBuyProductId}/> */}
+                                            <WalmartProduct productId={post.productReviewFields.productPriceLinks[0].walmartProductId}/>
                                         </>
                                 :
                                     <div>

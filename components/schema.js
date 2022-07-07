@@ -86,6 +86,7 @@ export default function Schema({ post }) {
                             "@type": "Product",
                             "name": "${post.productReviewFields.productName}",
                             "image": ["${sourceUrl}"],
+                            "thumbnailUrl" : "${sourceUrl}",
                             "description": "${post.productReviewFields.tldr}",
                             "review": {
                                 "@type": "Review",

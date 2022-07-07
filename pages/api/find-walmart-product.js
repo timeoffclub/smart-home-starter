@@ -7,7 +7,7 @@ export default async (req, res) => {
         let query = await faunaClient.query(
                 q.Map(
                     q.Paginate(
-                        q.Match(q.Index("amazon_product_by_id"), term.productId )
+                        q.Match(q.Index("walmart_product_by_id"), term.productId )
                     ),
                     q.Lambda(
                         "product",
