@@ -118,7 +118,7 @@ export default function Post({ post, related, nav }) {
                                         className='transition-all ease-in duration-500'
                                         src={post.featuredImage.node.sourceUrl}
                                         alt={post.featuredImage.node.altText}
-                                        objectFit='contain'
+                                        objectFit='cover'
                                         layout='fill'
                                         sizes='50vw'
                                         priority
