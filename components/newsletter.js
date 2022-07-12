@@ -14,6 +14,10 @@ export default function Newsletter({ mode }) {
         try {
             const response = await axios.post('../api/newsletter', { email })
             setState('SUCCESS')
+            console.log(response)
+            let contactId = response.data.data.contact.id
+            // Now add to Subscribers list
+            await axios.post('../api/newsletter-add-to-list', { contactId })
         } catch (e) {
             setErrorMessage(e.response.data.error)
             setState('ERROR')

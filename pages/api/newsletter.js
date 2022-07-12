@@ -2,19 +2,22 @@ import axios from 'axios'
 
 function getRequestParams(email) {
     // Get envars
-    const API_KEY = process.env.NEXT_PUBLIC_SENDINBLUE_API_KEY
+    const API_KEY = process.env.NEXT_PUBLIC_ACTIVECAMPAIGN_API_KEY
 
-    const url = `https://api.sendinblue.com/v3/contacts`
+    const url = `https://smarthomestarter.api-us1.com/api/3/contacts`
 
-    const data = JSON.stringify({
-        email: email,
-        updateEnabled: false
-    })
+    let contactObject = {
+        "contact": {
+            "email": email
+        }
+    }
+
+    const data = contactObject
     
     const headers = {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
         "Accept": "application/json",
-        "api-key": API_KEY
+        "api-token": API_KEY
     }
 
     return {
@@ -36,10 +39,12 @@ export default async function handler(req, res) {
     const { url, data, headers } = getRequestParams(email)
 
     axios.post(url, data, { headers })
-    .then(() => {
-        return res.status(201).json({ error: null })
+    .then((result) => {
+        console.log(result.data)
+        return res.status(201).json({error: null, data: result.data})
     })
     .catch((error) => {
+        console.log(error)
         return res.status(400).json({
             error: "Something went wrong. Email us at contact@smarthomestarter.com, and we\'ll add you to our mailing list."
         })

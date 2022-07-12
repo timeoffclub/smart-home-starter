@@ -87,7 +87,7 @@ export default function Schema({ post }) {
                             "name": "${post.productReviewFields.productName}",
                             "image": ["${sourceUrl}"],
                             "thumbnailUrl" : "${sourceUrl}",
-                            "description": "${post.productReviewFields.tldr}",
+                            "description": "${post.productReviewFields.tldr.replace(/\"/g, "'")}",
                             "review": {
                                 "@type": "Review",
                                 "reviewRating": {
